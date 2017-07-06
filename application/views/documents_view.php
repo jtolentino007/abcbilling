@@ -21,6 +21,8 @@
 
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
+        <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
+        <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
         <style>
             html {
@@ -109,14 +111,16 @@
                                         <div class="col-md-12">
                                             <div id="div_documents_list">
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                    <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Document Types</b>
-                                                    </div>
-                                                    <div class="panel-body table-responsive">
+                                                    </div> -->
+                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+                                                        <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small> | Reference</small></h1><hr>
                                                         <table id="tbl_documents" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
                                                                     <th>Document Type</th>
+                                                                    <th>Document Category</th>
                                                                     <th>Document Type Description</th>
                                                                     <th>
                                                                         <center>Action</center>
@@ -132,10 +136,11 @@
                                                 <div id="modal_documents" class="modal fade" role="dialog">
                                                     <div class="modal-dialog modal-md">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
+                                                            <!-- <div class="modal-header">
                                                                 <h3 style="color: white;">Document Type Information</h3>
-                                                            </div>
-                                                            <div class="modal-body">
+                                                            </div> -->
+                                                            <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
+                                                        <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small class="title-modal"> | Reference</small></h1><hr>
                                                                 <form id="frm_documents" role="form" class="form-horizontal row-border">
                                                                     <div class="form-group">
                                                                         <label class="col-xs-12 ">* Document Type :</label>
@@ -146,6 +151,19 @@
                                                                                 </span>
                                                                                 <input type="text" name="document_type" class="form-control" placeholder="Document Name" data-error-msg="Document name is required!" required />
                                                                             </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-xs-12">* Document Category :</label>
+                                                                        <div class="col-xs-12">
+                                                                            <select id="cbo_document_category" class="form-control" name="document_category_id">
+                                                                                <option value="0">[ Create New Document Category ]</option>
+                                                                                <?php foreach ($documents_categories as $document_category) { ?>
+                                                                                    <option value="<?php echo $document_category->document_category_id; ?>">
+                                                                                        <?php echo $document_category->document_category; ?>
+                                                                                    </option>
+                                                                                <?php } ?>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -175,6 +193,48 @@
                                 </div>
                             </div> <!-- .container-fluid -->
                     </div> <!-- #page-content -->
+                </div>
+
+                <div id="modal_document_category" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 style="color: white;">Document Category Information</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form id="frm_document_category" role="form" class="form-horizontal row-border">
+                                    <div class="form-group">
+                                        <label class="col-xs-12 ">* Document Category :</label>
+                                        <div class="col-xs-12">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-users"></i>
+                                                </span>
+                                                <input type="text" name="document_category" class="form-control" placeholder="Document Name" data-error-msg="Document name is required!" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-12 ">Document Category Description :</label>
+                                        <div class="col-xs-12">
+                                            <textarea name="document_category_desc" class="form-control" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button id="btn_save_category" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Save
+                                        </button>
+                                        <button id="btn_cancel_category" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"> Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
@@ -217,14 +277,20 @@
     <script src="assets/plugins/spinner/dist/spin.min.js"></script>
     <script src="assets/plugins/spinner/dist/ladda.min.js"></script>
 
-
+    <!-- twitter typehead -->
+    <script src="assets/plugins/twittertypehead/handlebars.js"></script>
+    <script src="assets/plugins/twittertypehead/bloodhound.min.js"></script>
+    <script src="assets/plugins/twittertypehead/typeahead.bundle.min.js"></script>
+    <script src="assets/plugins/twittertypehead/typeahead.jquery.min.js"></script>
     <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
+    <!-- Select2 -->
+    <script src="assets/plugins/select2/select2.full.min.js"></script>
 
     <script>
 
     $(document).ready(function(){
-        var dt; var _txnMode; var _selectedID; var _selectRowObj;
+        var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboCategories;
 
         $('#btn_cancel').on('click', function() {
             $('#modal_documents').modal('hide');
@@ -241,9 +307,10 @@
                 "columns": [
 
                     { targets:[0],data: "document_type" },
-                    { targets:[1],data: "document_type_description" },
+                    { targets:[1],data: "document_category" },
+                    { targets:[2],data: "document_type_description" },
                     {
-                        targets:[2],
+                        targets:[3],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                             var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -259,6 +326,13 @@
                     '<i class="fa fa-plus-circle"></i> New Document Type</button>';
                 $("div.toolbar").html(_btnNew);
             }();
+
+            _cboCategories = $('#cbo_document_category').select2({
+                allowClear: true,
+                placeholder: 'Please select Document Category'
+            });
+
+            _cboCategories.select2('val',null);
         }();
 
         var bindEventHandlers=(function(){
@@ -286,10 +360,42 @@
                 }
             } );
 
+            _cboCategories.on('select2:select', function(){
+                if (_cboCategories.val() == 0) {
+                    _cboCategories.select2('val',null);
+                    $('#modal_documents').modal('hide');
+                    $('#modal_document_category').modal('show');
+                }
+            });
+
+            $('#btn_cancel_category').on('click',function(){
+                $('#modal_document_category').modal('hide');
+                $('#modal_documents').modal('show');
+                clearFields($('#frm_document_category'));
+            });
+
+            $('#btn_save_category').on('click', function(){
+                if (validateRequiredFields($('#frm_document_category'))) {
+                    createDocumentCategory().done(function(response){
+                        showNotification(response);
+                        var _documentCategory = response.row_added[0];
+                        _cboCategories.append('<option value='+_documentCategory.document_category_id+'>'+_documentCategory.document_category+'</option>');
+                        _cboCategories.select2('val', _documentCategory.document_category_id);
+                        $('#modal_document_category').modal('hide');
+                        $('#modal_documents').modal('show');
+                        clearFields($('#frm_document_category'));
+                    }).always(function(){
+                        showSpinningProgress($('#btn_save'));
+                    });
+                }
+            });
+
             $('#btn_new').click(function(){
                 _txnMode="new";
                 //showList(false);
                 clearFields();
+                _cboCategories.select2('val',null);
+                $('.title-modal').text(' | New Document');
                  $('#modal_documents').modal('show');
             });
 
@@ -298,6 +404,7 @@
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID = data.document_type_id;
+                $('.title-modal').text(' | Edit Document');
 
                 $('input,textarea').each(function(){
                     var _elem=$(this);
@@ -307,6 +414,8 @@
                         }
                     });
                 });
+
+                _cboCategories.select2('val',data.document_category_id);
 
                 $('#modal_documents').modal('show');
             });
@@ -331,12 +440,12 @@
             });
 
             $('#btn_save').click(function(){
-                if(validateRequiredFields()){
+                if(validateRequiredFields($('#frm_documents'))){
                     if(_txnMode=="new"){
                             createDocumentType().done(function(response){
                             showNotification(response);
                             dt.row.add(response.row_added[0]).draw();
-                            clearFields();
+                            clearFields($('#frm_documents'));
                             $('#modal_documents').modal('hide');
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
@@ -345,7 +454,7 @@
                             updateDocumentType().done(function(response){
                             showNotification(response);
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw();
-                            clearFields();
+                            clearFields($('#frm_documents'));
                             $('#modal_documents').modal('hide');
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
@@ -355,11 +464,11 @@
             });
         })();
 
-        var validateRequiredFields=function(){
+        var validateRequiredFields=function(f){
             var stat=true;
 
             $('div.form-group').removeClass('has-error');
-            $('input[required],textarea','#frm_category').each(function(){
+            $('input[required],textarea[required]',f).each(function(){
                 if($(this).val()==""){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
@@ -368,6 +477,18 @@
                 }
             });
             return stat;
+        };
+
+        var createDocumentCategory=function(){
+            var _data=$('#frm_document_category').serializeArray();
+
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Document_category/transaction/create",
+                "data":_data,
+                "beforeSend": showSpinningProgress($('#btn_save'))
+            });
         };
 
         var createDocumentType=function(){
@@ -427,8 +548,8 @@
             $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
         };
 
-        var clearFields=function(){
-            $('input[required],textarea','#frm_documents').val('');
+        var clearFields=function(f){
+            $('input[required],textarea',f).val('');
             $('form').find('input:first').focus();
         };
 

@@ -2,6 +2,29 @@
     .static-sidebar-wrapper {
         transition: .2s;
     }
+
+    .sidebar nav.widget-body > ul.acc-menu ul li a {
+        padding: 8px 10px 8px 25px;
+        border-left: 3px solid transparent;
+    }
+
+    .sidebar nav.widget-body > ul.acc-menu ul {
+        padding: 0;
+        width: 1000px;
+    }
+
+    .sidebar nav.widget-body > ul.acc-menu li.hasChild > a {
+        width: 316px;
+    }
+
+    .sidebar nav.widget-body > ul.acc-menu ul, .sidebar nav.widget-body > ul.acc-menu ul li a {
+        width: 260px;
+    }
+
+    .sidebar nav.widget-body > ul.acc-menu ul li a:hover {
+        transition: .4s;
+        border-left: 3px solid #2196f3;
+    }
 </style>
 <div class="static-sidebar-wrapper sidebar-default">
     <div class="static-sidebar">
@@ -26,19 +49,12 @@
 
                         <li><a href="Dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
 
-                        <!-- <li class="<?php echo (in_array('6',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-wallet"></i><span>Financing</span></a>
-                            <ul class="acc-menu">
-                                <li class="<?php echo (in_array('6-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="General_journal">General Journal</a></li>
-                                <li class="<?php echo (in_array('6-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Cash_disbursement">Cash Disbursement</a></li>
-                            </ul>
-                        </li> -->
-
                         <li class="<?php echo (in_array('1',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-view-list-alt"></i><span>References</span></a>
                             <ul class="acc-menu">
-                                <li  class="<?php echo (in_array('1-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="documents">Documents Management</a></li>
-                                <li class="<?php echo (in_array('1-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="service_types">Service Types Management</a></li>
-                                <li class="<?php echo (in_array('1-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories">Category Management</a></li>
-                                <!-- <li class="<?php echo (in_array('1-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_classes">Account classes Management</a></li> -->
+                                <li class="<?php echo (in_array('1-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="document_category">Documents Category</a></li>
+                                <li  class="<?php echo (in_array('1-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="documents">Documents Types</a></li>
+                                <li class="<?php echo (in_array('1-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories">Services Category</a></li>
+                                <li class="<?php echo (in_array('1-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="service_types">Service Types</a></li>
                             </ul>
                         </li>
 
@@ -54,14 +70,12 @@
                         <li class="<?php echo (in_array('2',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-harddrive"></i><span>Masterfiles</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('2-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Clients">Client Management</a></li>
-                               <!--  <li class="<?php echo (in_array('2-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Suppliers">Suppliers Management</a></li> -->
                                 <li class="<?php echo (in_array('2-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Contracts">Contract Management</a></li>
                             </ul>
                         </li>
 
                         <li class="<?php echo (in_array('3',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-settings"></i><span>Settings</span></a>
                             <ul class="acc-menu">
-                                <!-- <li class="<?php echo (in_array('3-7',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_titles">Chart of Accounts</a></li> -->
                                 <li class="<?php echo (in_array('3-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Tax">Tax Setup</a></li>
                                 <li class="<?php echo (in_array('3-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="charges">Charges Setup</a></li>
                                 <li class="<?php echo (in_array('3-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="User_groups">User Rights Management</a></li>

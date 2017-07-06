@@ -44,6 +44,7 @@ class Service_types extends CORE_Controller
                 $m_services->category_id = $this->input->post('category_id',TRUE);
                 $m_services->filing_date = $this->input->post('filing_date',TRUE);
                 $m_services->filing_month = $this->input->post('filing_month',TRUE);
+                $m_services->is_once = $this->input->post('is_once',TRUE);
                 $m_services->save();
 
                 $service_type_id = $m_services->last_insert_id();
@@ -82,6 +83,7 @@ class Service_types extends CORE_Controller
                 $m_services->category_id = $this->input->post('category_id',TRUE);
                 $m_services->filing_date = $this->input->post('filing_date',TRUE);
                 $m_services->filing_month = $this->input->post('filing_month',TRUE);
+                $m_services->is_once = $this->input->post('is_once',TRUE);
 
                 $m_services->modify($service_type_id);
 

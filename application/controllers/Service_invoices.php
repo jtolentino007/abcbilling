@@ -120,6 +120,8 @@
                         echo json_encode($response);
                     }
 
+
+
                     break;
                 case 'invoice-list':
                     $billing_month=$this->input->get('month_id',TRUE);
@@ -129,23 +131,6 @@
                     $response['data']=$this->get_response_rows('billing_info.is_deleted=0 AND billing_info.is_active=1 AND billing_info.month_id='.$billing_month.' AND billing_info.year_id='.$billing_year);
                     echo json_encode($response);
                     break;
-
-                case 'cancel-billing':
-                    $m_service_info=$this->Services_invoice_model;
-
-                    $billing_id=$this->input->post('billing_id',TRUE);
-
-                    $m_service_info->is_active=0;
-                    $m_service_info->modify($billing_id);
-
-                    $response['title']="Success!";
-                    $response['stat']="success";
-                    $response['msg']="Billing successfully cancelled";
-                    $response['row_updated']=$this->get_response_rows('billing_info.billing_id='.$billing_id);
-
-                    echo json_encode($response);
-                    break;
-
                 case 'contract-billing-status-list':
                     $month_id=$this->input->get('month_id',TRUE);
                     $year_id=$this->input->get('year_id',TRUE);
@@ -251,59 +236,6 @@
                     $this->load->view('template/billing_statement_report',$data);
 
                     break;
-
-                case 'print-all':
-                    $m_billing=$this->Services_invoice_model;
-                    $m_billing_items=$this->Services_invoice_items_model;
-                    $m_company_info=$this->Company_model;
-                    $m_beginning=$this->Beginning_balance_model;
-
-                    $month_id=$this->input->get('m',TRUE);
-                    $year_id=$this->input->get('y',TRUE);
-
-                    $results=$m_billing->get_list(
-                        'payment_status != 2 AND month_id='.$month_id.' AND year_id='.$year_id,
-                        'billing_id'
-                    );
-
-                    foreach($results as $result) 
-                    {
-                        $billing_id=$result->billing_id;
-
-                        $company_info=$m_company_info->get_list();
-
-                        $data['company_info']=$company_info[0];
-                        $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
-
-                        $data['beginning_balances']=$m_beginning->get_list(
-                            array('billing_id'=>$billing_id)
-                        );
-
-                        $data['current_charges']=$m_billing_items->get_list(
-                            array('billing_id'=>$billing_id),
-                            'billing_items.*,
-                            charges.*',
-                            array(
-                                array('charges','charges.charge_id=billing_items.charge_id','left')
-                            )
-                        );
-
-                        $billing_info=$m_billing->get_list(
-                            $billing_id,
-                            'billing_info.*,
-                            customers_info.*,
-                            contracts.*',
-                            array(
-                                array('customers_info','customers_info.customer_id=billing_info.customer_id','left'),
-                                array('contracts','contracts.contract_id=billing_info.contract_id','left')
-                            )
-                        );
-
-                        $data['billing_info']=$billing_info[0];
-
-                        $this->load->view('template/billing_statement_all_report',$data);
-                    }
-                break;
 
             }
 		}

@@ -26,7 +26,7 @@ class Rights_link_model extends CORE_Model{
                                           (9,'4','4-2','Process Accomplishments'),
                                           (10,'4','4-3','Payments'),
                                           (11,'3','3-5','Charges'),
-                                          (12,'1','1-3','Category Management'),
+                                          (12,'1','1-3','Services Category Management'),
                                           (13,'2','2-2','Contract Management'),
                                           (14,'5','5-1','Clients Ledger'),
                                           (15,'3','3-6','Database Backup'),
@@ -35,7 +35,8 @@ class Rights_link_model extends CORE_Model{
                                           (18,'1','1-4','Account classes Management'),
                                           (19,'6','6-1','General Journal'),
                                           (20,'6','6-2','Cash Disbursement'),
-                                          (21,'2','2-3','Suppliers Management')
+                                          (21,'2','2-3','Suppliers Management'),
+                                          (22,'1','1-4','Document Category Management')
             ";
 
 

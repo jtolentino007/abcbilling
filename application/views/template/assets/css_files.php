@@ -23,10 +23,14 @@
         border:1px solid #aaa;
     }
 
+    small {
+        color: #858585!important;
+    }
+
     input.form-control,
     select.form-control{
         border:1px solid #aaa;
-        border-radius: 5px;
+        /*border-radius: 5px;*/
     }
 
     .btn:hover {
@@ -40,12 +44,12 @@
     .form-control:focus,
     textarea.form-control:focus,
     select.form-control:focus {
-        background: #fff490;
+        /*background: #fff490;*/
         color: black;
-        border-color: #9e9e9e;
-        -webkit-box-shadow: 0px 0px 16px -2px #fff490!important;
+        border-color: #4caf50;
+        /*-webkit-box-shadow: 0px 0px 16px -2px #fff490!important;
         -moz-box-shadow: 0px 0px 16px -2px #fff490!important;
-        box-shadow: 0px 0px 16px -2px #fff490!important;
+        box-shadow: 0px 0px 16px -2px #fff490!important;*/
     }
 
     .select2-container{
@@ -56,6 +60,7 @@
     .input-group-addon {
         border: 1px solid #aaa; 
         border-right: none;
+        background: transparent;
     }
 
     html {
@@ -81,18 +86,18 @@
 
     th {
         background: #c1e4c2!important;
-        border: 1px solid #c8c8c8!important;
+        border: 1px solid #a9daab!important;
         border-bottom: 3px solid #a9daab!important;
         padding: 10px;
     }
 
-    tr:hover {
+   /* tr:hover {
         transition: .3s;
         background: #d9eed9!important;
-    }
+    }*/
 
     tr:nth-child(even) {
-        background: #f3f3f3;
+        background: #d9eed9;
     }
 
     tfoot > tr {
@@ -104,7 +109,7 @@
     }
 
     table {
-        border: 1px solid #e1e1e1!important;
+        border: 1px solid #a9daab!important;
     }
 
     /*table.custom-design > thead > tr > th{

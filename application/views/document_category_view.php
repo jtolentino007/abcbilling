@@ -100,25 +100,25 @@
                             <?php echo $_chat_template; ?>
                             <ol class="breadcrumb">
                                 <li><a href="dashboard">Dashboard</a></li>
-                                <li><a href="categories">Services Category Management</a></li>
+                                <li><a href="document_category">Document Category</a></li>
                             </ol>
 
                             <div class="container-fluid">
                                 <div data-widget-group="group1">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div id="div_category_fields">
+                                            <div id="div_documents_list">
                                                 <div class="panel panel-default">
                                                     <!-- <div class="panel-heading">
-                                                        <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp;Services Category Management</b>
+                                                        <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Document Category</b>
                                                     </div> -->
                                                     <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Types <small> | Category</small></h1><hr>
-                                                        <table id="tbl_categories" class="table-striped custom-design" cellspacing="0" width="100%">
+                                                        <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small> | Category</small></h1><hr>
+                                                        <table id="tbl_documents_category" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Category Name</th>
-                                                                    <th>Category Description</th>
+                                                                    <th>Document Category</th>
+                                                                    <th>Document Category Description</th>
                                                                     <th>
                                                                         <center>Action</center>
                                                                     </th>
@@ -130,47 +130,48 @@
                                                     <div class="panel-footer"></div>
                                                 </div>
                                             </div>
-                                                <div id="modal_categories" class="modal fade" role="dialog">
-                                                    <div class="modal-dialog modal-md">
-                                                        <div class="modal-content">
-                                                            <!-- <div class="modal-header">
-                                                                <h3 style="color: white;">Category Management</h3>
-                                                            </div> -->
-                                                            <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Types <small class="title-modal"> | Category</small></h1><hr>
-                                                                <form id="frm_categories" role="form" class="form-horizontal row-border">
-                                                                    <div class="form-group">
-                                                                        <label class="col-xs-12 ">* Category Name :</label>
-                                                                        <div class="col-xs-12">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon">
-                                                                                    <i class="fa fa-users"></i>
-                                                                                </span>
-                                                                                <input type="text" name="category_name" class="form-control" placeholder="Category Name" data-error-msg="Category name is required!" required />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-xs-12 ">Category Description :</label>
-                                                                        <div class="col-xs-12">
-                                                                            <textarea name="category_description" class="form-control" placeholder="Description"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <div class="row">
+                                            <div id="modal_documents" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-md">
+                                                    <div class="modal-content">
+                                                        <!-- <div class="modal-header">
+                                                            <h3 style="color: white;">Document Category Information</h3>
+                                                        </div> -->
+                                                        <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
+                                                        <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small class="title-modal"> | Category</small></h1><hr>
+                                                            <form id="frm_documents" role="form" class="form-horizontal row-border">
+                                                                <div class="form-group">
+                                                                    <label class="col-xs-12 ">* Document Category :</label>
                                                                     <div class="col-xs-12">
-                                                                        <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Save
-                                                                        </button>
-                                                                        <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"> Cancel
-                                                                        </button>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">
+                                                                                <i class="fa fa-users"></i>
+                                                                            </span>
+                                                                            <input type="text" name="document_category" class="form-control" placeholder="Document Name" data-error-msg="Document name is required!" required />
+                                                                        </div>
                                                                     </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-xs-12 ">Document Category Description :</label>
+                                                                    <div class="col-xs-12">
+                                                                        <textarea name="document_category_desc" class="form-control" placeholder="Description"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <br />
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Save
+                                                                    </button>
+                                                                    <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"> Cancel
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -182,8 +183,8 @@
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content"><!---content--->
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                                <h4 class="" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
                             </div>
 
                             <div class="modal-body">
@@ -228,21 +229,21 @@
         var dt; var _txnMode; var _selectedID; var _selectRowObj;
 
         $('#btn_cancel').on('click', function() {
-            $('#modal_categories').modal('hide');
+            $('#modal_documents').modal('hide');
         });
 
         var initializeControls=function(){
-            dt=$('#tbl_categories').DataTable({
+            dt=$('#tbl_documents_category').DataTable({
                 "dom": '<"toolbar">frtip',
                 "bLengthChange":false,
                 "language": {
-                    "searchPlaceholder":"Search Category"
+                    "searchPlaceholder":"Search Document Category"
                 },
-                "ajax" : "Categories/transaction/list",
+                "ajax" : "Document_category/transaction/list",
                 "columns": [
 
-                    { targets:[0],data: "category_name" },
-                    { targets:[1],data: "category_description" },
+                    { targets:[0],data: "document_category" },
+                    { targets:[1],data: "document_category_desc" },
                     {
                         targets:[2],
                         render: function (data, type, full, meta){
@@ -256,8 +257,8 @@
             });
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Service Category" >'+
-                    '<i class="fa fa-plus-circle"></i> New Service Category</button>';
+                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Document Category" >'+
+                    '<i class="fa fa-plus-circle"></i> New Document Category</button>';
                 $("div.toolbar").html(_btnNew);
             }();
         }();
@@ -270,14 +271,15 @@
                 //showList(false);
                 clearFields();
                 $('.title-modal').text(' | New Category');
-                 $('#modal_categories').modal('show');
+                 $('#modal_documents').modal('show');
             });
 
-            $('#tbl_categories tbody').on('click','button[name="edit_info"]',function(){
+            $('#tbl_documents_category tbody').on('click','button[name="edit_info"]',function(){
                 _txnMode="edit";
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
-                _selectedID = data.category_id;
+                _selectedID = data.document_category_id;
+
                 $('.title-modal').text(' | Edit Category');
 
                 $('input,textarea').each(function(){
@@ -289,45 +291,45 @@
                     });
                 });
 
-                $('#modal_categories').modal('show');
+                $('#modal_documents').modal('show');
             });
 
-            $('#tbl_categories tbody').on('click','button[name="remove_info"]',function(){
+            $('#tbl_documents_category tbody').on('click','button[name="remove_info"]',function(){
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
-                _selectedID = data.category_id;
+                _selectedID = data.document_category_id;
 
                 $('#modal_confirmation').modal('show');
             });
 
             $('#btn_yes').click(function(){
-                removeCategory().done(function(response){
+                removeDocumentCategory().done(function(response){
                     showNotification(response);
                     dt.row(_selectRowObj).remove().draw();
                 });
             });
 
             $('#btn_cancel').click(function(){
-                $('modal_categories').modal('hide');
+                showList(true);
             });
 
             $('#btn_save').click(function(){
                 if(validateRequiredFields()){
                     if(_txnMode=="new"){
-                            createCategory().done(function(response){
+                            createDocumentCategory().done(function(response){
                             showNotification(response);
                             dt.row.add(response.row_added[0]).draw();
                             clearFields();
-                            $('#modal_categories').modal('hide');
+                            $('#modal_documents').modal('hide');
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
                         });
                     }else{
-                            updateCategory().done(function(response){
+                            updateDocumentCategory().done(function(response){
                             showNotification(response);
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw();
                             clearFields();
-                            $('#modal_categories').modal('hide');
+                            $('#modal_documents').modal('hide');
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
                         });
@@ -340,7 +342,7 @@
             var stat=true;
 
             $('div.form-group').removeClass('has-error');
-            $('input[required],textarea[required]','#frm_categories').each(function(){
+            $('input[required],textarea[required]','#frm_documents').each(function(){
                 if($(this).val()==""){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
@@ -351,37 +353,37 @@
             return stat;
         };
 
-        var createCategory=function(){
-            var _data=$('#frm_categories').serializeArray();
+        var createDocumentCategory=function(){
+            var _data=$('#frm_documents').serializeArray();
 
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Categories/transaction/create",
+                "url":"Document_category/transaction/create",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save'))
             });
         };
 
-        var updateCategory=function(){
-            var _data=$('#frm_categories').serializeArray();
-            _data.push({name : "category_id" ,value : _selectedID});
+        var updateDocumentCategory=function(){
+            var _data=$('#frm_documents').serializeArray();
+            _data.push({name : "document_category_id" ,value : _selectedID});
 
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Categories/transaction/update",
+                "url":"Document_category/transaction/update",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save'))
             });
         };
 
-        var removeCategory=function(){
+        var removeDocumentCategory=function(){
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Categories/transaction/delete",
-                "data":{category_id : _selectedID}
+                "url":"Document_category/transaction/delete",
+                "data":{document_category_id : _selectedID}
             });
         };
 
@@ -409,22 +411,8 @@
         };
 
         var clearFields=function(){
-            $('input[required],textarea','#frm_categories').val('');
+            $('input[required],textarea','#frm_documents').val('');
             $('form').find('input:first').focus();
-        };
-
-        function format ( d ) {
-            return '<br /><table style="margin-left:10%;width: 80%;">' +
-            '<thead>' +
-            '</thead>' +
-            '<tbody>' +
-            '<tr>' +
-            '<td>Category Name : </td><td><b>'+ d.category_name+'</b></td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>Category Description : </td><td>'+ d.category_desc+'</td>' +
-            '</tr>' +
-            '</tbody></table><br />';
         };
     });
 

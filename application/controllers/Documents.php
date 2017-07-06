@@ -7,7 +7,12 @@ class Documents extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-        $this->load->model('Documents_model');
+        $this->load->model(
+            array(
+                'Documents_model',
+                'Document_category_model'
+            )
+        );
     }
 
     public function index() {
@@ -18,6 +23,8 @@ class Documents extends CORE_Controller
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
         $data['_chat_template'] = $this->load->view('template/elements/chat_view','',TRUE);
         $data['title'] = 'Document Type Management';
+
+        $data['documents_categories'] = $this->Document_category_model->get_list('is_deleted=FALSE AND is_active=TRUE');
 
         $this->load->view('documents_view', $data);
     }
@@ -35,6 +42,7 @@ class Documents extends CORE_Controller
                 $m_documents = $this->Documents_model;
 
                 $m_documents->document_type = $this->input->post('document_type', TRUE);
+                $m_documents->document_category_id = $this->input->post('document_category_id', TRUE);
                 $m_documents->document_type_description = $this->input->post('document_type_description', TRUE);
                 $m_documents->save();
 
@@ -69,6 +77,7 @@ class Documents extends CORE_Controller
 
                 $document_type_id=$this->input->post('document_type_id',TRUE);
                 $m_documents->document_type=$this->input->post('document_type',TRUE);
+                $m_documents->document_category_id = $this->input->post('document_category_id', TRUE);
                 $m_documents->document_type_description=$this->input->post('document_type_description',TRUE);
 
                 $m_documents->modify($document_type_id);

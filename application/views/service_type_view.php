@@ -46,10 +46,6 @@
                 z-index: 9999999999;
             }
 
-            .modal-content {
-                border: 1px solid #404040;
-            }
-
             .panel {
                 border: none;
                 -webkit-box-shadow: 0px 0px 12px -1px rgba(156,151,156,1);
@@ -120,10 +116,11 @@
                                         <div class="col-md-12">
                                             <div id="div_services_list">
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                    <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Service Types</b>
-                                                    </div>
-                                                    <div class="panel-body table-responsive">
+                                                    </div> -->
+                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+                                                        <h1><span class="fa fa-cog" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Types <small> | Reference</small></h1><hr>
                                                         <table id="tbl_services" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
@@ -145,10 +142,11 @@
                                                 <div id="modal_services" class="modal fade" role="dialog">
                                                     <div class="modal-dialog modal-md">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h3 style="color: white;">Service Type Information</h3>
-                                                            </div>
-                                                            <div class="modal-body">
+                                                            <!-- <div class="modal-header">
+                                                                <b style="color: white; font-size: 12pt;"><i class="fa fa-cog"></i>&nbsp; Service Types</b>
+                                                            </div> -->
+                                                            <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
+                                                        <h1><span class="fa fa-cog" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Types <small class="title-modal"> | Reference</small></h1><hr>
                                                                 <form id="frm_services" role="form" class="form-horizontal row-border">
                                                                     <div class="form-group">
                                                                         <label class="col-xs-12 ">* Service Code :</label>
@@ -190,6 +188,12 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
+                                                                        <div class="col-xs-12">
+                                                                            <input type="checkbox" id="singleTransaction" name="single_transaction">
+                                                                            <label for="singleTransaction">Please check if this service is one time transaction only.</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group filing_form">
                                                                         <label class="col-xs-8 ">File Every :</label>
                                                                         <label class="col-xs-4">on Day :</label>
                                                                         <div class="col-xs-8">
@@ -317,7 +321,7 @@
     <script>
 
     $(document).ready(function(){
-        var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboCategory;
+        var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboCategory; var _cboServices;
 
         $('#btn_cancel').on('click', function() {
             $('#modal_services').modal('hide');
@@ -380,18 +384,29 @@
                 }
             } );
 
+            _cboServices=$('#cbo_filling_month').select2({
+                placeholder: "File Every ?",
+                allowClear: true
+            });
+
             _cboCategory=$("#cbo_category").select2({
                 placeholder: "Please select category.",
                 allowClear: true
             });
 
+            _cboServices.select2('val',null);
             _cboCategory.select2('val',null);
+
+            $('#singleTransaction').click(function(){
+                $('.filing_form').toggle();
+            });
 
             $('#btn_new').click(function(){
                 _txnMode="new";
                 //showList(false);
                 clearFields();
                 _cboCategory.select2('val',null);
+                $('.title-modal').text(' | New Service');
                  $('#modal_services').modal('show');
             });
 
@@ -400,6 +415,7 @@
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID = data.service_id;
+                $('.title-modal').text(' | Edit Service');
 
                 $('input,textarea').each(function(){
                     var _elem=$(this);
@@ -458,7 +474,7 @@
             })
 
             $('#btn_save').click(function(){
-                if(validateRequiredFields()){
+                if(validateRequiredFields($('#frm_services'))){
                     if(_txnMode=="new"){
                             createServiceType().done(function(response){
                             showNotification(response);
@@ -482,11 +498,11 @@
             });
         })();
 
-        var validateRequiredFields=function(){
+        var validateRequiredFields=function(f){
             var stat=true;
 
             $('div.form-group').removeClass('has-error');
-            $('input[required],textarea','#frm_category').each(function(){
+            $('input[required],textarea[required]',f).each(function(){
                 if($(this).val()==""){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
@@ -511,6 +527,7 @@
 
         var createServiceType=function(){
             var _data=$('#frm_services').serializeArray();
+            _data.push({name: 'is_once', value: ($('#singleTransaction').is(':checked') ? 1 : 0) });
 
             return $.ajax({
                 "dataType":"json",
@@ -524,6 +541,7 @@
         var updateServiceType=function(){
             var _data=$('#frm_services').serializeArray();
             _data.push({name : "service_id" ,value : _selectedID});
+            _data.push({name: 'is_once', value: ($('#singleTransaction').is(':checked') ? 1 : 0) });
 
             return $.ajax({
                 "dataType":"json",
