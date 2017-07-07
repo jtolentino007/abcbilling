@@ -970,21 +970,27 @@
                     $('#div_billing_no_loader').hide();
                     $('#div_billing_no').show();
 
-                    if(response.stat=="success"){
+                    //if(response.stat=="success"){
+
+                    if(response.stat=="info"){
+                        showNotification(response);
+                    }
+
                         $('#txt_billing_no').val(response.billing_no);
 
                         $('#tbl_current_charges > tbody').html(response.current_charges);
                         $('#tbl_beginning_balances > tbody').html(response.beginning_balances);
 
-
                         reInitializeNumeric();
                         reComputeTotalCurrentCharges();
                         reComputeTotalBeginningCharges();
                         reComputeBillingSummary();
-                    }else{
-                        showNotification(response);
-                        $('#modal_process_billing').modal('hide');
-                    }
+
+                    //}else{
+                        //alert("hello");
+                        //showNotification(response);
+                        //$('#modal_process_billing').modal('hide');
+                    //}
 
 
                 });

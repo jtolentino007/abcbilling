@@ -55,70 +55,86 @@
                     $m_billing_items=$this->Services_invoice_items_model;
                     $m_beginning=$this->Beginning_balance_model;
 
+
                     $m_billing->begin();
-                    $m_billing->billing_no=$m_billing->create_billing_no();
-                    $m_billing->contract_id=$this->input->post('contract_id',TRUE);
-                    $m_billing->date_billed=date('Y-m-d',strtotime($this->input->post('date_billed',TRUE)));
-                    $m_billing->customer_id=$this->input->post('customer_id',TRUE);
-                    $m_billing->month_id=$this->input->post('month_id',TRUE);
-                    $m_billing->year_id=$this->input->post('year_id',TRUE);
-                    $m_billing->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
-                    //$m_billing->remarks=$this->input->post('remarks',TRUE);
-                    $m_billing->total_billing_current_amount=$this->get_numeric_value($this->input->post('total_billing_current_amount',TRUE));
-                    $m_billing->total_billing_previous_amount=$this->get_numeric_value($this->input->post('total_billing_previous_amount',TRUE));
-                    $m_billing->total_billing_amount=$this->get_numeric_value($this->input->post('total_billing_amount',TRUE));
-                    $m_billing->total_amount_due=$this->get_numeric_value($this->input->post('total_amount_due',TRUE));
-                    $m_billing->advance_payment=$this->get_numeric_value($this->input->post('advance_payment',TRUE));
+                     //$m_billing->billing_no=$m_billing->create_billing_no();
+                    $billing_no = $this->input->post('billing_no',TRUE);
 
-                    $m_billing->posted_by=$this->session->user_id;
-                    $m_billing->set('date_posted','NOW()');
-                    $m_billing->save();
-
-                    $billing_id=$m_billing->last_insert_id();
-
-
-                    //billing items
-                    $current_charge_id=$this->input->post('current_charge_id',TRUE);
-                    $current_charge_description=$this->input->post('current_charge_description',TRUE);
-                    $current_charge_amount=$this->input->post('current_charge_amount',TRUE);
-
-                    for($i=0;$i<=count($current_charge_id)-1;$i++){
-                        $m_billing_items->billing_id=$billing_id;
-                        $m_billing_items->charge_id=$current_charge_id[$i];
-                        $m_billing_items->description=$current_charge_description[$i];
-                        $m_billing_items->charge_line_total=$this->get_numeric_value($current_charge_amount[$i]);
-                        $m_billing_items->save();
+                    $exist = $m_billing->get_list("billing_no='".$billing_no."'");
+                    if(count($exist)>0){
+                        $response['title']="Duplicate!";
+                        $response['stat']="error";
+                        $response['msg']="Billing number already exists. Make sure billing number is not in used.";
+                        die(json_encode($response));
                     }
 
 
-                    //beginning balances
-                    $beginning_balance_charge_id=$this->input->post('beginning_balance_charge_id',TRUE);
-                    $beginning_balance_description=$this->input->post('beginning_balance_description',TRUE);
-                    $beginning_balance_remaining=$this->input->post('beginning_balance_remaining',TRUE);
+                    $m_billing->billing_no=$billing_no;
+                        $m_billing->contract_id=$this->input->post('contract_id',TRUE);
+                        $m_billing->date_billed=date('Y-m-d',strtotime($this->input->post('date_billed',TRUE)));
+                        $m_billing->customer_id=$this->input->post('customer_id',TRUE);
+                        $m_billing->month_id=$this->input->post('month_id',TRUE);
+                        $m_billing->year_id=$this->input->post('year_id',TRUE);
+                        $m_billing->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
+                        //$m_billing->remarks=$this->input->post('remarks',TRUE);
+                        $m_billing->total_billing_current_amount=$this->get_numeric_value($this->input->post('total_billing_current_amount',TRUE));
+                        $m_billing->total_billing_previous_amount=$this->get_numeric_value($this->input->post('total_billing_previous_amount',TRUE));
+                        $m_billing->total_billing_amount=$this->get_numeric_value($this->input->post('total_billing_amount',TRUE));
+                        $m_billing->total_amount_due=$this->get_numeric_value($this->input->post('total_amount_due',TRUE));
+                        $m_billing->advance_payment=$this->get_numeric_value($this->input->post('advance_payment',TRUE));
 
-                    for($i=0;$i<=count($beginning_balance_charge_id)-1;$i++){
-                        $m_beginning->billing_id=$billing_id;
-                        $m_beginning->charge_id=$beginning_balance_charge_id[$i];
-                        $m_beginning->description=$beginning_balance_description[$i];
-                        $m_beginning->beginning_amount=$this->get_numeric_value($beginning_balance_remaining[$i]);
-                        $m_beginning->save();
-                    }
+                        $m_billing->posted_by=$this->session->user_id;
+                        $m_billing->set('date_posted','NOW()');
+                        $m_billing->save();
+
+                        $billing_id=$m_billing->last_insert_id();
 
 
-                    $m_billing->commit();
+                        //billing items
+                        $current_charge_id=$this->input->post('current_charge_id',TRUE);
+                        $current_charge_description=$this->input->post('current_charge_description',TRUE);
+                        $current_charge_amount=$this->input->post('current_charge_amount',TRUE);
 
-                    if($m_billing->status()===TRUE){
+                        for($i=0;$i<=count($current_charge_id)-1;$i++){
+                            $m_billing_items->billing_id=$billing_id;
+                            $m_billing_items->charge_id=$current_charge_id[$i];
+                            $m_billing_items->description=$current_charge_description[$i];
+                            $m_billing_items->charge_line_total=$this->get_numeric_value($current_charge_amount[$i]);
+                            $m_billing_items->save();
+                        }
 
-                        $contract_id=$this->input->post('contract_id',TRUE);
-                        $month_id=$this->input->post('month_id',TRUE);
-                        $year_id=$this->input->post('year_id',TRUE);
 
-                        $response['title']="Success!";
-                        $response['stat']="success";
-                        $response['msg']="Billing successfully created.";
-                        $response['contract_row']=$m_billing->get_contract_billing_status($month_id,$year_id,$contract_id);
-                        echo json_encode($response);
-                    }
+                        //beginning balances
+                        $beginning_balance_charge_id=$this->input->post('beginning_balance_charge_id',TRUE);
+                        $beginning_balance_description=$this->input->post('beginning_balance_description',TRUE);
+                        $beginning_balance_remaining=$this->input->post('beginning_balance_remaining',TRUE);
+
+                        for($i=0;$i<=count($beginning_balance_charge_id)-1;$i++){
+                            $m_beginning->billing_id=$billing_id;
+                            $m_beginning->charge_id=$beginning_balance_charge_id[$i];
+                            $m_beginning->description=$beginning_balance_description[$i];
+                            $m_beginning->beginning_amount=$this->get_numeric_value($beginning_balance_remaining[$i]);
+                            $m_beginning->save();
+                        }
+
+
+                        $m_billing->commit();
+
+                        if($m_billing->status()===TRUE){
+
+                            $contract_id=$this->input->post('contract_id',TRUE);
+                            $month_id=$this->input->post('month_id',TRUE);
+                            $year_id=$this->input->post('year_id',TRUE);
+
+                            $response['title']="Success!";
+                            $response['stat']="success";
+                            $response['msg']="Billing successfully created.";
+                            $response['contract_row']=$m_billing->get_contract_billing_status($month_id,$year_id,$contract_id);
+                            echo json_encode($response);
+                        }
+
+
+
 
 
 
@@ -158,12 +174,7 @@
                         )
                     );
 
-                    if(count($exist)>0){
-                        $response['title']="Contract Already Billed!";
-                        $response['stat']="error";
-                        $response['msg']="Sorry, contract is already been billed for this month. Please cancel existing billing to process new billing on current period.";
-                        die(json_encode($response));
-                    }
+
 
 
                     //get recurring fixed charges on the contract template
@@ -181,14 +192,35 @@
                         )
                     );
 
-                    //get previous balances
-                    $data['previous_fees']=$m_billing->get_billing_with_balances($contract_id);
 
 
-                    $response['stat']="success";
+
+
+
+
+
                     $response['billing_no']=$m_billing->create_billing_no();
-                    $response['current_charges']=$this->load->view('template/current_charges_table_body',$data,TRUE);
-                    $response['beginning_balances']=$this->load->view('template/beginning_balance_table_body',$data,TRUE);
+
+
+                    if(count($exist)<=0){ // if billing already created for this month, do not include previous balance
+                        //$response['title']="Contract Already Billed!";
+                        //$response['stat']="error";
+                        //$response['msg']="Sorry, contract is already been billed for this month. Please cancel existing billing to process new billing on current period.";
+                        //die(json_encode($response));
+
+                        //get previous balances
+                        $response['stat']="success";
+                        $response['current_charges']=$this->load->view('template/current_charges_table_body',$data,TRUE);
+                        $data['previous_fees']=$m_billing->get_billing_with_balances($contract_id);
+                        $response['beginning_balances']=$this->load->view('template/beginning_balance_table_body',$data,TRUE);
+                    }else{
+                        $response['stat']="info";
+                        $response['title']="Reminder!";
+                        $response['msg']="Billing is already created for this month.";
+                        $response['current_charges'] = '';
+                        $response['beginning_balances'] = '';
+                    }
+
 
                     echo json_encode($response);
 
@@ -199,6 +231,10 @@
                     $m_billing_items=$this->Services_invoice_items_model;
                     $m_company_info=$this->Company_model;
                     $m_beginning=$this->Beginning_balance_model;
+
+                    //query list of billing id
+                    // id_list = get_list_of_billing();
+
 
                     $billing_id=$this->input->get('bid', TRUE);
 
