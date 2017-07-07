@@ -293,7 +293,7 @@
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -814,6 +814,7 @@
                     showNotification(response);
 
                     var data=response.row_updated[0];
+                    console.log(data);
                     if(response.stat=="success"){
                         var htmlStat=(data.stat=="1"?'<i class="fa fa-check-circle" style="color: #4caf50;"></i></center>':'<center><i class="fa fa-times-circle" style="color: #f44336;"></i></center>');
 

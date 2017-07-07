@@ -153,7 +153,14 @@
                                     <td><?php echo $customer_file->date_posted; ?></td>
                                     <td><?php echo $customer_file->user_name; ?></td>
                                     <td align="center"><a href="" id="link_delete" data-file-id="<?php echo $customer_file->customer_file_id; ?>"><i class="fa fa-trash" style="color:black;"></i></a></td>
-                                    <td align="center"><a href="https://docs.google.com/viewerng/viewer?url=<?php echo base_url($customer_file->document_path); ?>" target="_blank" id="link_search" data-file-id="<?php echo $customer_file->customer_file_id; ?>"><i class="fa fa-search" style="color:blue;"></i></a></td>
+                                    <td align="center"><a href="<?php echo ($customer_file->file_extension == 'jpeg' 
+                            || $customer_file->file_extension == 'jpg' 
+                            || $customer_file->file_extension == 'bmp' 
+                            || $customer_file->file_extension == 'png' 
+                            ? base_url().'Image_viewer?src='.base_url($customer_file->document_path).'&fname='.$customer_file->document_filename
+                            : 'https://docs.google.com/viewerng/viewer?url='. base_url($customer_file->document_path) 
+                            ) 
+                    ?>" target="_blank" id="link_search" data-file-id="<?php echo $customer_file->customer_file_id; ?>"><i class="fa fa-search" style="color:blue;"></i></a></td>
 
                                 </tr>
                             <?php } ?>
@@ -161,6 +168,8 @@
                         </table>
 
                     </div>
+
+                    
 
 
                     <div class="tab-pane " id="fee_template_<?php echo $contract_id; ?>" style="min-height: 250px;">

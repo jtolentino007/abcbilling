@@ -216,6 +216,7 @@ class Contracts extends CORE_Controller
                         $m_files->document_type_id=$doc_type_id;
                         $m_files->document_path=$file_path;
                         $m_files->document_filename=$orig_file_name;
+                        $m_files->file_extension=$extension;
                         $m_files->posted_by_user=$this->session->user_id;
 
                         if($m_files->save()){
@@ -314,10 +315,12 @@ class Contracts extends CORE_Controller
                     $m_services->save();
                 }
 
+                $updated_row = $m_services->get_customer_service_status($contract_id,$service_id);
+
                 $response['title']='Status Updated!';
                 $response['stat']='success';
-                $response['msg']='Service status successfully updated.';
-                $response['row_updated']=$m_services->get_customer_service_status($contract_id,$service_id);
+                $response['msg']=($updated_row[0]->stat == "1" ? 'Service successfully integrated to this contract.' : 'Service successfully removed from this contract.');
+                $response['row_updated']=$updated_row;
                 echo json_encode($response);
 
                 break;
