@@ -13,7 +13,11 @@ class Templates extends CORE_Controller {
                 'User_group_right_model',
                 'Company_model',
                 'User_customers_model',
-                'Users_model'
+                'Users_model',
+                'Documents_model',
+                'Tax_types_model',
+                'Services_model',
+                'Customers_item_model'
             )
         );
     }
@@ -113,6 +117,29 @@ class Templates extends CORE_Controller {
                 $data['customers']=$m_user_customers->get_affiliated_clients($user_id);
 
                 $this->load->view('template/user_customers_expandable_details',$data);
+                break;
+
+            case 'trial':
+            $data['documents'] = $this->Documents_model->get_list('is_active=TRUE AND is_deleted=FALSE');
+            $data['taxes'] = $this->Tax_types_model->get_list('is_deleted=FALSE');
+            $data['services'] = $this->Services_model->get_list('is_active=TRUE AND is_deleted=FALSE');
+            $documents= $this->Customers_item_model->get_list('document_type="GD" AND customer_id = 12',
+                array('customer_items.document_id',
+                    'customer_items.value')
+
+                );
+            $data['checked'] = $documents;
+            
+
+               $data['SD'] = $this->Customers_item_model->get_list('document_type="SD" AND customer_id = 12',
+                array('customer_items.document_id'
+                    )
+
+
+
+                );
+
+                $this->load->view('template/client_edit_view',$data);
                 break;
         }
     }

@@ -46,7 +46,7 @@
                         <?php echo $customer_info[0]->tax_type; ?>
                     </div>
                     <div class="col-xs-12 col-lg-2">
-                        <img class="img-responsive image" style="border: 1px solid #aaa;" name="img_customer_photo" src="<?php echo $customer_info[0]->photo_path; ?>" alt="Image" width="100%">
+                        <!-- <img class="img-responsive image" style="border: 1px solid #aaa;" name="img_customer_photo" src="<?php echo $customer_info[0]->photo_path; ?>" alt="Image" width="100%"> -->
 
                         <br /><br />
                         Contact No. : <br />
