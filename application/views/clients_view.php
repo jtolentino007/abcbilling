@@ -46,7 +46,7 @@
             opacity: .8;
             cursor: pointer;
         }*/
-
+.container-checkbox { border:2px solid #ccc; width:100%; height: 250px; overflow-y: scroll;}
         .numeriCol {
             text-align: right;
         }
@@ -151,6 +151,30 @@
           transform: translate(-50%, -50%);
           -ms-transform: translate(-50%, -50%);
         }
+         input.bottom{
+    border: 1px solid #aaa;
+    margin: 1px 0px 0px 0px;
+    border-radius: 5px;
+
+/*        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid  #aaa;*/
+        }
+        .panel-heading-01{
+            padding: 2.5px  2.5px  2.5px  2.5px;
+            background-color: black;
+            color:white;
+            text-align:center;
+            font-style: italic;
+
+        }
+        tr:hover {
+    background: none!important;}
+
+    tr{
+        background: none!important;
+    }
     </style>
 
 </head>
@@ -245,35 +269,83 @@
             </div>
 
             <div id="modal_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                <div class="modal-dialog" style="width: 65%;">
+                <div class="modal-dialog modal-lg" style="width:90%;"> 
                     <div class="modal-content">
-                        <div class="modal-header" style="background-color:#2ecc71;">
+                        <!-- <div class="modal-header" style="background-color:#2ecc71;">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title" style="color:#ecf0f1;"><span id="modal_mode"> </span>Client Information</h4>
-                        </div>
-                        <div class="modal-body">
+
+                        </div> -->
+
+                        <table >
+                        <thead >
+                        <tr width="100%">
+                        <td width="10%">
+                        <img src="<?php echo $companydata[0]->logo_path; ?>" style="width: 100%;">
+                        </td>
+                        <td><b><?php echo $companydata[0]->company_name;?></b><br><?php echo $companydata[0]->company_address; ?>
+                        </td>
+                        </tr>
+                        <tr style="background-color: none;">
+                        <h5><td colspan="2" height="30px" style="background: none;"><b>CLIENT REGISTRATION FORM</b></td></h5>
+                        </tr>         
+                        </thead>
+                        </table>
                             <form id="frm_customer">
+                        <div class="col-sm-12">
                                 <div class="row">
-                                    <div class="col-lg-5">
-                                        Customer Code *: <br><input type="text" name="customer_code" data-error-msg="Customer Code is required!" class="form-control" required  />
+                                    <div class="panel-heading-01">
+                                        <h3 class="panel-title panel-heading-01" >CLIENT INFORMATION</h3>
+                                    </div><br>
+                                    <div class="col-lg-12">
+
+                                        <!-- Customer Code *: <br><input type="text" name="customer_code" data-error-msg="Customer Code is required!" class="form-control" required  /> -->
+                                        Corporate/Individual Name * :<br><input class="form-control" name="company_name" data-error-msg="Company name is required!" id="txtCompanyName" type="text" required />
                                         Trade name * : <br><input class="form-control" name="trade_name" data-error-msg="Trade name is required!" id="txtTradeName" type="text" required /></td>
-                                        Company Name * :<br><input class="form-control" name="company_name" data-error-msg="Company name is required!" id="txtCompanyName" type="text" required />
-                                        Head Office Address :<br><textarea class="form-control" name="office_address" data-error-msg="Head Office Address is required!" id="txtHeadOfficeAddress"></textarea>
-                                        Billing Address : <br><textarea class="form-control" name="billing_address" data-error-msg="Billing Address is required!" id="txtBilling" type="text" ></textarea>
-                                        Contact Person : <br><input class="form-control" name="contact_person" />
+                                        Office Address :<br><textarea class="form-control" name="office_address" data-error-msg="Head Office Address is required!" id="txtHeadOfficeAddress"></textarea>
+
+                                        <div class="col-lg-12 col-sm-12">
+                                            <div class="col-lg-6 col-sm-6">
+                                             Owner /  Person in Charge : <br><input class="form-control" name="contact_person" />
+                                             Contact # : <br><input type="text" class="form-control" name="contact_no" /><br>
+                                             <div class="col-sm-12">
+                                                <div class="col-sm-6">
+                                                    Business Type : <br>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="radio" name="business_type" class="business" data-value="01" id="business_type_01">
+                                                    <label for="business_type_01">Single Proprietorship</label><br>
+                                                    <input type="radio" name="business_type" class="business" data-value="02" id="business_type_02">
+                                                    <label for="business_type_02">Partnership</label><br>
+                                                    <input type="radio" name="business_type" class="business" data-value="03" id="business_type_03">
+                                                    <label for="business_type_03">Corporation</label><br>
+                                                </div>
+                                            </div>
+                                        
+                                            </div>
+                                            <div class="col-lg-6 col-sm-6">
+                                            Email Address :<br><input type="text" class="form-control" name="email_address" id="txtEmail" />
+                                            RDO No. : <br><input type="text" class="form-control" name="rdo_no" />
+                                            TIN # : <br><input type="text" class="form-control" name="tin_no" />
+                                            Industry # : <br><input type="text" class="form-control" name="industry" />
+                                            SEC / DTI  : <br><input type="text" class="form-control" name="sec_dti" />
+                                            </div>
+                                        </div>
+
+                                       <!--  Billing Address : <br><textarea class="form-control" name="billing_address" data-error-msg="Billing Address is required!" id="txtBilling" type="text" ></textarea> -->
+                                        
                                     </div>
-                                    <div class="col-lg-4">
-                                        Designation : <br><input type="text" class="form-control" name="designation" id="txtDesignation" />
-                                        Contact # : <br><input type="text" class="form-control" name="contact_no" />
-                                        Email Address :<br><input type="text" class="form-control" name="email_address" id="txtEmail" />
-                                        TIN # : <br><input type="text" class="form-control" name="tin_no" />
-                                        VAT : <br><select name="tax_type_id" class="form-control" >
+                                   <!--  <div class="col-lg-4"> -->
+                                       <!--  Designation : <br><input type="text" class="form-control" name="designation" id="txtDesignation" /> -->
+                                        
+
+
+<!--                                         VAT : <br><select name="tax_type_id" class="form-control" >
                                             <?php foreach ($taxes as $tax) { ?>
                                                 <option value="<?php echo $tax->tax_type_id; ?>"><?php echo $tax->tax_type; ?></option>
                                             <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-3">
+                                        </select> -->
+                                   <!--  </div> -->
+<!--                                     <div class="col-lg-3">
                                         <div class="img-container" style="height: 240px;">
                                             <img class="image" name="img_user" src="assets/img/default-user-image.png" alt="Image" style="max-height: 100%; min-height: 100%;">
                                             <input type="file" name="file_upload[]" class="hidden">
@@ -287,6 +359,104 @@
                                         <div>
                                             <button type="button" id="btn_remove_photo" class="btn btn-danger btn-block">Remove Photo</button>
                                         </div>
+                                    </div> -->
+                                </div>
+                                <br>
+                                <div class="panel-heading-01" width="100%">
+                                    <h3 class="panel-title panel-heading-01" >DOCUMENTS PROVIDED</h3>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <div class="col-lg-4">
+                                    <br>
+                                    General Documents: <br>
+                                        <div class="container-checkbox">
+                                            <div style="padding: 5px 5px 5px 5px;">
+                                            <?php foreach ($documents as $key ) {?>
+                                                  <input type="checkbox" class="documents" id="<?php echo $key->document_type_id;?>gd" data-value="<?php echo $key->document_type_id;?>">
+                                                  <label for="<?php echo $key->document_type_id;?>gd"><?php echo $key->document_type;?></label>
+                                              <br>
+                                            <?php } ?>
+                                            </div>
+                                        </div><br>
+                                    Supporting Documents <br>
+                                        <input type="checkbox" class="supporting" id="1sd" data-value="1">
+                                            <label for="1sd">SSS, PHIC and HDMF Registration </label><br>
+                                        <input type="checkbox" class="supporting" id="2sd" data-value="2">
+                                            <label for="2sd">CTC </label>  <br>
+                                        <input type="checkbox" class="supporting" id="3sd" data-value="3">
+                                            <label for="3sd">Government ID of Owner/Signatory/OIC (atleast 2)</label><br>
+                                    </div>
+                                    <div class="col-lg-8">
+                                    <br>
+                                        <div class="col-sm-12 col-lg-12">
+                                         Previous Returns: <br>
+                                         <table width="100%" border="0" style="border: none!important;">
+                                         <tr class="pr-return">
+                                         <td>
+                                            <input type="checkbox" class="previous" id-post="1" name="checkbox1pr" id="1pr" data-value="1" >
+                                            <label for="1pr">Latest Income Tax Return <b>Year</b></label>
+                                            
+                                         </td>
+                                         <td>
+                                             <input type="text" dis="1pr" id="text1pr" class="bottom form-control pr-return-input" width="100%">
+                                         </td>
+                                         </tr>
+
+                                         <tr class="pr-return">
+                                            <td>
+                                                <input type="checkbox" class="previous" id-post="2" name="checkbox2pr" id="2pr" data-value="2" style="padding-top: 1px;">
+                                                <label for="2pr">Percentage Tax <b>Period</b> </label>
+                                            </td>
+                                            <td>
+                                                <input type="text"  dis="2pr" class="bottom form-control pr-return-input" >
+                                            </td>
+                                         </tr>
+
+                                        <tr class="pr-return">
+                                            <td>
+                                            <input type="checkbox" class="previous" id-post="3" name="checkbox3pr" id="3pr" data-value="3" style="padding-top: 1px;">
+                                            <label for="3pr">Vat Return <b>Period</b></label>
+                                            </td>
+                                            <td>
+                                            <input type="text" dis="3pr" class="bottom form-control pr-return-input" >
+                                            </td>
+                                         </tr>
+                                         <tr class="pr-return">
+                                             <td>
+                                                <input type="checkbox" class="previous" id-post="4" name="checkbox4pr" id="4pr" data-value="4" style="padding-top: 1px;">
+                                                <label for="4pr">Expanded WT <b>Period</b> </label>
+                                            </td>
+                                            <td>
+                                            <input type="text" dis="4pr" class="bottom form-control  pr-return-input" >
+                                            </td>
+                                        </tr>
+                                         <tr class="pr-return">
+                                            <td>
+                                            <input type="checkbox" class="previous" id-post="5" name="checkbox5pr" id="5pr" data-value="5" style="padding-top: 1px;">
+                                            <label for="5pr">WT on  Compensation <b>Period</b></label>
+                                            </td>
+                                            <td>
+                                                <input type="text" dis="5pr" class="bottom form-control  pr-return-input" >
+                                            </td>
+                                         </tr>
+
+                                         <tr class="pr-return">
+                                            <td>
+
+                                            <input type="checkbox" class="previous"  id-post="6" name="checkbox6pr" id="6pr" data-value="6" style="padding-top: 1px;">
+                                            <label for="6pr">Others:</label>
+                                            </td>
+                                            
+                                            <td>
+                                            <input type="text" dis="6pr" class="bottom form-control  pr-return-input" >
+                                            </td>
+                                         </tr>
+
+
+                                         </table>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                             </form>
@@ -314,6 +484,78 @@
 </div>
 <script type="text/javascript" src="assets/js/chat.js"></script>
 <script>
+$(function () {
+    $('input[dis="1pr"]').prop('disabled', true);
+    $('input[dis="2pr"]').prop('disabled', true);
+    $('input[dis="3pr"]').prop('disabled', true);
+    $('input[dis="4pr"]').prop('disabled', true);
+    $('input[dis="5pr"]').prop('disabled', true);
+    $('input[dis="6pr"]').prop('disabled', true);
+
+    //show it when the checkbox is clicked
+    $('input[name="checkbox1pr"]').on('click', function () {
+
+        if ($(this).prop('checked')) {
+            $("input[dis='1pr']").prop('disabled',  false);
+
+        } else {
+            $("input[dis='1pr']").prop('disabled', true);
+            $("input[dis='1pr']").val('');
+        }
+    });
+
+
+    $('input[name="checkbox2pr"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $("input[dis='2pr']").prop('disabled',  false);
+
+        } else {
+            $("input[dis='2pr']").prop('disabled', true);
+            $("input[dis='2pr']").val('');
+        }
+    });
+    $('input[name="checkbox3pr"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $("input[dis='3pr']").prop('disabled',  false);
+
+        } else {
+            $("input[dis='3pr']").prop('disabled', true);
+            $("input[dis='3pr']").val('');
+        }
+    });
+    $('input[name="checkbox4pr"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $("input[dis='4pr']").prop('disabled',  false);
+
+        } else {
+            $("input[dis='4pr']").prop('disabled', true);
+            $("input[dis='4pr']").val('');
+        }
+    });
+    $('input[name="checkbox5pr"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $("input[dis='5pr']").prop('disabled',  false);
+
+        } else {
+            $("input[dis='5pr']").prop('disabled', true);
+            $("input[dis='5pr']").val('');
+        }
+    });
+    $('input[name="checkbox6pr"]').on('click', function () {
+        if ($(this).prop('checked')) {
+            $("input[dis='6pr']").prop('disabled',  false);
+
+        } else {
+            $("input[dis='6pr']").prop('disabled', true);
+            $("input[dis='6pr']").val('');
+        }
+    });
+
+
+});
+
+
+
     $(document).ready(function(){
         var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboItemTypes;
         var _files; var _customerID; var _docTypeID; var _docSelectedRowObj; var _selectedDocTBL;
@@ -418,6 +660,8 @@
 
 
 
+
+
             $('#btn_attach_files').click(function(){
                 var data=new FormData();
                 var btn=$(this);
@@ -515,7 +759,29 @@
                         }
                     });
                 });
+                //new
+
+            $('.supporting').each(function(){
+                var _eleme=$(this);
+                $.each(items,function(name){
+                    if(_eleme.attr('data-value') == name){
+                        _eleme.attr('checked', true);
+                    }
+
+
+                })
+                // if (_eleme.is(':checked')){
+                //      _data.push({name : "supporting[]" ,value : _eleme.attr('data-value')});
+                // }                
             });
+
+
+
+
+
+            });
+
+
             $('#tbl_clients tbody').on('click','button[name="remove_info"]',function(){
                 $('#modal_confirmation').modal('show');
                 _selectRowObj=$(this).closest('tr');
@@ -560,6 +826,7 @@
                 showList(true);
             });
             $('#btn_save').click(function(){
+
                 if(validateRequiredFields()){
                     if(_txnMode=="new"){
                         createCustomer().done(function(response){
@@ -612,6 +879,43 @@
         var createCustomer=function() {
             var _data=$('#frm_customer,#frm_services,#frm_documents').serializeArray();
             _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
+            
+            $('.documents').each(function(){
+                var _elem=$(this);
+                if (_elem.is(':checked')){
+                     _data.push({name : "documents[]" ,value : _elem.attr('data-value')});
+                }                
+            });
+            $('.supporting').each(function(){
+                var _eleme=$(this);
+                if (_eleme.is(':checked')){
+                     _data.push({name : "supporting[]" ,value : _eleme.attr('data-value')});
+                }                
+            });
+            $('.pr-return').each(function(){
+                var _elemen=$(this);
+                var prev = _elemen.find('.previous');
+                var prev_input = _elemen.find('.pr-return-input');
+                // alert(prev.attr('id'));
+                    if (prev.is(':checked')){
+                        _data.push({name : prev.attr('id-post') ,value : prev_input.val()});
+                    }   
+            
+
+                // var _elemen=$(this+'.previous');
+                // alert(_elemen.att+r('id'));
+                // if (_elemen.is(':checked')){
+                //      _data.push({name : _elemen.attr('data-value') ,value : _elemen.attr('data-value')});
+                // }                
+            });
+
+            $('.business').each(function(){
+                var _element=$(this);
+                if (_element.is(':checked')){
+                     _data.push({name : "business" ,value : _element.attr('data-value')});
+                }                
+            });
+
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
