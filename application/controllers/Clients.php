@@ -115,7 +115,6 @@ class Clients extends CORE_Controller {
                 echo json_encode($response);
                 break;
             //****************************************************************************************************************
-
             case 'create':
                 $m_customers_item=$this->Customers_item_model;
                 $m_customers=$this->Customers_model;
@@ -127,6 +126,8 @@ class Clients extends CORE_Controller {
                 // $m_customers->designation=$this->input->post('designation',TRUE);
                 // $m_customers->tax_type_id=$this->input->post('tax_type_id',TRUE);
                 // Added Column 07062017 when updated the form
+
+
                 $m_customers->set('date_created','NOW()');
                 $m_customers->created_by = $this->session->user_id;
                 $m_customers->company_name=$this->input->post('company_name',TRUE);
@@ -143,6 +144,10 @@ class Clients extends CORE_Controller {
                 $m_customers->sec_dti=$this->input->post('sec_dti',TRUE);
                 $m_customers->business_style_id=$this->input->post('business_style_id',TRUE);
                 $m_customers->business_type=$this->input->post('business_type',TRUE);
+
+                $last_code = ltrim(substr($m_customers->get_last_customer_code(), 0, -3), '0');
+                $new_code = str_pad($last_code + 1, 5, 0, STR_PAD_LEFT) ."-". $this->input->post('business_type',TRUE);
+                $m_customers->customer_code=$new_code;
 
                 $m_customers->save();
 

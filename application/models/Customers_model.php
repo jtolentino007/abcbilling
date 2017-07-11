@@ -80,6 +80,11 @@ class Customers_model extends CORE_Model {
         return $this->db->query($sql)->result();
     }
 
+    function get_last_customer_code()
+    {
+        return $this->db->select('customer_code')->order_by('customer_code','desc')->limit(1)->get('customers_info')->row('customer_code');
+    }
+
 
 
 }

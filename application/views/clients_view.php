@@ -279,6 +279,7 @@
                                                     <thead class="">
                                                     <tr>
                                                         <th>&nbsp;&nbsp;</th>
+                                                        <th>Customer Code</th>
                                                         <th>Company Name</th>
                                                         <th>Trade Name</th>
                                                         <th>Office Address</th>
@@ -646,13 +647,14 @@
                             "data":           null,
                             "defaultContent": ""
                         },
-                        { targets:[1],data: "company_name" },
-                        { targets:[2],data: "trade_name" },
-                        { targets:[3],data: "office_address" },
-                        { targets:[4],data: "contact_no" },
-                        { targets:[5],data: "email_address" },
+                        { targets:[1],data: "customer_code" },
+                        { targets:[2],data: "company_name" },
+                        { targets:[3],data: "trade_name" },
+                        { targets:[4],data: "office_address" },
+                        { targets:[5],data: "contact_no" },
+                        { targets:[6],data: "email_address" },
                         {
-                            targets:[6],
+                            targets:[7],
                             render: function (data, type, full, meta){
                                 var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"   data-toggle="tooltip" data-placement="top" title="Edit" style="margin-left:-5px;"><i class="fa fa-pencil"></i> </button>';
                                 var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info"  data-toggle="tooltip" data-placement="top" title="Move to trash" style="margin-right:-5px;"><i class="fa fa-trash-o"></i> </button>';
@@ -824,6 +826,7 @@
                 $('.supporting_docs').prop('checked',false);
                 $('.previous_returns').prop('checked',false);
                 $('.txt-pr').prop('disabled',true);
+                $('.txt-pr').val('');
                 $('#modal_customer').modal('show');
             });
             $('#btn_browse').click(function(event){
@@ -945,7 +948,7 @@
             });
 
             $('#btn_cancel').click(function(){
-                showList(true);
+                $('#modal_customer').modal('hide');
             });
 
             $('#btn_save_returns').click(function(){
