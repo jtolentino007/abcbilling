@@ -27,6 +27,71 @@
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
+    <style type="text/css">
+        input[type=checkbox] {
+                position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+            }
+
+            input[type=checkbox] + label.css-checkbox {
+                padding-left:30px;
+                height:25px; 
+                display:inline-block;
+                line-height:25px;
+                background-repeat:no-repeat;
+                background-position: 0 0;
+                font-size:12px;
+                vertical-align:middle;
+                cursor:pointer;
+
+            }
+
+            input[type=checkbox]:checked + label.css-checkbox {
+                background-position: 0 -25px;
+            }
+
+            label.css-checkbox {
+                background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_391ce065f36b1460c4845fa9b5173fba.png);
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            input[type=radio] {
+                position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+            }
+
+            input[type=radio] + label.css-radio {
+                padding-left:26px;
+                height:21px; 
+                display:inline-block;
+                line-height:21px;
+                background-repeat:no-repeat;
+                background-position: 0 0;
+                font-size:12px;
+                vertical-align:middle;
+                cursor:pointer;
+
+            }
+
+            input[type=radio]:checked + label.css-radio {
+                background-position: 0 -21px;
+            }
+            label.css-radio {
+                background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_5ab92245cf78caac21ff087cfc374219.png);
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+            .modal {
+              overflow-y:auto;
+            }
+    </style>
 
     <style>
         /*.container-img:hover .overlay {
@@ -108,6 +173,11 @@
             resize: none;
         }
 
+        label {
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
         #img_user {
             padding-bottom: 15px;
         }
@@ -152,9 +222,9 @@
           -ms-transform: translate(-50%, -50%);
         }
          input.bottom{
-    border: 1px solid #aaa;
-    margin: 1px 0px 0px 0px;
-    border-radius: 5px;
+            border: 1px solid #aaa;
+            margin: 1px 0px 0px 0px;
+            border-radius: 5px;
 
 /*        border: 0;
         outline: 0;
@@ -194,7 +264,7 @@
                     <?php echo $_chat_template; ?>
                     <ol class="breadcrumb" style="margin:0%;">
                         <li><a href="dashboard">Dashboard</a></li>
-                        <li><a href="Clients">Customers</a></li>
+                        <li><a href="Clients">Clients</a></li>
                     </ol>
 
                     <div class="container-fluid">
@@ -269,211 +339,278 @@
             </div>
 
             <div id="modal_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                <div class="modal-dialog modal-lg" style="width:90%;"> 
+                <div class="modal-dialog modal-lg" style="width:80%;"> 
                     <div class="modal-content">
-                        <!-- <div class="modal-header" style="background-color:#2ecc71;">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-
-                        </div> -->
-
-                        <table >
-                        <thead >
-                        <tr width="100%">
-                        <td width="10%">
-                        <img src="<?php echo $companydata[0]->logo_path; ?>" style="width: 100%;">
-                        </td>
-                        <td><b><?php echo $companydata[0]->company_name;?></b><br><?php echo $companydata[0]->company_address; ?>
-                        </td>
-                        </tr>
-                        <tr style="background-color: none;">
-                        <h5><td colspan="2" height="30px" style="background: none;"><b>CLIENT REGISTRATION FORM</b></td></h5>
-                        </tr>         
-                        </thead>
-                        </table>
-                            <form id="frm_customer">
-                        <div class="col-sm-12">
-                                <div class="row">
-                                    <div class="panel-heading-01">
-                                        <h3 class="panel-title panel-heading-01" >CLIENT INFORMATION</h3>
-                                    </div><br>
-                                    <div class="col-lg-12">
-
-                                        <!-- Customer Code *: <br><input type="text" name="customer_code" data-error-msg="Customer Code is required!" class="form-control" required  /> -->
-                                        Corporate/Individual Name * :<br><input class="form-control" name="company_name" data-error-msg="Company name is required!" id="txtCompanyName" type="text" required />
-                                        Trade name * : <br><input class="form-control" name="trade_name" data-error-msg="Trade name is required!" id="txtTradeName" type="text" required /></td>
-                                        Office Address :<br><textarea class="form-control" name="office_address" data-error-msg="Head Office Address is required!" id="txtHeadOfficeAddress"></textarea>
-
-                                        <div class="col-lg-12 col-sm-12">
-                                            <div class="col-lg-6 col-sm-6">
-                                             Owner /  Person in Charge : <br><input class="form-control" name="contact_person" />
-                                             Contact # : <br><input type="text" class="form-control" name="contact_no" /><br>
-                                             <div class="col-sm-12">
-                                                <div class="col-sm-6">
-                                                    Business Type : <br>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="radio" name="business_type" class="business" data-value="01" id="business_type_01">
-                                                    <label for="business_type_01">Single Proprietorship</label><br>
-                                                    <input type="radio" name="business_type" class="business" data-value="02" id="business_type_02">
-                                                    <label for="business_type_02">Partnership</label><br>
-                                                    <input type="radio" name="business_type" class="business" data-value="03" id="business_type_03">
-                                                    <label for="business_type_03">Corporation</label><br>
-                                                </div>
-                                            </div>
-                                        
-                                            </div>
-                                            <div class="col-lg-6 col-sm-6">
-                                            Email Address :<br><input type="text" class="form-control" name="email_address" id="txtEmail" />
-                                            RDO No. : <br><input type="text" class="form-control" name="rdo_no" />
-                                            TIN # : <br><input type="text" class="form-control" name="tin_no" />
-                                            Industry # : <br><input type="text" class="form-control" name="industry" />
-                                            SEC / DTI  : <br><input type="text" class="form-control" name="sec_dti" />
-                                            </div>
-                                        </div>
-
-                                       <!--  Billing Address : <br><textarea class="form-control" name="billing_address" data-error-msg="Billing Address is required!" id="txtBilling" type="text" ></textarea> -->
-                                        
+                        <div class="modal-body" style="border-top: 5px solid #36474f;">
+                            <div class="row" style="padding: 20px;">
+                                <div class="container-fluid">
+                                    <div class="col-xs-6 col-sm-2">
+                                        <img src="<?php echo $company_info->logo_path; ?>" style="height: 80px; width: 100%;">
                                     </div>
-                                   <!--  <div class="col-lg-4"> -->
-                                       <!--  Designation : <br><input type="text" class="form-control" name="designation" id="txtDesignation" /> -->
-                                        
-
-
-<!--                                         VAT : <br><select name="tax_type_id" class="form-control" >
-                                            <?php foreach ($taxes as $tax) { ?>
-                                                <option value="<?php echo $tax->tax_type_id; ?>"><?php echo $tax->tax_type; ?></option>
-                                            <?php } ?>
-                                        </select> -->
-                                   <!--  </div> -->
-<!--                                     <div class="col-lg-3">
-                                        <div class="img-container" style="height: 240px;">
-                                            <img class="image" name="img_user" src="assets/img/default-user-image.png" alt="Image" style="max-height: 100%; min-height: 100%;">
-                                            <input type="file" name="file_upload[]" class="hidden">
-                                            <div id="btn_browse" class="overlay" style="height: 240px;">
-                                                <div class="text text-center">Browse Image</div>
-                                            </div>
-                                        </div>
-                                        <div id="div_img_loader" style="display: none;">
-                                            <img name="img_loader" src="assets/img/loader/ajax-loader-sm.gif" style="display: block;margin:40% auto auto auto; " />
-                                        </div>
-                                        <div>
-                                            <button type="button" id="btn_remove_photo" class="btn btn-danger btn-block">Remove Photo</button>
-                                        </div>
-                                    </div> -->
+                                    <div class="col-xs-6 col-sm-5 hidden-xs">
+                                        <strong style="font-size: 18px;"><?php echo $company_info->company_name; ?></strong>
+                                        <address style="font-size: 16px;"><?php echo $company_info->company_address; ?></address>
+                                    </div>
+                                    <div class="col-xs-3 col-sm-5">
+                                    </div>
                                 </div>
-                                <br>
-                                <div class="panel-heading-01" width="100%">
-                                    <h3 class="panel-title panel-heading-01" >DOCUMENTS PROVIDED</h3>
-                                </div><br>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                    <div class="col-lg-4">
-                                    <br>
-                                    General Documents: <br>
-                                        <div class="container-checkbox">
-                                            <div style="padding: 5px 5px 5px 5px;">
-                                            <?php foreach ($documents as $key ) {?>
-                                                  <input type="checkbox" class="documents" id="<?php echo $key->document_type_id;?>gd" data-value="<?php echo $key->document_type_id;?>">
-                                                  <label for="<?php echo $key->document_type_id;?>gd"><?php echo $key->document_type;?></label>
-                                              <br>
-                                            <?php } ?>
-                                            </div>
-                                        </div><br>
-                                    Supporting Documents <br>
-                                        <input type="checkbox" class="supporting" id="1sd" data-value="1">
-                                            <label for="1sd">SSS, PHIC and HDMF Registration </label><br>
-                                        <input type="checkbox" class="supporting" id="2sd" data-value="2">
-                                            <label for="2sd">CTC </label>  <br>
-                                        <input type="checkbox" class="supporting" id="3sd" data-value="3">
-                                            <label for="3sd">Government ID of Owner/Signatory/OIC (atleast 2)</label><br>
+                            </div>
+                            <div class="row hidden-xs">
+                                <div class="container-fluid">
+                                    <div class="col-xs-2"></div>
+                                    <div class="col-xs-10">
+                                        <strong style="font-size: 18px;">CLIENT REGISTRATION FORM</strong>
                                     </div>
-                                    <div class="col-lg-8">
-                                    <br>
-                                        <div class="col-sm-12 col-lg-12">
-                                         Previous Returns: <br>
-                                         <table width="100%" border="0" style="border: none!important;">
-                                         <tr class="pr-return">
-                                         <td>
-                                            <input type="checkbox" class="previous" id-post="1" name="checkbox1pr" id="1pr" data-value="1" >
-                                            <label for="1pr">Latest Income Tax Return <b>Year</b></label>
-                                            
-                                         </td>
-                                         <td>
-                                             <input type="text" dis="1pr" id="text1pr" class="bottom form-control pr-return-input" width="100%">
-                                         </td>
-                                         </tr>
-
-                                         <tr class="pr-return">
-                                            <td>
-                                                <input type="checkbox" class="previous" id-post="2" name="checkbox2pr" id="2pr" data-value="2" style="padding-top: 1px;">
-                                                <label for="2pr">Percentage Tax <b>Period</b> </label>
-                                            </td>
-                                            <td>
-                                                <input type="text"  dis="2pr" class="bottom form-control pr-return-input" >
-                                            </td>
-                                         </tr>
-
-                                        <tr class="pr-return">
-                                            <td>
-                                            <input type="checkbox" class="previous" id-post="3" name="checkbox3pr" id="3pr" data-value="3" style="padding-top: 1px;">
-                                            <label for="3pr">Vat Return <b>Period</b></label>
-                                            </td>
-                                            <td>
-                                            <input type="text" dis="3pr" class="bottom form-control pr-return-input" >
-                                            </td>
-                                         </tr>
-                                         <tr class="pr-return">
-                                             <td>
-                                                <input type="checkbox" class="previous" id-post="4" name="checkbox4pr" id="4pr" data-value="4" style="padding-top: 1px;">
-                                                <label for="4pr">Expanded WT <b>Period</b> </label>
-                                            </td>
-                                            <td>
-                                            <input type="text" dis="4pr" class="bottom form-control  pr-return-input" >
-                                            </td>
-                                        </tr>
-                                         <tr class="pr-return">
-                                            <td>
-                                            <input type="checkbox" class="previous" id-post="5" name="checkbox5pr" id="5pr" data-value="5" style="padding-top: 1px;">
-                                            <label for="5pr">WT on  Compensation <b>Period</b></label>
-                                            </td>
-                                            <td>
-                                                <input type="text" dis="5pr" class="bottom form-control  pr-return-input" >
-                                            </td>
-                                         </tr>
-
-                                         <tr class="pr-return">
-                                            <td>
-
-                                            <input type="checkbox" class="previous"  id-post="6" name="checkbox6pr" id="6pr" data-value="6" style="padding-top: 1px;">
-                                            <label for="6pr">Others:</label>
-                                            </td>
-                                            
-                                            <td>
-                                            <input type="text" dis="6pr" class="bottom form-control  pr-return-input" >
-                                            </td>
-                                         </tr>
-
-
-                                         </table>
+                                </div>
+                            </div><br>
+                            <div class="row">
+                                <div class="container-fluid text-center" style="background: #36474f; padding: 5px 0;">
+                                    <strong style="color: white;">CLIENT INFORMATION</strong>
+                                </div>
+                            </div><br>
+                            <form id="frm_customer">
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> * Corporate/ Individual Name: </label>
+                                            <input class="form-control" type="text" name="company_name" data-error-msg="Corporate name is required" required>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> * Trade Name: </label>
+                                            <input class="form-control" type="text" name="trade_name" data-error-msg="Trade name is required" required>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> * Office Address: </label>
+                                            <input class="form-control" type="text" name="office_address" data-error-msg="Office address is required" required>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> * Owner / Person-in-charge: </label>
+                                            <input class="form-control" type="text" name="contact_person" data-error-msg="Person-in-charge is required" required>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> * E-mail address: </label>
+                                            <input class="form-control" type="email" name="email_address" data-error-msg="Email is required" required>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> * Contact nos.: </label>
+                                            <input class="form-control" type="text" name="contact_no" data-error-msg="Email is required" required>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label>RDO No.: </label>
+                                            <input class="form-control" type="text" name="rdo_no">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label>TIN</label>
+                                            <input class="form-control" type="text" name="tin_no">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label>Industry</label>
+                                            <input class="form-control" type="text" name="industry">
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label>SEC / DTI</label>
+                                            <input class="form-control" type="text" name="sec_dti">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <div class="col-xs-12 col-sm-2">
+                                            <label> * Business Type : </label>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div style="padding: 0 5px; margin-top: 10px; max-height: 120px; overflow-y: auto; border: 1px solid #d1d1d1;">
+                                                <input id="singleProp" type="radio" name="business_type" data-value="01" checked>
+                                                <label class="css-radio" for="singleProp">Single Proprietorship</label><br>
+                                                <input id="partner" type="radio" name="business_type" data-value="02">
+                                                <label class="css-radio" for="partner">Partnership</label><br>
+                                                <input id="corp" type="radio" name="business_type" data-value="03">
+                                                <label class="css-radio" for="corp">Corporation</label><br>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-2">
+                                            <label> * Business Style : </label>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="bs-container" style="padding: 0 5px; margin-top: 10px; max-height: 120px; overflow-y: auto; border: 1px solid #d1d1d1;">
+                                                <?php foreach($business_styles as $business_style) { ?>
+                                                    <input id="<?php echo 'bs_'.$business_style->business_style_id; ?>" type="radio" name="business_style_id" data-value="<?php echo $business_style->business_style_id; ?>" <?php echo ($business_style->business_style_id == 1 ? 'checked' : '') ?> >
+                                                    <label class="css-radio" for="<?php echo 'bs_'.$business_style->business_style_id; ?>"><?php echo $business_style->business_style_name; ?></label><br>
+                                                <?php } ?>
+                                            </div><br>
+                                            <button id="btn_new_business" class="btn btn-primary btn-block">
+                                                <i class="fa fa-plus"></i>&nbsp; New Business Style
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="container-fluid text-center" style="background: #36474f; padding: 5px 0;">
+                                        <strong style="color: white;">DOCUMENTS PROVIDED</strong>
+                                    </div>
+                                </div><br>
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <label style="color: white;"><span class="fa fa-file-o"></span>&nbsp; GENERAL DOCUMENTS</label>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <?php foreach ($general_docs as $general_doc) { ?>
+                                                        <input class="general_docs" id="<?php echo $general_doc->document_type_id.'GD'; ?>" type="checkbox" name="document_id[]" data-document-type="GD" value="<?php echo $general_doc->document_type_id.'GD'; ?>">
+                                                        <label class="css-checkbox" for="<?php echo $general_doc->document_type_id.'GD'; ?>"><?php echo $general_doc->document_type; ?></label><br>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <label style="color: white;"><span class="fa fa-files-o"></span>&nbsp; SUPPORTING DOCUMENTS</label>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <?php foreach ($supporting_docs as $supporting_doc) { ?>
+                                                        <input class="supporting_docs" id="<?php echo $supporting_doc->document_type_id.'SD'; ?>" type="checkbox" name="document_id[]" data-document-type="SD" value="<?php echo $supporting_doc->document_type_id.'SD'; ?>">
+                                                        <label class="css-checkbox" for="<?php echo $supporting_doc->document_type_id.'SD'; ?>"><?php echo $supporting_doc->document_type; ?></label><br>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <label style="color: white;"><span class="fa fa-files-o"></span>&nbsp; PREVIOUS RETURNS</label>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form id="frm_items">
+                                                        <div class="pr-container" style="max-height: 250px; overflow-y: auto;">
+                                                            <?php foreach ($previous_returns as $previous_return) { ?>
+                                                                <input class="chk-returns previous_returns" id="<?php echo $previous_return->document_type_id.'PR'; ?>" type="checkbox" name="previous_id[]" data-document-type="PR" data-value="<?php echo $previous_return->document_type_id; ?>" value="<?php echo $previous_return->document_type_id.'PR'; ?>">  
+                                                                <label class="css-checkbox" for="<?php echo $previous_return->document_type_id.'PR'; ?>"><?php echo $previous_return->document_type; ?>
+                                                                </label> 
+                                                                <input id="<?php echo $previous_return->document_type_id; ?>" class="txt-pr form-control pull-right" type="text" name="value[]" style="margin-top: 10px; width: 150px;" placeholder="<?php echo ($previous_return->unit_time == 'Y' ? 'Year' : 'Period'); ?>" disabled><br>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </form>
+                                                    <hr>
+                                                    <button id="btn_add_prevreturns" class="btn btn-primary btn-block">
+                                                        <i class="fa fa-plus"></i>&nbsp; Add New Previous Returns
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
-
                         <div class="modal-footer">
-                            <button id="btn_save" type="button" class="btn btn-primary" style="text-transform: none;"><span class=""></span> Save Changes</button>
-                            <button id="btn_cancel" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: none;">Cancel</button>
+                            <button id="btn_save" class="btn btn-primary">
+                                Save Changes
+                            </button>
+                            <button id="btn_cancel" class="btn btn-default">
+                                Cancel
+                            </button>
                         </div>
                     </div><!---content-->
                 </div>
             </div><!---modal-->
 
+            <div id="modal_business_style" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <!-- <div class="modal-header">
+                            <h3 style="color: white;">Document Category Information</h3>
+                        </div> -->
+                        <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
+                        <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Business Style <small class="title-modal"> | Reference</small></h1><hr>
+                            <form id="frm_BusinessStyle" role="form" class="form-horizontal row-border">
+                                <div class="form-group">
+                                    <label class="col-xs-12 ">* Business Style Name :</label>
+                                    <div class="col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-users"></i>
+                                            </span>
+                                            <input type="text" name="business_style_name" class="form-control" placeholder="Name" data-error-msg="Business Style Name Name is required!" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12 ">Business Style Description :</label>
+                                    <div class="col-xs-12">
+                                        <textarea name="business_style_description" class="form-control" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button id="btn_save_business" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Save
+                                    </button>
+                                    <button id="btn_cancel_business" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"> Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal_documents" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <!-- <div class="modal-header">
+                            <h3 style="color: white;">Document Type Information</h3>
+                        </div> -->
+                        <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
+                    <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> New Previous Returns <small class="title-modal"> | Reference</small></h1><hr>
+                            <form id="frm_documents" role="form" class="form-horizontal row-border">
+                                <div class="form-group">
+                                    <label class="col-xs-12 ">* Previous Return Document :</label>
+                                    <div class="col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-users"></i>
+                                            </span>
+                                            <input type="text" name="document_type" class="form-control" placeholder="Document Name" data-error-msg="Document name is required!" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12">* Unit of Time (e.g. Year or Period) :</label>
+                                    <div class="col-xs-12">
+                                        <select id="cbo_time_unit" class="form-control" name="unit_time" data-error-msg="Unit of time is required" required>
+                                            <option value="Y">Year</option>
+                                            <option value="P">Period</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button id="btn_save_returns" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Save
+                                    </button>
+                                    <button id="btn_cancel_returns" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"> Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -484,82 +621,10 @@
 </div>
 <script type="text/javascript" src="assets/js/chat.js"></script>
 <script>
-$(function () {
-    $('input[dis="1pr"]').prop('disabled', true);
-    $('input[dis="2pr"]').prop('disabled', true);
-    $('input[dis="3pr"]').prop('disabled', true);
-    $('input[dis="4pr"]').prop('disabled', true);
-    $('input[dis="5pr"]').prop('disabled', true);
-    $('input[dis="6pr"]').prop('disabled', true);
-
-    //show it when the checkbox is clicked
-    $('input[name="checkbox1pr"]').on('click', function () {
-
-        if ($(this).prop('checked')) {
-            $("input[dis='1pr']").prop('disabled',  false);
-
-        } else {
-            $("input[dis='1pr']").prop('disabled', true);
-            $("input[dis='1pr']").val('');
-        }
-    });
-
-
-    $('input[name="checkbox2pr"]').on('click', function () {
-        if ($(this).prop('checked')) {
-            $("input[dis='2pr']").prop('disabled',  false);
-
-        } else {
-            $("input[dis='2pr']").prop('disabled', true);
-            $("input[dis='2pr']").val('');
-        }
-    });
-    $('input[name="checkbox3pr"]').on('click', function () {
-        if ($(this).prop('checked')) {
-            $("input[dis='3pr']").prop('disabled',  false);
-
-        } else {
-            $("input[dis='3pr']").prop('disabled', true);
-            $("input[dis='3pr']").val('');
-        }
-    });
-    $('input[name="checkbox4pr"]').on('click', function () {
-        if ($(this).prop('checked')) {
-            $("input[dis='4pr']").prop('disabled',  false);
-
-        } else {
-            $("input[dis='4pr']").prop('disabled', true);
-            $("input[dis='4pr']").val('');
-        }
-    });
-    $('input[name="checkbox5pr"]').on('click', function () {
-        if ($(this).prop('checked')) {
-            $("input[dis='5pr']").prop('disabled',  false);
-
-        } else {
-            $("input[dis='5pr']").prop('disabled', true);
-            $("input[dis='5pr']").val('');
-        }
-    });
-    $('input[name="checkbox6pr"]').on('click', function () {
-        if ($(this).prop('checked')) {
-            $("input[dis='6pr']").prop('disabled',  false);
-
-        } else {
-            $("input[dis='6pr']").prop('disabled', true);
-            $("input[dis='6pr']").val('');
-        }
-    });
-
-
-});
-
-
-
     $(document).ready(function(){
         var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboItemTypes;
         var _files; var _customerID; var _docTypeID; var _docSelectedRowObj; var _selectedDocTBL;
-        var _selectedFileTBL; var _selectedServiceTBL;
+        var _selectedFileTBL; var _selectedServiceTBL; var _cboUnitTime;
 
 
 
@@ -594,10 +659,7 @@ $(function () {
                                 return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';
                             }
                         }
-                    ],
-                    "initComplete": function () {
-                        $('#tbl_clients tr:lt(5) td.details-control').click();
-                    }
+                    ]
                 });
                 var createToolBarButton=function() {
                     var _btnNew='<button class="btn btn-green"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Client Record" >'+
@@ -615,10 +677,31 @@ $(function () {
                 autoclose: true
             });
 
+            _cboUnitTime = $('#cbo_time_unit').select2({
+                allowClear: true,
+                placeholder: 'Please Select Unit of Time'
+            });
+            _cboUnitTime.select2('val',null);
 
         }();
         var bindEventHandlers=(function(){
             var detailRows = [];
+
+            $('.chk-returns').click(function(){
+                $.each($(this), function(){
+                    if ($(this).is(':checked')){
+                        $('#'+$(this).data('value')).removeAttr('disabled');
+                        $('#'+$(this).data('value')).attr('required','required');
+                        $('#'+$(this).data('value')).attr('data-error-msg','Year/Period is required');
+                    } else {
+                        $('#'+$(this).data('value')).prop('disabled',true);
+                        $('#'+$(this).data('value')).val('');
+                        $('#'+$(this).data('value')).removeAttr('required');
+                        $('#'+$(this).data('value')).removeAttr('data-error-msg');
+                    }
+                });
+            });
+
             $('#tbl_clients tbody').on( 'click', 'tr td.details-control', function () {
                 var tr = $(this).closest('tr');
                 var row = dt.row( tr );
@@ -654,13 +737,8 @@ $(function () {
 
 
             $('#attach_files').on('change',function(event){
-
                 _files=event.target.files;
             });
-
-
-
-
 
             $('#btn_attach_files').click(function(){
                 var data=new FormData();
@@ -724,10 +802,28 @@ $(function () {
 
             });
 
+            $('#btn_add_prevreturns').click(function(){
+                clearFields($('#frm_documents'));
+                _cboUnitTime.select2('val',null);
+                $('#modal_customer').modal('hide');
+                $('#modal_documents').modal('show');
+            });
+
+            $('#btn_new_business').click(function(){
+                clearFields($('#frm_BusinessStyle'));
+                $('#modal_customer').modal('hide');
+                $('#modal_business_style').modal('show');
+            });
 
             $('#btn_new').click(function(){
                 _txnMode="new";
-                clearFields($('#modal_customer'));
+                clearFields($('#frm_customer'));
+                $('#singleProp').prop('checked','checked');
+                $('#bs_1').prop('checked','checked');
+                $('.general_docs').prop('checked',false);
+                $('.supporting_docs').prop('checked',false);
+                $('.previous_returns').prop('checked',false);
+                $('.txt-pr').prop('disabled',true);
                 $('#modal_customer').modal('show');
             });
             $('#btn_browse').click(function(event){
@@ -742,15 +838,20 @@ $(function () {
             $('#tbl_clients tbody').on('click','button[name="edit_info"]',function(){
                 _txnMode="edit";
                 $('#modal_customer').modal('show');
+                $('#singleProp').prop('checked','checked');
+                $('#bs_1').prop('checked','checked');
+
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID=data.customer_id;
+
                 if(data.photo_path==""){
                     $('img[name="img_user"]').attr('src','assets/img/anonymous-icon.png');
                 }
                 else{
                     $('img[name="img_user"]').attr('src',data.photo_path);
                 }
+
                 $('input,textarea,select').each(function(){
                     var _elem=$(this);
                     $.each(data,function(name,value){
@@ -759,24 +860,32 @@ $(function () {
                         }
                     });
                 });
-                //new
 
-            $('.supporting').each(function(){
-                var _eleme=$(this);
-                $.each(items,function(name){
-                    if(_eleme.attr('data-value') == name){
-                        _eleme.attr('checked', true);
+                $('input[data-value=' + data.business_type+']').prop('checked',true);
+                $('#bs_' + data.business_style_id).prop('checked',true);
+
+                $.ajax({
+                    url : 'Clients/transaction/get-client-ind-documents',
+                    type : "POST",
+                    data:{ Id : _selectedID },
+                    dataType : 'json',
+                    success : function(response){
+                        var _customerItems = response;
+
+                        $('.general_docs, .supporting_docs, .chk-returns').each(function(){
+                            $(this).prop('checked',false);
+                        });
+
+                        $('.txt-pr').prop('disabled',true);
+                        $('.txt-pr').val('');
+
+                        $.each(response.data, function(key, value){
+                            $('#' + value.document_id + value.document_type).prop('checked',true);
+                            $('#'+ value.document_id).val(value.value);
+                            $('#'+ value.document_id).prop('disabled',false);
+                        });
                     }
-
-
                 })
-                // if (_eleme.is(':checked')){
-                //      _data.push({name : "supporting[]" ,value : _eleme.attr('data-value')});
-                // }                
-            });
-
-
-
 
 
             });
@@ -805,7 +914,7 @@ $(function () {
                 $.each(_files,function(key,value){
                     data.append(key,value);
                 });
-                console.log(_files);
+
                 $.ajax({
                     url : 'Clients/transaction/upload',
                     type : "POST",
@@ -822,16 +931,68 @@ $(function () {
                     }
                 });
             });
+
+            $('#btn_cancel_returns').click(function(){
+                clearFields($('#frm_documents'));
+                $('#modal_documents').modal('hide');
+                $('#modal_customer').modal('show');
+            });
+
+            $('#btn_cancel_business').click(function(){
+                clearFields($('#frm_BusinessStyle'));
+                $('#modal_business_style').modal('hide');
+                $('#modal_customer').modal('show');
+            });
+
             $('#btn_cancel').click(function(){
                 showList(true);
             });
-            $('#btn_save').click(function(){
 
-                if(validateRequiredFields()){
+            $('#btn_save_returns').click(function(){
+                if (validateRequiredFields($('#frm_documents'))) {
+                    createPreviousReturns().done(function(response){
+                        showNotification(response);
+                        _prevReturn = response.row_added[0];
+                        $('.pr-container').append(
+                            '<input class="chk-returns" id="'+ _prevReturn.document_type_id + 'PR' + '" type="checkbox" name="document_id[]" data-document-type="PR" data-value="'+ _prevReturn.document_type_id +'">' + 
+                            '<label class="css-checkbox" for="'+ _prevReturn.document_type_id + 'PR' + '">' + _prevReturn.document_type + '</label> ' + 
+                            '<input id="'+ _prevReturn.document_type_id +'" class="txt-pr form-control pull-right" type="text" name="value[]" style="margin-top: 10px; width: 150px;" placeholder="' + (_prevReturn.unit_time == 'Y' ? 'Year' : 'Period') + '" disabled><br>'
+                        );
+                        $('#modal_documents').modal('hide');
+                        $('#modal_customer').modal('show');
+                    }).always(function(){
+                        showSpinningProgress($('#btn_save_returns'));
+                    });
+                }
+            });
+
+            $('#btn_save_business').click(function(){
+                if (validateRequiredFields($('#frm_BusinessStyle'))) {
+                    createBusinessStyle().done(function(response){
+                        showNotification(response);
+
+                        _businessStyle = response.row_added[0];
+
+                        $('.bs-container').append(
+                            '<input id="' + 'bs_' + _businessStyle.business_style_id + '" type="radio" name="business_style_id" value="' + _businessStyle.business_style_id + '" checked>' + 
+                            '<label class="css-radio" for="'+ 'bs_' + _businessStyle.business_style_id +'">' + _businessStyle.business_style_name + '</label><br>'
+                        );
+
+                        clearFields($('#frm_BusinessStyle'));
+                        $('#modal_business_style').modal('hide');
+                        $('#modal_customer').modal('show');
+                    }).always(function(){
+                        showSpinningProgress($('#btn_save_business'));
+                    });
+                }
+            });
+
+            $('#btn_save').click(function(){
+                if(validateRequiredFields($('#frm_customer,#frm_items'))){
                     if(_txnMode=="new"){
                         createCustomer().done(function(response){
                             showNotification(response);
-                            dt.row.add(response.row_added[0]).draw(false);
+                            dt.row.add(response.row_added[0]).draw();
                             $('#modal_customer').modal('hide');
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
@@ -872,48 +1033,69 @@ $(function () {
             });
             return stat;
         };
+
         var clearFields=function(parent){
             $('input,textarea',parent).val('');
             $('img[name="img_user"]').attr('src','assets/img/default-user-image.png');
         };
+
+        var createPreviousReturns=function(){
+            var _data=$('#frm_documents').serializeArray();
+            _data.push({ name: "document_category_id", value: 3 });
+
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Documents/transaction/create",
+                "data":_data,
+                "beforeSend": showSpinningProgress($('#btn_save_returns'))
+            });
+        };
+
+        var createBusinessStyle=function(){
+            var _data=$('#frm_BusinessStyle').serializeArray();
+
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Business_style/transaction/create",
+                "data":_data,
+                "beforeSend": showSpinningProgress($('#btn_save_business'))
+            });
+        };
+
         var createCustomer=function() {
-            var _data=$('#frm_customer,#frm_services,#frm_documents').serializeArray();
+            var _data=$('#frm_customer').find(':input').not('[name=business_type]').not('[name=business_style_id]').serializeArray();
+
             _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
-            
-            $('.documents').each(function(){
-                var _elem=$(this);
-                if (_elem.is(':checked')){
-                     _data.push({name : "documents[]" ,value : _elem.attr('data-value')});
-                }                
-            });
-            $('.supporting').each(function(){
-                var _eleme=$(this);
-                if (_eleme.is(':checked')){
-                     _data.push({name : "supporting[]" ,value : _eleme.attr('data-value')});
-                }                
-            });
-            $('.pr-return').each(function(){
-                var _elemen=$(this);
-                var prev = _elemen.find('.previous');
-                var prev_input = _elemen.find('.pr-return-input');
-                // alert(prev.attr('id'));
-                    if (prev.is(':checked')){
-                        _data.push({name : prev.attr('id-post') ,value : prev_input.val()});
-                    }   
-            
+            _data.push({name : "business_type", value : $('input[name=business_type]:checked').data('value') });
+            _data.push({name : "business_style_id", value : $('input[name=business_style_id]:checked').data('value') });
 
-                // var _elemen=$(this+'.previous');
-                // alert(_elemen.att+r('id'));
-                // if (_elemen.is(':checked')){
-                //      _data.push({name : _elemen.attr('data-value') ,value : _elemen.attr('data-value')});
-                // }                
+            $('.general_docs').each(function(){
+                if ($(this).is(':checked')){
+                    _data.push({ name: "document_id[]", value: $(this).attr('id') });
+                    _data.push({ name: "document_type[]", value: $(this).data('document-type') });
+                }
             });
 
-            $('.business').each(function(){
-                var _element=$(this);
-                if (_element.is(':checked')){
-                     _data.push({name : "business" ,value : _element.attr('data-value')});
-                }                
+            $('.supporting_docs').each(function(){
+                if ($(this).is(':checked')){
+                    _data.push({ name: "document_id[]", value: $(this).attr('id') });
+                    _data.push({ name: "document_type[]", value: $(this).data('document-type') });
+                }
+            });
+
+            $('.previous_returns').each(function(){
+                if ($(this).is(':checked')){
+                    _data.push({ name: "previous_id[]", value: $(this).attr('id') });
+                    _data.push({ name: "pr_document_type_id[]", value: $(this).data('document-type') });
+                }
+            });
+
+            $('.txt-pr').each(function(){
+                if ($('#'+$(this).attr('id')).val() != "") {
+                    _data.push({ name: "value[]", value: $('#'+$(this).attr('id')).val() });
+                }
             });
 
             return $.ajax({
@@ -924,10 +1106,42 @@ $(function () {
                 "beforeSend": showSpinningProgress($('#btn_save'))
             });
         };
+
         var updateCustomer=function() {
-            var _data=$('#frm_customer,#frm_services,#frm_documents').serializeArray();
-            _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
+            var _data=$('#frm_customer').find(':input').not('[name=business_type]').not('[name=business_style_id]').serializeArray();
+
             _data.push({name : "customer_id" ,value : _selectedID});
+            _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
+            _data.push({name : "business_type", value : $('input[name=business_type]:checked').data('value') });
+            _data.push({name : "business_style_id", value : $('input[name=business_style_id]:checked').data('value') });
+
+            $('.general_docs').each(function(){
+                if ($(this).is(':checked')){
+                    _data.push({ name: "document_id[]", value: $(this).attr('id') });
+                    _data.push({ name: "document_type[]", value: $(this).data('document-type') });
+                }
+            });
+
+            $('.supporting_docs').each(function(){
+                if ($(this).is(':checked')){
+                    _data.push({ name: "document_id[]", value: $(this).attr('id') });
+                    _data.push({ name: "document_type[]", value: $(this).data('document-type') });
+                }
+            });
+
+            $('.previous_returns').each(function(){
+                if ($(this).is(':checked')){
+                    _data.push({ name: "previous_id[]", value: $(this).attr('id') });
+                    _data.push({ name: "pr_document_type_id[]", value: $(this).data('document-type') });
+                }
+            });
+
+            $('.txt-pr').each(function(){
+                if ($('#'+$(this).attr('id')).val() != "") {
+                    _data.push({ name: "value[]", value: $('#'+$(this).attr('id')).val() });
+                }
+            });
+
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
