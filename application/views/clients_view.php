@@ -397,7 +397,7 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-6">
                                             <label> * Contact nos.: </label>
-                                            <input class="form-control" type="text" name="contact_no" data-error-msg="Email is required" required>
+                                            <input class="form-control" type="text" name="contact_no" data-error-msg="Contact nos. are required" required>
                                         </div>
                                         <div class="col-xs-12 col-sm-6">
                                             <label>RDO No.: </label>
@@ -417,6 +417,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </form>
                                 <div class="row">
                                     <div class="container-fluid">
                                         <div class="col-xs-12 col-sm-2">
@@ -448,7 +449,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                                 <div class="row" style="margin-top: 10px;">
                                     <div class="container-fluid text-center" style="background: #36474f; padding: 5px 0;">
                                         <strong style="color: white;">DOCUMENTS PROVIDED</strong>
@@ -974,7 +974,7 @@
                         _businessStyle = response.row_added[0];
 
                         $('.bs-container').append(
-                            '<input id="' + 'bs_' + _businessStyle.business_style_id + '" type="radio" name="business_style_id" value="' + _businessStyle.business_style_id + '" checked>' + 
+                            '<input id="' + 'bs_' + _businessStyle.business_style_id + '" type="radio" name="business_style_id" data-value="' + _businessStyle.business_style_id + '" checked>' + 
                             '<label class="css-radio" for="'+ 'bs_' + _businessStyle.business_style_id +'">' + _businessStyle.business_style_name + '</label><br>'
                         );
 
@@ -993,6 +993,7 @@
                         createCustomer().done(function(response){
                             showNotification(response);
                             dt.row.add(response.row_added[0]).draw();
+                            console.log(response.row_added[0]);
                             $('#modal_customer').modal('hide');
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));
@@ -1001,6 +1002,7 @@
                         updateCustomer().done(function(response){
                             showNotification(response);
                             dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
+                            console.log(response.row_updated[0]);
                             $('#modal_customer').modal('hide');
                         }).always(function(){
                             showSpinningProgress($('#btn_save'));

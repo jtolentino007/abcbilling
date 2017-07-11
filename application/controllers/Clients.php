@@ -397,11 +397,7 @@ class Clients extends CORE_Controller {
     function row_response($filter_value){
         $m_customers=$this->Customers_model;
         $m_customers_item =$this->Customers_item_model;
-        return 
-        $m_customers->get_list($filter_value);
-        $m_customers_items->get_list($filter_value);
-        
 
-        
+        return $m_customers->get_list($filter_value);
     }
 }
