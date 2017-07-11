@@ -19,7 +19,7 @@ class Clients extends CORE_Controller {
         $this->load->model('Contract_model');
         $this->load->model('Company_model');
         $this->load->model('Customers_item_model');
-
+        $this->load->model('Business_style_model');
     }
 
     public function index()
@@ -33,12 +33,16 @@ class Clients extends CORE_Controller {
         $data['title']='Customer Management';
 
         $data['documents'] = $this->Documents_model->get_list('is_active=TRUE AND is_deleted=FALSE');
+        $data['general_docs'] = $this->Documents_model->get_list('is_active=TRUE AND is_deleted=FALSE AND document_category_id=1');
+        $data['supporting_docs'] = $this->Documents_model->get_list('is_active=TRUE AND is_deleted=FALSE AND document_category_id=2');
+        $data['previous_returns'] = $this->Documents_model->get_list('is_active=TRUE AND is_deleted=FALSE AND document_category_id=3');
+        $data['business_styles'] = $this->Business_style_model->get_list('is_active=TRUE AND is_deleted=FALSE');
         $data['taxes'] = $this->Tax_types_model->get_list('is_deleted=FALSE');
         $data['services'] = $this->Services_model->get_list('is_active=TRUE AND is_deleted=FALSE');
         
         $m_company= $this->Company_model;
         $company=$m_company->get_list();
-        $data['companydata']=$company;
+        $data['company_info']=$company[0];
 
         $this->load->view('clients_view',$data);
     }
@@ -59,8 +63,6 @@ class Clients extends CORE_Controller {
                   $m_customers=$this->Customers_model;
                   $m_customers_item =$this->Customers_item_model;
                   $response['data']=$m_customers->get_list('is_deleted=FALSE');
-                  
-                  $response['sd']=$m_customers_item->get_list('document_type="SD"');
                 } else {
                   $m_user_customers=$this->User_customers_model;
                   $response['data']=$m_user_customers->get_list(
@@ -95,102 +97,79 @@ class Clients extends CORE_Controller {
                 echo json_encode($response);
                 break;
             //****************************************************************************************************************
-            case 'create':
 
+            //****************************************************************************************************************
+            case 'get-client-ind-documents':
+                $m_customers=$this->Customers_model;
+
+                $customer_id=$this->input->post('Id');
+
+                $response['data'] = $m_customers->get_list(
+                    'customers_info.is_deleted=FALSE AND customers_info.customer_id='.$customer_id,
+                    'customer_items.*',
+                    array(
+                        array('customer_items','customer_items.customer_id=customers_info.customer_id','inner')
+                    )
+                );
+
+                echo json_encode($response);
+                break;
+            //****************************************************************************************************************
+
+            case 'create':
                 $m_customers_item=$this->Customers_item_model;
                 $m_customers=$this->Customers_model;
                 $m_photos=$this->Customer_photos_model;
+
                 $m_customers->begin();
                 // Removed column 07062017 when updated the from
                 // $m_customers->customer_code=$this->input->post('customer_code',TRUE);
                 // $m_customers->designation=$this->input->post('designation',TRUE);
                 // $m_customers->tax_type_id=$this->input->post('tax_type_id',TRUE);
+                // Added Column 07062017 when updated the form
+                $m_customers->set('date_created','NOW()');
+                $m_customers->created_by = $this->session->user_id;
                 $m_customers->company_name=$this->input->post('company_name',TRUE);
                 $m_customers->trade_name=$this->input->post('trade_name',TRUE);
                 $m_customers->office_address=$this->input->post('office_address',TRUE);
                 $m_customers->billing_address=$this->input->post('billing_address',TRUE);
                 $m_customers->contact_person=$this->input->post('contact_person',TRUE);
-
                 $m_customers->contact_no=$this->input->post('contact_no',TRUE);
                 $m_customers->email_address=$this->input->post('email_address',TRUE);
                 $m_customers->tin_no=$this->input->post('tin_no',TRUE);
                 $m_customers->photo_path=$this->input->post('photo_path',TRUE);
-
-                // Added Column 07062017 when updated the form
-                $m_customers->industry=$this->input->post('industry',TRUE);
                 $m_customers->rdo_no=$this->input->post('rdo_no',TRUE);
+                $m_customers->industry=$this->input->post('industry',TRUE);
                 $m_customers->sec_dti=$this->input->post('sec_dti',TRUE);
+                $m_customers->business_style_id=$this->input->post('business_style_id',TRUE);
+                $m_customers->business_type=$this->input->post('business_type',TRUE);
 
                 $m_customers->save();
 
                 $customer_id=$m_customers->last_insert_id();//get last insert id
 
+                $document_id = $this->input->post('document_id',TRUE);
+                $value = $this->input->post('value',TRUE);
+                $document_type = $this->input->post('document_type',TRUE);
+                $previous_id = $this->input->post('previous_id',TRUE);
+                $pr_document_type_id = $this->input->post('pr_document_type_id',TRUE);
 
-                $document=$this->input->post('documents',TRUE);
-                for($i=0;$i<count($document);$i++){
-                    $m_customers_item->document_type='GD';
-                    $m_customers_item->customer_id=$customer_id;
-                    $m_customers_item->document_id=$document[$i];
+                for($i=0;$i<count($document_id);$i++)
+                {
+                    $m_customers_item->customer_id = $customer_id;
+                    $m_customers_item->document_id = $document_id[$i];
+                    $m_customers_item->document_type = $document_type[$i];
                     $m_customers_item->save();
                 }
 
-                $supporting=$this->input->post('supporting',TRUE);
-                for($i=0;$i<count($supporting);$i++){
-                    $m_customers_item->document_type='SD';
-                    $m_customers_item->customer_id=$customer_id;
-                    $m_customers_item->document_id=$supporting[$i];
+                for($i=0;$i<count($previous_id);$i++) 
+                {
+                    $m_customers_item->customer_id = $customer_id;
+                    $m_customers_item->document_id = $previous_id[$i];
+                    $m_customers_item->value = $value[$i];
+                    $m_customers_item->document_type = $pr_document_type_id[$i];
                     $m_customers_item->save();
                 }
-       
-
-                foreach ($_POST as $key => $val) {
-
-                   if ($key == 1 ){
-                    $m_customers_item->document_type='PR';
-                       $m_customers_item->customer_id=$customer_id;
-                       $m_customers_item->document_id=$key;
-                       $m_customers_item->value=$val;
-                       $m_customers_item->save();
-                   }
-                  if ($key == 2 ){
-                    $m_customers_item->document_type='PR';
-                       $m_customers_item->customer_id=$customer_id;
-                       $m_customers_item->document_id=$key;
-                       $m_customers_item->value=$val;
-                       $m_customers_item->save();
-                   }
-                  if ($key == 3 ){
-                    $m_customers_item->document_type='PR';
-                       $m_customers_item->customer_id=$customer_id;
-                       $m_customers_item->document_id=$key;
-                       $m_customers_item->value=$val;
-                       $m_customers_item->save();
-                   }
-                  if ($key == 4 ){
-                        $m_customers_item->document_type='PR';
-                       $m_customers_item->customer_id=$customer_id;
-                       $m_customers_item->document_id=$key;
-                       $m_customers_item->value=$val;
-                       $m_customers_item->save();
-                   }
-                  if ($key == 5 ){
-                        $m_customers_item->document_type='PR';
-                       $m_customers_item->customer_id=$customer_id;
-                       $m_customers_item->document_id=$key;
-                       $m_customers_item->value=$val;
-                       $m_customers_item->save();
-                   }
-                  if ($key == 6 ){
-                       $m_customers_item->document_type='PR';
-                       $m_customers_item->document_id=$key;
-                       $m_customers_item->value=$val;
-                       $m_customers_item->save();
-                   }
-
-                }
-
-
-
 
                 $m_user_customers=$this->User_customers_model;
                 $m_user_customers->user_id=$this->session->user_id;
@@ -233,31 +212,58 @@ class Clients extends CORE_Controller {
             //****************************************************************************************************************
             case 'update':
                 $m_customers=$this->Customers_model;
+                $m_customers_item=$this->Customers_item_model;
+                $m_photos=$this->Customer_photos_model;
                 $customer_id=$this->input->post('customer_id',TRUE);
                 //$m_photos=$this->Customer_photos_model;
 
                 $m_customers->begin();
 
-                $m_customers->customer_code=$this->input->post('customer_code',TRUE);
                 $m_customers->company_name=$this->input->post('company_name',TRUE);
                 $m_customers->trade_name=$this->input->post('trade_name',TRUE);
                 $m_customers->office_address=$this->input->post('office_address',TRUE);
                 $m_customers->billing_address=$this->input->post('billing_address',TRUE);
                 $m_customers->contact_person=$this->input->post('contact_person',TRUE);
-                $m_customers->designation=$this->input->post('designation',TRUE);
                 $m_customers->contact_no=$this->input->post('contact_no',TRUE);
                 $m_customers->email_address=$this->input->post('email_address',TRUE);
                 $m_customers->tin_no=$this->input->post('tin_no',TRUE);
-                $m_customers->tax_type_id=$this->input->post('tax_type_id',TRUE);
                 $m_customers->photo_path=$this->input->post('photo_path',TRUE);
-                //$m_customers->set('date_modified','NOW()');
-                //$m_customers->modified_by_user=$this->session->user_id;
+                $m_customers->rdo_no=$this->input->post('rdo_no',TRUE);
+                $m_customers->industry=$this->input->post('industry',TRUE);
+                $m_customers->sec_dti=$this->input->post('sec_dti',TRUE);
+                $m_customers->business_style_id=$this->input->post('business_style_id',TRUE);
+                $m_customers->business_type=$this->input->post('business_type',TRUE);
+
+                $m_customers->set('date_modified','NOW()');
+                $m_customers->modified_by=$this->session->user_id;
                 $m_customers->modify($customer_id);
 
+                $m_customers_item->delete_via_fk($customer_id);
 
+                $document_id = $this->input->post('document_id',TRUE);
+                $value = $this->input->post('value',TRUE);
+                $document_type = $this->input->post('document_type',TRUE);
+                $previous_id = $this->input->post('previous_id',TRUE);
+                $pr_document_type_id = $this->input->post('pr_document_type_id',TRUE);
+
+                for($i=0;$i<count($document_id);$i++)
+                {
+                    $m_customers_item->customer_id = $customer_id;
+                    $m_customers_item->document_id = $document_id[$i];
+                    $m_customers_item->document_type = $document_type[$i];
+                    $m_customers_item->save();
+                }
+
+                for($i=0;$i<count($previous_id);$i++) 
+                {
+                    $m_customers_item->customer_id = $customer_id;
+                    $m_customers_item->document_id = $previous_id[$i];
+                    $m_customers_item->value = $value[$i];
+                    $m_customers_item->document_type = $pr_document_type_id[$i];
+                    $m_customers_item->save();
+                }
 
                 $m_customers->commit();
-
 
                 $response['title']='Success!';
                 $response['stat']='success';
@@ -390,7 +396,7 @@ class Clients extends CORE_Controller {
 
     function row_response($filter_value){
         $m_customers=$this->Customers_model;
-        $m_customers_item =$this->$Customers_item_model;
+        $m_customers_item =$this->Customers_item_model;
         return 
         $m_customers->get_list($filter_value);
         $m_customers_items->get_list($filter_value);

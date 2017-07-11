@@ -20,7 +20,10 @@ class Login extends CORE_Controller {
                 'Users_model',
                 'Account_title_model',
                 'Account_type_model',
-                'Account_class_model'
+                'Account_class_model',
+                'Document_category_model',
+                'Documents_model',
+                'Business_style_model'
             )
         );
     }
@@ -38,27 +41,6 @@ class Login extends CORE_Controller {
 
         //WORKAROUND FOR LOGIN REDIRECTION TO DASHBOARD (if user session is ACTIVE)
         if($this->session->userdata('logged_in') == 1) {
-            // $dashboardData['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
-            // $dashboardData['_def_js_files']=$this->load->view('template/assets/js_files','',TRUE);
-            // $dashboardData['_switcher_settings']=$this->load->view('template/elements/switcher','',TRUE);
-            // $dashboardData['_side_bar_navigation']=$this->load->view('template/elements/side_bar_navigation','',TRUE);
-            // $dashboardData['_top_navigation']=$this->load->view('template/elements/top_navigation','',TRUE);
-
-            // $user_count=$this->Users_model->get_list(
-            //     'is_deleted=FALSE AND is_active=TRUE',
-            //     'COUNT(*) AS user_count'
-            // );
-
-            // $customer_count=$this->User_customers_model->get_list(
-            //     array('user_id'=>$this->session->user_id),
-            //     'COUNT(*) AS customer_count'
-            // );
-
-            // $dashboardData['users_count']=$user_count[0];
-
-            // $dashboardData['customers_count']=$customer_count[0];
-
-            // $this->load->view('dashboard_view',$dashboardData);
             redirect(base_url('Dashboard'));
         } else {
             $this->load->view('login_view',$data); 
@@ -94,6 +76,15 @@ class Login extends CORE_Controller {
 
         $m_account_class=$this->Account_class_model;
         $m_account_class->create_default_account_classes();
+
+        $m_document_category=$this->Document_category_model;
+        $m_document_category->create_default_document_category();
+
+        $m_document=$this->Documents_model;
+        $m_document->create_default_documents();
+
+        $m_business_style=$this->Business_style_model;
+        $m_business_style->create_default_business_styles();
     }
 
 

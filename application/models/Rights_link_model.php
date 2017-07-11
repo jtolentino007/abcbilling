@@ -36,7 +36,9 @@ class Rights_link_model extends CORE_Model{
                                           (19,'6','6-1','General Journal'),
                                           (20,'6','6-2','Cash Disbursement'),
                                           (21,'2','2-3','Suppliers Management'),
-                                          (22,'1','1-4','Document Category Management')
+                                          (22,'1','1-5','Document Category Management'),
+                                          (23,'1','1-6','Business Style Management'),
+                                          (24,'1','1-7','Engagement Details Management')
             ";
 
 

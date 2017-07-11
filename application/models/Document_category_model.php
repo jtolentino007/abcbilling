@@ -7,6 +7,18 @@
 		{
 			parent::__construct();
 		}
+
+		function create_default_document_category(){
+	        $sql="INSERT IGNORE INTO `document_category` (`document_category_id`, `document_category`, `document_category_desc`) 
+	        	  VALUES 
+	        	  (1,'General Documents',''),
+	        	  (2,'Supporting Documents',''),
+	        	  (3,'Previous Returns','')
+	        	";
+
+
+	        $this->db->query($sql);
+	    }
 	}
 
 ?>

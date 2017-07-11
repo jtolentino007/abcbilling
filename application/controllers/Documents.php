@@ -44,6 +44,7 @@ class Documents extends CORE_Controller
                 $m_documents->document_type = $this->input->post('document_type', TRUE);
                 $m_documents->document_category_id = $this->input->post('document_category_id', TRUE);
                 $m_documents->document_type_description = $this->input->post('document_type_description', TRUE);
+                $m_documents->unit_time = $this->input->post('unit_time', TRUE);
                 $m_documents->save();
 
                 $document_type_id = $m_documents->last_insert_id();

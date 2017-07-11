@@ -51,10 +51,11 @@
 
                         <li class="<?php echo (in_array('1',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-view-list-alt"></i><span>References</span></a>
                             <ul class="acc-menu">
-                                <li class="<?php echo (in_array('1-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="document_category">Documents Category</a></li>
+                                <li class="<?php echo (in_array('1-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="document_category">Documents Category</a></li>
                                 <li  class="<?php echo (in_array('1-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="documents">Documents Types</a></li>
-                                <li class="<?php echo (in_array('1-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories">Services Category</a></li>
+                                <li class="<?php echo (in_array('1-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories">Services Category</a></li>
                                 <li class="<?php echo (in_array('1-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="service_types">Service Types</a></li>
+                                <li class="<?php echo (in_array('1-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Business_style">Business Styles</a></li>
                             </ul>
                         </li>
 

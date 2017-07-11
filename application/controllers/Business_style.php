@@ -45,8 +45,9 @@
 	             	$response['title'] = 'Success!';
 	                $response['stat'] = 'success';
 	                $response['msg'] = 'Business Style Successfully created.';
-	            $response['row_added'] = $m_business_style->get_list('is_deleted=FALSE AND is_active=TRUE AND business_style_id='.$business_style_id); 
-	            echo json_encode($response);
+	            	$response['row_added'] = $m_business_style->get_list('is_deleted=FALSE AND is_active=TRUE AND business_style_id='.$business_style_id); 
+	            	
+	            	echo json_encode($response);
 	                break;
 
 	             case 'delete':
