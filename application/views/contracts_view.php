@@ -73,11 +73,11 @@
             float: left;
         }
         td.details-control {
-            background: url('assets/img/Folder_Closed.png') no-repeat center center;
+            background: url('assets/img/closed.png') no-repeat center center;
             cursor: pointer;
         }
         tr.details td.details-control {
-            background: url('assets/img/Folder_Opened.png') no-repeat center center;
+            background: url('assets/img/open.png') no-repeat center center;
         }
         .child_table{
             padding: 5px;
@@ -814,7 +814,6 @@
                     showNotification(response);
 
                     var data=response.row_updated[0];
-                    console.log(data);
                     if(response.stat=="success"){
                         var htmlStat=(data.stat=="1"?'<i class="fa fa-check-circle" style="color: #4caf50;"></i></center>':'<center><i class="fa fa-times-circle" style="color: #f44336;"></i></center>');
 

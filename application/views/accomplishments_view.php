@@ -99,11 +99,11 @@
         }
 
         td.details-control {
-            background: url('assets/img/Folder_Closed.png') no-repeat center center;
+            background: url('assets/img/closed.png') no-repeat center center;
             cursor: pointer;
         }
         tr.details td.details-control {
-            background: url('assets/img/Folder_Opened.png') no-repeat center center;
+            background: url('assets/img/open.png') no-repeat center center;
         }
 
         .child_table{
@@ -184,25 +184,25 @@
 
                                             <div class="row">
 
-                                                <div class="col-xs-12 col-lg-2">
+                                                <div class="col-xs-12 col-sm-2">
                                                     <div class="zTreeDemoBackground" style="margin-left: 10px;margin-top: 10px;margin-bottom: 20px;border: 0px solid black;">
                                                         <ul id="treeDemo" class="ztree"></ul>
                                                     </div>
                                                 </div>
 
 
-                                                <div class="col-xs-12 col-lg-10">
+                                                <div class="col-xs-12 col-sm-10">
                                                     <div class="panel-body table-responsive" style="padding-left: 1px!important;">
                                                         <div style="border:1px solid  #acb8b1;padding: 1%;">
-                                                            <span style="font-size: 14pt;">Accomplishments as of <b id="lbl_date"><?php echo date('F'); ?> 2017</b></span><span style="font-size: 9pt;"> (Please tick mark all accomplished services on <b>Completed Column</b>.)</span><hr />
+                                                            <span style="font-size: 14pt;">Accomplishments as of <b id="lbl_date"><?php echo date('F'); ?> <?php echo date('Y'); ?></b></span><span style="font-size: 9pt;"> (Please tick mark all accomplished services on <b>Completed Column</b>.)</span><hr />
 
                                                             <table id="tbl_customers" class="table" cellspacing="0" width="100%">
                                                                 <thead>
                                                                     <th width="1%">&nbsp;&nbsp;</th>
-                                                                    <th width="10%">Code</th>
+                                                                    <th width="15%">Contract Code</th>
+                                                                    <th width="15%">Customer Code</th>
                                                                     <th width="20%">Company / Client</th>
                                                                     <th width="15%">Trade Name</th>
-                                                                    <th width="20%">Office Address</th>
                                                                     <th width="10%">Contact No</th>
                                                                     <th width="15%">Contact Person</th>
                                                                 </thead>
@@ -255,7 +255,7 @@
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -322,10 +322,10 @@
                         "data":           null,
                         "defaultContent": ""
                     },
-                    { targets:[1],data: "customer_code" },
-                    { targets:[2],data: "company_name" },
-                    { targets:[3],data: "trade_name" },
-                    { targets:[4],data: "office_address" },
+                    { targets:[1],data: "contract_no" },
+                    { targets:[2],data: "customer_code" },
+                    { targets:[3],data: "company_name" },
+                    { targets:[4],data: "trade_name" },
                     { targets:[5],data: "contact_no" },
                     { targets:[6],data: "contact_person" }
 
@@ -382,19 +382,8 @@
                 {"id":"<?php echo $year; ?>-<?php echo $month; ?>","pId":"<?php echo $year; ?>","name":"<?php echo $month; ?>","title":"<?php echo $month; ?>","open":"<?php echo ($year==date("Y")?"true":false); ?>","icon":"assets\/plugins\/zTree\/img\/diy\/11.png"},
                 <?php } ?>
                 <?php } ?>
-
-
-
-
             ];
-
             reInitializeTreeView();
-
-
-
-
-
-
         }();
 
 
@@ -418,10 +407,11 @@
                 else {
                     tr.addClass( 'details' );
                     var d=row.data();
+
                     $.ajax({
                         "dataType":"html",
                         "type":"POST",
-                        "url":"Accomplishments/transaction/expand-view?id="+ d.customer_id +"&month="+_monthID+"&year="+_year,
+                        "url":"Accomplishments/transaction/expand-view?id="+ d.customer_id +"&contract_id="+d.contract_id+"&month="+_monthID+"&year="+_year,
                         "beforeSend" : function(){
                             row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                         }

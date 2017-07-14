@@ -11,7 +11,8 @@
 				array(
 					'Services_model',
                     'Customers_model',
-                    'Accomplishment_model'
+                    'Accomplishment_model',
+                    'Contract_model'
 				)
 			);
 		}
@@ -50,20 +51,34 @@
                 
                 case 'list':
                     $m_customers=$this->Customers_model;
-                    $response['data']=$m_customers->get_list('is_deleted=0');
+                    $response['data']=$this->Contract_model->get_list('contracts.is_active=TRUE AND contracts.is_deleted=FALSE AND uc.user_id='.$this->session->user_id,
+                            'contracts.*,ci.*',
+                            array(
+                                array('customers_info as ci','ci.customer_id=contracts.customer_id','inner'),
+                                array('user_customers as uc','uc.customer_id=ci.customer_id','left')
+                            )
+                        );
+                    // $m_customers->get_list(
+                    //     'customers_info.is_deleted=0 AND uc.user_id='.$this->session->user_id,
+                    //     'customers_info.*',
+                    //     array(
+                    //         array('user_customers as uc','uc.customer_id=customers_info.customer_id','left')
+                    //     )
+                    // );
                     echo (
                         json_encode($response)
                     );
-
                     break;
+
                 case 'expand-view':
                     $m_customers=$this->Customers_model;
                     $customer_id=$this->input->get('id');
+                    $contract_id=$this->input->get('contract_id');
                     $month=$this->input->get('month');
                     $year=$this->input->get('year');
 
                     $data['customer_id']=$customer_id;
-                    $data['services']=$this->Accomplishment_model->get_services_accomplishment($customer_id,null,$month,$year);
+                    $data['services']=$this->Accomplishment_model->get_services_accomplishment($customer_id,null,$month,$year,$contract_id);
                     $data['customer_info']=$m_customers->get_list($customer_id);
 
 

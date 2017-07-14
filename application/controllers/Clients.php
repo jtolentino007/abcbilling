@@ -299,13 +299,11 @@ class Clients extends CORE_Controller {
                 );
 
                 $data['customer_contracts']=$m_contract->get_list(
-                    array(
-                        'is_deleted=FALSE AND is_active=TRUE',
-                        'contracts.customer_id'=>$customer_id
-                    ),
+                    'contracts.is_deleted=FALSE AND contracts.is_active=TRUE AND contracts.customer_id='.$customer_id,
                     'DISTINCT(contracts.contract_no) AS contract_no,
                     contracts.date_started,
-                    IFNULL(charges.charge_amount,0) as charge_amount,
+                    charges.charge_name,
+                    IFNULL(contract_fee_template.amount,0) as charge_amount,
                     contracts.is_active',
                     array(
                         array('customers_info','customers_info.customer_id=contracts.customer_id','left'),

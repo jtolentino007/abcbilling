@@ -35,11 +35,11 @@
         }
 
         td.details-control {
-            background: url('assets/img/Folder_Closed.png') no-repeat center center;
+            background: url('assets/img/closed.png') no-repeat center center;
             cursor: pointer;
         }
         tr.details td.details-control {
-            background: url('assets/img/Folder_Opened.png') no-repeat center center;
+            background: url('assets/img/open.png') no-repeat center center;
         }
 
         .page-content > .breadcrumb { 

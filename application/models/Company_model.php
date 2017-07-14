@@ -15,9 +15,6 @@ class Company_model extends CORE_Model{
 
 
 
-
-
-
 }
 
 

@@ -51,38 +51,38 @@
 
                         <li class="<?php echo (in_array('1',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-view-list-alt"></i><span>References</span></a>
                             <ul class="acc-menu">
-                                <li class="<?php echo (in_array('1-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="document_category">Documents Category</a></li>
-                                <li  class="<?php echo (in_array('1-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="documents">Documents Types</a></li>
-                                <li class="<?php echo (in_array('1-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories">Services Category</a></li>
-                                <li class="<?php echo (in_array('1-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="service_types">Service Types</a></li>
-                                <li class="<?php echo (in_array('1-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Business_style">Business Styles</a></li>
+                                <li class="<?php echo (in_array('1-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="document_category"><i class="fa fa-files-o"></i> Documents Category</a></li>
+                                <li  class="<?php echo (in_array('1-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="documents"><i class="fa fa-file-o"></i> Documents Types</a></li>
+                                <li class="<?php echo (in_array('1-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="categories"><i class="fa fa-cogs"></i> Services Category</a></li>
+                                <li class="<?php echo (in_array('1-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="service_types"><i class="fa fa-cog"></i> Service Types</a></li>
+                                <li class="<?php echo (in_array('1-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Business_style"><i class="fa fa-building-o"></i> Business Styles</a></li>
                             </ul>
                         </li>
 
                         <li class="<?php echo (in_array('4',$this->session->parent_rights)?'':'hidden'); ?>">
                             <a href="#"><i class="ti ti-agenda"></i><span>Transactions</span></a>
                             <ul class="acc-menu">
-                                <li class="<?php echo (in_array('4-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Accomplishments">Process Accomplishments</a></li>
-                                <li class="<?php echo (in_array('4-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Service_invoices">Process Billing</a></li>
-                                <li class="<?php echo (in_array('4-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Payments">Collection Entry</a></li>
+                                <li class="<?php echo (in_array('4-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Accomplishments"><i class="fa fa-check"></i> Process Accomplishments</a></li>
+                                <li class="<?php echo (in_array('4-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Service_invoices"><i class="fa fa-bars"></i> Process Billing</a></li>
+                                <li class="<?php echo (in_array('4-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Payments"><i class="fa fa-columns"></i> Collection Entry</a></li>
                             </ul>
                         </li>
 
                         <li class="<?php echo (in_array('2',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-harddrive"></i><span>Masterfiles</span></a>
                             <ul class="acc-menu">
-                                <li class="<?php echo (in_array('2-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Clients">Client Management</a></li>
-                                <li class="<?php echo (in_array('2-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Contracts">Contract Management</a></li>
+                                <li class="<?php echo (in_array('2-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Clients"><i class="fa fa-user"></i> Client Management</a></li>
+                                <li class="<?php echo (in_array('2-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Contracts"><i class="fa fa-file-text-o"></i> Contract Management</a></li>
                             </ul>
                         </li>
 
                         <li class="<?php echo (in_array('3',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-settings"></i><span>Settings</span></a>
                             <ul class="acc-menu">
-                                <li class="<?php echo (in_array('3-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Tax">Tax Setup</a></li>
-                                <li class="<?php echo (in_array('3-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="charges">Charges Setup</a></li>
-                                <li class="<?php echo (in_array('3-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="User_groups">User Rights Management</a></li>
-                                <li class="<?php echo (in_array('3-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="users">User Account Management</a></li>
-                                <li class="<?php echo (in_array('3-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="DBBackup">Backup Database</a></li>
-                                <li class="<?php echo (in_array('3-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="company">Company Info Setup</a></li>
+                                <li class="<?php echo (in_array('3-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Tax"><i class="fa fa-cube"></i> Tax Setup</a></li>
+                                <li class="<?php echo (in_array('3-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="charges"><i class="fa fa-inbox"></i> Charges Setup</a></li>
+                                <li class="<?php echo (in_array('3-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="User_groups"><i class="fa fa-code"></i> User Rights Management</a></li>
+                                <li class="<?php echo (in_array('3-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="users"><i class="fa fa-group"></i> User Account Management</a></li>
+                                <li class="<?php echo (in_array('3-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="DBBackup"><i class="fa fa-database"></i> Backup Database</a></li>
+                                <li class="<?php echo (in_array('3-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="company"><i class="fa fa-institution"></i> Company Info Setup</a></li>
                             </ul>
                         </li>
 

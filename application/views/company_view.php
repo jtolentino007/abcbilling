@@ -120,14 +120,14 @@
 
 
                                     <div id="div_company_fields">
-                                        <div class="panel panel-default" style="border-top: 3px solid #2196f3;">
-                                            <div class="panel-heading">
+                                        <div class="panel panel-default">
+                                            <!-- <div class="panel-heading">
                                                 <h2>Company Information</h2>
                                                 <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
-                                            </div>
+                                            </div> -->
 
-                                            <div class="panel-body">
-
+                                            <div class="panel-body" style="border-top: 5px solid #56b65a;">
+                                            <h1><i class="fa fa-building" style="color: #56b65a"></i>&nbsp;Company Information</h1><hr>
                                                <form id="frm_company" role="form" class="form-horizontal row-border">
 
 

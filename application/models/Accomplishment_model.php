@@ -12,14 +12,19 @@ class Accomplishment_model extends CORE_Model{
         parent::__construct();
     }
 
-    function get_services_accomplishment($customer_id,$service_id=null,$month_id=null,$year_id=null){
+    function get_services_accomplishment($customer_id,$service_id=null,$month_id=null,$year_id=null, $contract_id=null){
         $sql="SELECT
                 ser.service_id,ser.service_name,
                 IFNULL(acc.narration,'')as narration,acc.date_accomplished,
                 IF(ISNULL(acc.service_id),0,1) as status FROM
 
-                (SELECT s.service_id,s.service_name FROM services as s
-                WHERE s.is_deleted=0) as ser
+                (SELECT 
+                s.service_id,
+                s.service_name 
+                FROM services as s
+                INNER JOIN customers_services as cs ON cs.service_id = s.service_id
+                WHERE s.is_deleted=0
+                ".($contract_id==null?"":" AND cs.contract_id=".$contract_id).") as ser
 
                 LEFT JOIN
 

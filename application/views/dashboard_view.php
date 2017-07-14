@@ -281,6 +281,7 @@
                                                     ($this->session->user_group_id == 1 ? 'here&#39;s a rundown of your business performance and how your collections are doing individually.' : 'here&#39;s a rundown of your performance and how your collections are doing individually.')
                                                 ?></h3> 
                                             </div>  
+                                            <?php if ($this->session->user_group_id == 1) { ?>
                                             <div class="col-xs-12 col-sm-3">
                                                 <button id="btn_generate" class="btn btn-primary btn-block" style="font-size: 20px; font-weight: 200; border-radius: 10px; margin-top: 5px;">
                                                     Generate Billing Report
@@ -302,6 +303,7 @@
                                                     <option value="12">December</option>
                                                 </select>
                                             </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     <div style="margin-bottom: 15px;">
@@ -415,7 +417,8 @@
                                                 <div class="panel-heading">
                                                      <h4 style="color: white;"><i class="fa fa-newspaper-o"></i> ACTIVITIES FEED</h4>
                                                 </div>
-                                                <div class="panel-body" style="padding: 0 0 5px 0!important; max-height: 935px; overflow-y: scroll;">
+                                                <div class="panel-body" style="padding: 0 0 5px 0!important; max-height: 935px; overflow-y: scroll;min-height: 300px;">
+                                                <?php if ($this->session->user_group_id == 1) { ?>
                                                     <?php foreach($newsfeeds as $newsfeed) { ?>
                                                         <div class="container-fluid" style="border: 1px dashed #e2e2e2;padding: 10px;">
                                                             <div class="col-xs-12 col-sm-2">
@@ -428,6 +431,7 @@
                                                             </div>
                                                         </div>
                                                     <?php } ?>
+                                                <?php } else { echo "<div class='container-fluid text-center'><h3>Activities feed not available</h3></div>"; } ?>
                                                 </div>
                                             </div>
                                         </div>

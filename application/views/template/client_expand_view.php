@@ -61,8 +61,9 @@
                             <thead style="border: 1px solid #aaa;">
                                 <tr>
                                     <td style="padding: 5px; border-right: 1px solid #aaa;"><strong>Contract #</strong></td>
+                                    <td style="padding: 5px; border-right: 1px solid #aaa;">Item</td>
                                     <td style="padding: 5px; border-right: 1px solid #aaa;"><strong>Date Start</strong></td>
-                                    <td style="padding: 5px; border-right: 1px solid #aaa;text-align: right;"><strong>Retainer's Fee</strong></td>
+                                    <td style="padding: 5px; border-right: 1px solid #aaa;text-align: right;"><strong>Fee</strong></td>
                                     <td width="5%" style="padding: 5px;"><center><strong>Status</strong></center></td>
                                 </tr>
                             </thead>
@@ -70,6 +71,7 @@
                                 <?php foreach($customer_contracts as $customer_contract) { ?>
                                     <tr>
                                         <td><?php echo $customer_contract->contract_no; ?></td>
+                                        <td><?php echo $customer_contract->charge_name; ?></td>
                                         <td><?php echo $customer_contract->date_started; ?></td>
                                         <td style="text-align: right;"><?php echo number_format($customer_contract->charge_amount,2); ?></td>
                                         <td><center><?php echo ($customer_contract->is_active == FALSE ? '<i class="fa fa-times-circle" style="color: red;"></i>' : '<i class="fa fa-check-circle" style="color: green;"></i>') ?></center></td>

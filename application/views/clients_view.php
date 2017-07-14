@@ -137,12 +137,12 @@
         }
 
         td.details-control {
-            background: url('assets/img/Folder_Closed.png') no-repeat center center;
+            background: url('assets/img/closed.png') no-repeat center center;
             cursor: pointer;
         }
 
         tr.details td.details-control {
-            background: url('assets/img/Folder_Opened.png') no-repeat center center;
+            background: url('assets/img/open.png') no-repeat center center;
         }
 
         .child_table{
@@ -239,12 +239,6 @@
             font-style: italic;
 
         }
-        tr:hover {
-    background: none!important;}
-
-    tr{
-        background: none!important;
-    }
     </style>
 
 </head>
@@ -275,7 +269,7 @@
                                         <div class="panel panel-default">
                                             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Client Management</b></div></a>
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_clients" class="custom-design table-striped" cellspacing="0" width="100%">
+                                                <table id="tbl_clients" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th>&nbsp;&nbsp;</th>
@@ -340,9 +334,9 @@
             </div>
 
             <div id="modal_customer" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                <div class="modal-dialog modal-lg" style="width:80%;"> 
+                <div class="modal-dialog modal-lg" style="width:60%;"> 
                     <div class="modal-content">
-                        <div class="modal-body" style="border-top: 5px solid #36474f;">
+                        <div class="modal-body" style="border-top: 5px solid #56b65a;">
                             <div class="row" style="padding: 20px;">
                                 <div class="container-fluid">
                                     <div class="col-xs-6 col-sm-2">

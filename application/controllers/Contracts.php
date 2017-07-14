@@ -49,7 +49,7 @@ class Contracts extends CORE_Controller
             case 'list':
                 $m_contracts=$this->Contract_model;
                 $response['data']=$this->get_response(
-                    'contracts.is_deleted=0 AND contracts.is_active=TRUE AND uc.user_id='.$this->session->user_id
+                    'contracts.is_deleted=FALSE AND contracts.is_active=TRUE AND uc.user_id='.$this->session->user_id
                 );
                 echo json_encode($response);
 
@@ -304,10 +304,12 @@ class Contracts extends CORE_Controller
                 ));
 
                 if(count($exist)>0){ //if service already exist
-                    $m_services->delete(array(
+                    $m_services->delete(
+                        array(
                         'service_id'=>$service_id,
                         'contract_id'=>$contract_id
-                    ));
+                        )   
+                    );
 
                 }else{
                     $m_services->contract_id=$contract_id;
