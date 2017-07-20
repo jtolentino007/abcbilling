@@ -12,56 +12,59 @@ class Customers_model extends CORE_Model {
 
     function get_customer_receivable_list($customer_id) 
     {
-        $sql="SELECT 
-            unpaid.*,
-            IFNULL(paid.payment_amount, 0) AS payment_amount,
-            ((IFNULL(unpaid.total_billing_current_amount, 0) - IFNULL(unpaid.advance_payment, 0)) - IFNULL(paid.payment_amount,0) - IFNULL(paid.discount,0)) AS amount_due
-        FROM
-            (SELECT 
-                DISTINCT(billing_info.billing_id) AS billing_id,
-                billing_info.billing_no,
-                billing_info.contract_id,
-                contracts.contract_no,
-                billing_items.notes,
-                billing_info.date_billed,
-                customers_info.company_name,
-                billing_info.date_due,
-                billing_info.total_billing_current_amount,
-                billing_info.advance_payment
-            FROM
-            billing_info
-            LEFT JOIN billing_items ON billing_items.billing_id = billing_info.billing_id
-            LEFT JOIN contracts ON contracts.contract_id = billing_info.contract_id
-            LEFT JOIN customers_info ON customers_info.customer_id = billing_info.customer_id
+        $sql = "SELECT
+                unpaid.*,
+                unpaid.charge_line_total,
+                IFNULL(paid.payment_amount,0) AS payment_amount,
+                (IFNULL(unpaid.charge_line_total,0) - IFNULL(paid.payment_amount,0) - IFNULL(paid.discount,0)) AS amount_due
+                FROM
+                (SELECT 
+                binfo.billing_id,
+                binfo.billing_no,
+                binfo.contract_id,
+                binfo.date_billed,
+                binfo.date_due,
+                ctr.contract_no,
+                chr.charge_name,
+                bi.charge_id,
+                bi.notes,
+                bi.charge_line_total,
+                ci.customer_id,
+                ci.company_name
+                FROM billing_items bi
+                INNER JOIN billing_info binfo ON binfo.billing_id = bi.billing_id
+                LEFT JOIN contracts ctr on ctr.contract_id = binfo.contract_id
+                LEFT JOIN charges chr ON chr.charge_id = bi.charge_id
+                LEFT JOIN customers_info ci ON ci.customer_id = binfo.customer_id
+                WHERE 
+                binfo.is_active = TRUE
+                AND binfo.is_deleted=FALSE
+                AND binfo.customer_id = $customer_id
+                AND binfo.payment_status = 0
+                OR binfo.payment_status = 1) AS unpaid
 
-            WHERE
-                billing_info.is_active = TRUE
-                AND billing_info.is_deleted = FALSE
-                AND billing_info.payment_status = 0
-                AND billing_info.customer_id = $customer_id
-                OR billing_info.payment_status = 1) AS unpaid
-                
-            LEFT JOIN
+                LEFT JOIN
 
-            (SELECT 
-                payment_items.payment_id,
-                payment_items.billing_id,
-                payment_items.discount,
-                SUM(payment_items.payment_amount) AS payment_amount
-            FROM
-            (payment_items
-            INNER JOIN billing_info ON billing_info.billing_id = payment_items.billing_id)
+                (SELECT
+                pi.payment_id,
+                pi.billing_id,
+                pi.charge_id,
+                SUM(pi.discount) AS discount,
+                SUM(pi.payment_amount) AS payment_amount
+                FROM
+                (payment_items pi
+                INNER JOIN billing_info binfo ON binfo.billing_id = pi.billing_id)
+                INNER JOIN payment_info pinfo ON pinfo.payment_id = pi.payment_id
+                WHERE pinfo.is_active = TRUE
+                AND pinfo.is_deleted = FALSE
+                AND pinfo.customer_id = $customer_id
+                AND binfo.payment_status = 0
+                OR binfo.payment_status = 1
+                GROUP BY pi.billing_id,pi.charge_id) AS paid
 
-            INNER JOIN payment_info ON payment_info.payment_id = payment_items.payment_id
+                ON paid.billing_id = unpaid.billing_id AND paid.charge_id = unpaid.charge_id
 
-                WHERE
-                payment_info.is_active = TRUE
-                AND payment_info.is_deleted = FALSE
-                AND billing_info.payment_status = 0
-                AND payment_info.customer_id = $customer_id
-                OR billing_info.payment_status = 1
-
-            GROUP BY payment_items.billing_id) AS paid ON unpaid.billing_id = paid.billing_id HAVING amount_due>0";
+                HAVING amount_due>0";
 
         return $this->db->query($sql)->result();
     }

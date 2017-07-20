@@ -58,9 +58,10 @@
     }
 
     .input-group-addon {
-        border: 1px solid #aaa; 
+        border: 1px solid transparent!important; 
         border-right: none;
-        background: transparent;
+        background: rgb(76, 175, 80)!important;
+        color: white;
     }
 
     html {

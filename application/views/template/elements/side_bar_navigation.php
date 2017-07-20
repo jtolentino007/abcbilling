@@ -63,6 +63,7 @@
                             <a href="#"><i class="ti ti-agenda"></i><span>Transactions</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('4-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Accomplishments"><i class="fa fa-check"></i> Process Accomplishments</a></li>
+                                <li class="<?php echo (in_array('4-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Advance_payment"><i class="fa fa-newspaper-o"></i> Advance Payments</a></li>
                                 <li class="<?php echo (in_array('4-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Service_invoices"><i class="fa fa-bars"></i> Process Billing</a></li>
                                 <li class="<?php echo (in_array('4-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Payments"><i class="fa fa-columns"></i> Collection Entry</a></li>
                             </ul>

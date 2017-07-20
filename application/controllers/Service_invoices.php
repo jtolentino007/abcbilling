@@ -15,7 +15,9 @@
                     'Charges_model',
                     'Contract_fee_template_model',
                     'Beginning_balance_model',
-                    'Company_model'
+                    'Company_model',
+                    'Advance_payments_model',
+                    'Billing_advances_model'
                 )
 			);
 		}
@@ -89,6 +91,16 @@
 
                         $billing_id=$m_billing->last_insert_id();
 
+                        //advance payments
+                        $m_billing_advance = $this->Billing_advances_model;
+
+                        if($this->input->post('advance_payment_id',TRUE) != 0) 
+                        {
+                            $m_billing_advance->billing_id = $billing_id;
+                            $m_billing_advance->advance_payment_id = $this->input->post('advance_payment_id',TRUE);
+                            $m_billing_advance->amount = $this->get_numeric_value($this->input->post('amount',TRUE));
+                            $m_billing_advance->save();
+                        }
 
                         //billing items
                         $current_charge_id=$this->input->post('current_charge_id',TRUE);
@@ -102,7 +114,6 @@
                             $m_billing_items->charge_line_total=$this->get_numeric_value($current_charge_amount[$i]);
                             $m_billing_items->save();
                         }
-
 
                         //beginning balances
                         $beginning_balance_charge_id=$this->input->post('beginning_balance_charge_id',TRUE);
@@ -133,12 +144,8 @@
                             echo json_encode($response);
                         }
 
-
-
-
-
-
                     break;
+
                 case 'invoice-list':
                     $billing_month=$this->input->get('month_id',TRUE);
                     $billing_year=$this->input->get('year',TRUE);
@@ -175,9 +182,6 @@
                         )
                     );
 
-
-
-
                     //get recurring fixed charges on the contract template
                     $data['fees']=$m_fee->get_list(
                         array(
@@ -193,15 +197,7 @@
                         )
                     );
 
-
-
-
-
-
-
-
                     $response['billing_no']=$m_billing->create_billing_no();
-
 
                     if(count($exist)<=0){ // if billing already created for this month, do not include previous balance
                         //$response['title']="Contract Already Billed!";
@@ -225,6 +221,16 @@
 
                     echo json_encode($response);
 
+                    break;
+
+                case 'get-clients-advances':
+                    $m_advance=$this->Advance_payments_model;
+
+                    $customer_id = $this->input->get('cusid',TRUE);
+
+                    $response['advances'] = $m_advance->get_client_advances($customer_id);
+
+                    echo json_encode($response);
                     break;
 
                 case 'billing_statement':

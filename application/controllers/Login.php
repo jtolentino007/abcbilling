@@ -50,7 +50,6 @@ class Login extends CORE_Controller {
 
 
     function create_required_default_data(){
-
         //create default user : the admin
         $m_users=$this->Users_model;
         $m_users->create_default_user();

@@ -69,6 +69,15 @@
         #tbl_billing tr.details td.details-control {
             background: url('assets/img/print.png') no-repeat center center;
         }
+
+        .modal-titles {
+            color: white;
+        }
+
+        .modal {
+            overflow-y:auto;
+        }
+
         .child_table{
             padding: 5px;
             border: 1px #ff0000 solid;
@@ -191,7 +200,7 @@
             </div>
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-sm">
-                    <div class="modal-content"><!---content--->
+                    <div class="modal-content"><!---content-->
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title"><span id="modal_mode"> </span>Confirm Deletion</h4>
@@ -203,10 +212,38 @@
                             <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                             <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         </div>
-                    </div><!---content---->
+                    </div><!---content-->
                 </div>
             </div><!---modal-->
-            <div id="modal_process_billing" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+
+            <!-- Modal -->
+            <div id="modal_advances" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-titles">Advance Payments of </h4>
+                        </div>
+                        <div class="modal-body">
+                            <table id="tbl_advances" width="100%">
+                                <thead>
+                                    <th>Advance Payment Amount</th>
+                                    <th class="text-center">Action</th>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn_cancel" type="button" class="btn btn-default">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal_process_billing" class="modal fade" role="dialog"><!--modal-->
                 <div class="modal-dialog" style="width: 65%;">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color:#2ecc71;">
@@ -331,7 +368,7 @@
                                     </tfoot>
                                 </table>
                             </div>
-<br />
+                                <br />
                             <div style="border: 1px solid gray;padding: 1%;border-radius: 5px;">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -341,7 +378,7 @@
                                            <td align="right" width="20%" valign="center"><input type="text" name="total_billing_amount" id="txt_total" class="form-control" value="" style="text-align: right;font-weight: 600;" readonly /></td>
                                        </tr>
                                        <tr>
-                                           <td align="right" width="80%" valign="center" style="padding: 10px;"><i>Less Advance Payment : </i> (<a href="#">Browse Advances</a>)</td>
+                                           <td align="right" width="80%" valign="center" style="padding: 10px;"><i>Less Advance Payment : </i> (<a id="browse_advances" href="#">Browse Advances</a>)</td>
                                            <td align="right" width="20%" valign="center"><input type="text" name="advance_payment" id="txt_advance" class="form-control numeric"  style="text-align: right;font-weight: 600;" value="" /></td>
                                        </tr>
                                        <tr>
@@ -360,13 +397,13 @@
                             <button id="btn_finalize" type="button" class="btn btn-primary" style="text-transform: capitalize;"><i class="fa fa-save"></i> <span class=""></span> Finalize Billing Statement</button>
                             <button id="btn_cancel" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: none;">Cancel</button>
                         </div>
-                    </div><!---content---->
+                    </div><!---content-->
                 </div>
             </div><!---modal-->
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION </h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -394,7 +431,9 @@
     $(document).ready(function(){
         var dt; var _txnMode; var _selectedID; var _selectRowObj;
         var zNodes; var setting; var _monthID; var _year; var dtBilling;
-        var _cboCurrentCharges;var _cboPreviousCharges;
+        var _cboCurrentCharges;var _cboPreviousCharges; var _clientName; var _clientID; 
+        var _advancePaymentId;
+
         var reInitializeTreeView=function(){
             $.fn.zTree.init($("#treeDemo"), setting, zNodes);
         };
@@ -504,6 +543,8 @@
             });
         };
         var initializeControls=function(){
+            $('#txt_advance').attr('disabled','disabled');
+            $('#txt_advance').val('0.00');
             $('.date-picker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -511,6 +552,7 @@
                 calendarWeeks: true,
                 autoclose: true
             });
+
             _cboCurrentCharges=$('#cbo_current_charges').select2({
                 placeholder: "Please select charge.",
                 allowClear: true
@@ -584,17 +626,22 @@
                     });
                 }
             });
+
             $('#tbl_billing tbody').on('click','#btn_print', function(){
                 _selectRowObj=$(this).closest('tr');
                 var data=dtBilling.row(_selectRowObj).data();
                 _selectedID=data.billing_id;
                 window.open('Service_invoices/transaction/billing_statement?bid='+_selectedID);
             });
+
             $('#btn_finalize').click(function(){
                 var btn=$(this);
                 var _data=$('#frm_billing').serializeArray();
                 _data.push({name:"total_billing_current_amount",value:$('#td_total_current_charges').text()});
                 _data.push({name:"total_billing_previous_amount",value:$('#td_total_beginning_balances').text()});
+                _data.push({name:"advance_payment_id",value: _advancePaymentId});
+                _data.push({name:"amount", value: $('#txt_advance').val()});
+
                 $.ajax({
                     "dataType":"json",
                     "type":"POST",
@@ -617,6 +664,7 @@
                     showSpinningProgress(btn);
                 });
             });
+
             $('#txt_advance').on('keyup',function(){
                 reComputeBillingSummary();
             });
@@ -656,14 +704,17 @@
                 reInitializeNumeric();
                 $(this).select2('val',null);
             });
+
             $('#tbl_current_charges tbody').on( 'keyup', 'input.numeric', function () {
                 reComputeTotalCurrentCharges();
                 reComputeBillingSummary();
             });
+
             $('#tbl_beginning_balances tbody').on( 'keyup', 'input.numeric', function () {
                 reComputeTotalBeginningCharges();
                 reComputeBillingSummary();
             });
+
             $('#tbl_current_charges tbody').on( 'click', 'button[name="remove_charge"]', function () {
                 var row=$(this).closest('tr');
                 // row.fadeOut(500, function() {
@@ -672,6 +723,7 @@
                     reComputeBillingSummary();
                 // });
             });
+
             $('#tbl_beginning_balances tbody').on( 'click', 'button[name="remove_charge"]', function () {
                 var row=$(this).closest('tr');
                 // row.fadeOut(500, function() {
@@ -680,12 +732,17 @@
                     reComputeBillingSummary();
                 // });
             });
+
             $('#tbl_customers tbody').on( 'click', 'button[name="process_billling"]', function () {
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID=data.contract_id;
+                _clientID=data.customer_id;
+                _clientName=data.company_name;
+
                 $('input[name="month_id"]').val(_monthID);
                 $('input[name="year_id"]').val(_year);
+                $('input[name="advance_payment"]').val('0.00');
                 $('input,textarea,select',$('#frm_billing')).each(function(){
                     var _elem=$(this);
                     $.each(data,function(name,value){
@@ -694,6 +751,7 @@
                         }
                     });
                 });
+
                 //get all current charges of current contract
                 $.ajax({
                     "dataType":"json",
@@ -725,8 +783,55 @@
                         //$('#modal_process_billing').modal('hide');
                     //}
                 });
+
                 $('#modal_process_billing').modal('show');
             });
+
+            $('#browse_advances').click(function(){
+                $('#modal_process_billing').modal('hide');
+                $('#modal_advances').modal('show');
+                $('.modal-titles').html('Cash Advances : <br><strong>' + _clientName + '</strong>');
+
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Service_invoices/transaction/get-clients-advances?cusid="+_clientID,
+                }).done(function(response){
+                    var data = response.advances;
+
+                    $('#tbl_advances tbody').html('');
+
+                    $.each(data, function(index, value){
+                        $('#tbl_advances tbody').append(
+                            '<tr>' + 
+                                '<td>' + 
+                                    value.new_advance_amount +
+                                '</td>' +
+                                '<td>' + 
+                                    '<center><button id="' + value.new_advance_amount + '" class="btn btn-success" data-advance-id="'+ value.advance_payment_id +'"><i class="fa fa-check"></i></button></center>'+
+                                '</td>' +
+                            '</tr>'
+                        );
+                    });
+                });
+            });
+
+            $('#tbl_advances tbody').on('click','button',function(){
+                var btn = $(this).closest('button');
+
+                $('#modal_advances').modal('hide');
+                $('#modal_process_billing').modal('show');
+                $('#txt_advance').removeAttr('disabled');
+                $('#txt_advance').val(btn.attr('id'));
+                _advancePaymentId = btn.data('advance-id');
+                reComputeBillingSummary();
+            });
+
+            $('#btn_cancel').click(function(){
+                $('#modal_process_billing').modal('show');
+                $('#modal_advances').modal('hide');
+            });
+
             $('.zTreeDemoBackground').on('click','ul.ztree li span',function(){
                 var sMonth=$(this).closest('li').text();
                 var sYear=$(this).closest('ul').closest('li').find('a').attr('title');
@@ -735,8 +840,12 @@
                 _monthID=$(this).closest('li').index()+1;
                 _year=sYear;
                 if ($(this).parent().hasClass('level0')) {
-                    _year = YearOnly;
-                    $('.lbl_date').html(YearOnly);
+                    if ($(this).parent().hasClass('curSelectedNode'))
+                        _year = YearOnly;
+                    else
+                        _year = $(this).closest('li').find('a').attr('title');
+
+                    $('.lbl_date').html(_year);
                 } else {
                     $('.lbl_date').html(sMonth+" "+sYear);
                 }
@@ -748,7 +857,9 @@
                 reloadContractBillingStatus();
                 // $('.lbl_date').html(sMonth+" "+sYear);
             });
+
         })();
+
         var showNotification=function(obj){
             PNotify.removeAll(); //remove all notifications
             new PNotify({
@@ -757,12 +868,14 @@
                 type:  obj.stat
             });
         };
+
         function addDiyDom(treeId, treeNode) {
             var aObj = $("#" + treeNode.tId);
             if(!isNaN(treeNode.id)){
                 //aObj.closest('a').text("Test");
             }
         };
+
         var reInitializeServiceDataTable=function(tbl){
             var dtService;
             dtService=tbl.DataTable({
@@ -773,9 +886,10 @@
                 "pageLength":8
             });
             tbl.on('click','a#link_accomplished',function(){
-                alert("dd");
+               
             });
         };
+
         var newRowCurrentCharges=function(d){
             return '<tr>'+
                         '<td>'+ d.charge_name +'<input name="current_charge_id[]" type="hidden" value="'+ d.charge_id+'" readonly></td>'+
@@ -784,6 +898,7 @@
                         '<td align="center"><button name="remove_charge" class="btn btn-default"><i class="fa fa-trash"></i></button></td>'+
                     '</tr>';
         };
+
         function newRowBeginningCharges(d){
             return '<tr>'+
                 '<td>'+ d.charge_name+'<input type="hidden" name="beginning_balance_charge_id[]" value="'+ d.charge_id+'" readonly></td>'+
@@ -793,12 +908,15 @@
                 '<td align="center"><button name="remove_charge" class="btn btn-default"><i class="fa fa-trash"></i></button></td>'+
                 '</tr>';
         };
+
         var reInitializeNumeric=function(){
             $('.numeric').autoNumeric('init',{mDec:2});
         };
+
         var getFloat=function(f){
             return parseFloat(accounting.unformat(f));
         };
+
         var reComputeTotalCurrentCharges=function(){
             var rows=$('#tbl_current_charges > tbody  tr');
             var totalCurrentCharge=0;
@@ -807,6 +925,7 @@
             });
             $('#td_total_current_charges').html('<b>'+accounting.formatNumber(totalCurrentCharge,2)+'</b>');
         };
+
         var reComputeTotalBeginningCharges=function(){
             var rows=$('#tbl_beginning_balances > tbody  tr');
             var totalCharge=0;
@@ -815,6 +934,7 @@
             });
             $('#td_total_beginning_balances').html('<b>'+accounting.formatNumber(totalCharge,2)+'</b>');
         };
+
         var reComputeBillingSummary=function(){
             var totalCurrent=getFloat($('#td_total_current_charges').text());
             var totalBeginning=getFloat($('#td_total_beginning_balances').text());
@@ -824,6 +944,7 @@
             $('#txt_total').val(accounting.formatNumber(totalCurrent+totalBeginning,2));
             $('#txt_total_amount_due').val(accounting.formatNumber(total_due,2));
         };
+
         var showSpinningProgress=function(e){
             $(e).toggleClass('disabled');
             $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
