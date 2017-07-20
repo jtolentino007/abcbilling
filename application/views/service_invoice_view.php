@@ -635,6 +635,24 @@
             });
 
             $('#btn_finalize').click(function(){
+            var totalCurrent=getFloat($('#td_total_current_charges').text());
+            var totalBeginning=getFloat($('#td_total_beginning_balances').text());
+            var total=totalCurrent+totalBeginning;
+            var total_advance=getFloat($('#txt_advance').val());
+            var total_due=total-total_advance;
+
+
+                if(total_due < 0 ){
+                    // if total amount is negative
+                 showNotification({"title":"Error!","stat":"error","msg":"Sorry, you can't process a billing with a negative amount."});
+                } 
+
+                else if(total_due == 0){
+                    showNotification({"title":"Error!","stat":"error","msg":"Sorry, you can't process a billing with a 0 amount."});
+                }
+
+                else {
+                    // if total amount is positive
                 var btn=$(this);
                 var _data=$('#frm_billing').serializeArray();
                 _data.push({name:"total_billing_current_amount",value:$('#td_total_current_charges').text()});
@@ -663,6 +681,10 @@
                 }).always(function(){
                     showSpinningProgress(btn);
                 });
+
+
+
+            }
             });
 
             $('#txt_advance').on('keyup',function(){
@@ -943,6 +965,7 @@
             var total_due=total-total_advance;
             $('#txt_total').val(accounting.formatNumber(totalCurrent+totalBeginning,2));
             $('#txt_total_amount_due').val(accounting.formatNumber(total_due,2));
+        
         };
 
         var showSpinningProgress=function(e){
