@@ -10,6 +10,7 @@
 			$this->load->model(
 				array(
 					'Advance_payments_model',
+					'Billing_advances_model',
 					'Customers_model'
 				)
 			);
@@ -75,10 +76,25 @@
 					break;
 
 				case 'cancel':
-					$m_advances=$this->Advance_payments_model;
-
+					$m_billing_advances=$this->Billing_advances_model;
 					$advance_payment_id=$this->input->post('advance_payment_id',TRUE);
 
+
+					$billing_advance=$m_billing_advances->get_list(
+						array(
+							'advance_payment_id'=>$advance_payment_id)
+						);
+					if (count($billing_advance)>0){
+					$response['title'] = 'Error!';
+                    $response['stat'] = 'error';
+                    $response['msg'] = 'Cannot Delete: Advanced payment is in use.';
+
+                    echo json_encode($response);
+                    exit();
+
+					} else{
+					
+					$m_advances=$this->Advance_payments_model;
 					$m_advances->is_active=0;
 					$m_advances->set('date_cancelled','NOW()');
 					$m_advances->modify(array('advance_payment_id'=>$advance_payment_id));
@@ -88,6 +104,8 @@
                     $response['msg'] = 'Advance payment successfully cancelled.';
 
                     echo json_encode($response);
+
+                    }
 					break;
 			}
 		}
