@@ -180,8 +180,11 @@
                                     <div id="div_chart_list">
                                         <div class="panel panel-default">
 
-                                            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Accomplishments</b></div></a>
+                                           <!--  <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Accomplishments</b></div></a> -->
 
+                                        <div style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Accomplishments <small> </small></h1><hr>
+                                        </div>
                                             <div class="row">
 
                                                 <div class="col-xs-12 col-sm-2">
@@ -192,8 +195,8 @@
 
 
                                                 <div class="col-xs-12 col-sm-10">
-                                                    <div class="panel-body table-responsive" style="padding-left: 1px!important;">
-                                                        <div style="border:1px solid  #acb8b1;padding: 1%;">
+                                                    <div class="panel-body table-responsive" style="padding-left: 1px!important; border:none!important; ">
+                                                        <div style="border-left:1px solid #eeeeee;padding: 1%;">
                                                             <span style="font-size: 14pt;">Accomplishments as of <b id="lbl_date"><?php echo date('F'); ?> <?php echo date('Y'); ?></b></span><span style="font-size: 9pt;"> (Please tick mark all accomplished services on <b>Completed Column</b>.)</span><hr />
 
                                                             <table id="tbl_customers" class="table" cellspacing="0" width="100%">

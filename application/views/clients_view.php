@@ -267,8 +267,9 @@
                                 <div class="col-md-12">
                                     <div id="div_supplier_list">
                                         <div class="panel panel-default">
-                                            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Client Management</b></div></a>
-                                            <div class="panel-body table-responsive">
+                                            <!-- <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Client Management</b></div></a> -->
+                                            <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Client <small> | Management</small></h1><hr>
                                                 <table id="tbl_clients" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>

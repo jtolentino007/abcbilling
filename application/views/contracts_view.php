@@ -136,9 +136,10 @@
                                     <div id="div_supplier_list">
                                         <div class="panel panel-default">
 
-                                            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Contract Management</b></div></a>
+                                          <!--   <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Contract Management</b></div></a> -->
 
-                                            <div class="panel-body table-responsive">
+                                            <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+                                            <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts <small> | Management</small></h1><hr>
                                                 <table id="tbl_clients" class="custom-design table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
 
@@ -225,10 +226,9 @@
 
             <div id="modal_contract_entry" class="modal fade" role="dialog"><!--modal-->
                 <div class="modal-dialog" style="width: 30%;">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color:#2ecc71;">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                            <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Account / Contract Profile</h4>
+                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                        <div>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small class="title-modal"> | </small></h1><hr>
                         </div>
                         <div class="modal-body">
                             <form id="frm_contract">
@@ -543,6 +543,7 @@
             });
 
             $('#btn_new').click(function(){
+                $('.title-modal').text(' | New Contract ');
                 var currentDate=<?php echo json_encode(date('m/d/Y')); ?>;
                 _txnMode="new";
                 clearFields($('#modal_contract_entry'));
@@ -552,7 +553,7 @@
 
             $('#tbl_clients tbody').on('click','button[name="edit_info"]',function(){
                 _txnMode="edit";
-
+                $('.title-modal').text(' | Edit Contract');
                 $('#modal_contract_entry').modal('show');
                 _selectRowObj=$(this).closest('table').closest('tr');
                 var data=dt.row(_selectRowObj).data();

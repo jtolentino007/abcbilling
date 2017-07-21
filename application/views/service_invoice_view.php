@@ -128,7 +128,10 @@
                                 <div class="col-md-12">
                                     <div id="div_chart_list">
                                         <div class="panel panel-default">
-                                            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Billing Statements</b></div></a>
+                                        <div style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Billing Statements <small> | Transaction</small></h1><hr>
+                                        </div>
+                                            <!-- <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Billing Statements</b></div></a> -->
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-2">
                                                     <div class="zTreeDemoBackground" style="margin-left: 10px;margin-top: 10px;margin-bottom: 20px;border: 0px solid black;">
@@ -646,10 +649,6 @@
                     // if total amount is negative
                  showNotification({"title":"Error!","stat":"error","msg":"Sorry, you can't process a billing with a negative amount."});
                 } 
-
-                else if(total_due == 0){
-                    showNotification({"title":"Error!","stat":"error","msg":"Sorry, you can't process a billing with a 0 amount."});
-                }
 
                 else {
                     // if total amount is positive
