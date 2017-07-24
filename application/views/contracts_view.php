@@ -134,12 +134,12 @@
                                 <div class="col-md-12">
 
                                     <div id="div_supplier_list">
-                                        <div class="panel panel-default">
-
+                                        <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                                            <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts <small> | Management</small></h1><hr>
                                           <!--   <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Contract Management</b></div></a> -->
 
-                                            <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                            <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts <small> | Management</small></h1><hr>
+                                            <div class="panel-body table-responsive" >
+                                            
                                                 <table id="tbl_clients" class="custom-design table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
 
@@ -172,7 +172,7 @@
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-md">
                     <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
-                    <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small> | Confirm Deletion</small></h1><hr>
+                    <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small> | Confirm Deletion</small></h1><hr>
 
 
                    <!--      <div class="modal-header">
@@ -193,7 +193,7 @@
             <div id="modal_confirm_cancel" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-md">
                     <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
-                    <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small> | Confirm Cancellation</small></h1><hr>
+                    <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small> | Confirm Cancellation</small></h1><hr>
 <!--                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color: white"><span id="modal_mode"> </span>Confirm Cancellation</h4>
@@ -232,7 +232,7 @@
                 <div class="modal-dialog" style="width: 30%;">
                     <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
                         <div>
-                           <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small class="title-modal"> | </small></h1><hr>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small class="title-modal"> | </small></h1><hr>
                         </div>
                         <div class="modal-body">
                             <form id="frm_contract">
@@ -269,11 +269,14 @@
             <!-- data-backdrop="static" and data-keyboard="false" prevents the modal from closing when clicking outside of it -->
             <div id="modal_add_client" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                    <div class="modal-content"  style="border-top:5px solid rgb(76, 175, 80);">
+                                            <div>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-user" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Client<small> | Create</small></h1><hr>
+                        </div>
+<!--                         <div class="modal-header">
                             <button type="button" id="close_client" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                             <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>New Company / Client</h4>
-                        </div>
+                        </div> -->
                         <div class="modal-body">
                             <form id="frm_client">
                                 Customer Code *: <br><input type="text" name="customer_code" data-error-msg="Customer Code is required!" class="form-control" required  />
@@ -414,7 +417,7 @@
 
 
                 _cboClients = $('#cbo_clients').select2({
-                    placeholder: "Please select contracts.",
+                    placeholder: "Please select a client.",
                     allowClear: true
                 });
 

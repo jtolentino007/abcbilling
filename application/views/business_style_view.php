@@ -108,12 +108,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="div_BusinessStyle_list">
-                                                <div class="panel panel-default">
+                                                <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-building-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Business Style <small> | Reference  </small></h1><hr>
                                                     <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Document Category</b>
                                                     </div> -->
-                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Business Style <small> | Reference  </small></h1><hr>
+                                                    <div class="panel-body table-responsive" >
+                                                        
                                                         <table id="tbl_business_style" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
@@ -133,7 +134,7 @@
                                             <div id="modal_business_style" class="modal fade" role="dialog">
                                                 <div class="modal-dialog modal-md">
                                                     <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
-                                                    <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Business Style <small class="title-modal"> | Reference</small></h1><hr>
+                                                    <h1 style="padding-left: 20px;"><span class="fa fa-building-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Business Style <small class="title-modal"> | Reference</small></h1><hr>
                                                         <!-- <div class="modal-header">
                                                             <h3 style="color: white;">Document Category Information</h3>
                                                         </div> -->
@@ -183,7 +184,7 @@
                 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                     <div class="modal-dialog modal-md">
                         <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
-                        <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Business Style <small> | Confirm Deletion  </small></h1><hr>
+                        <h1 style="padding-left: 20px;"><span class="fa fa-building-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Business Style <small> | Confirm Deletion  </small></h1><hr>
                             <!-- <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>

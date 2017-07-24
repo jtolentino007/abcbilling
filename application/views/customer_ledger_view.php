@@ -113,7 +113,7 @@
                                                     <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Customer Ledger Report</b>
                                                     </div> -->
-                                                    <h1 style="padding-left: 20px;"><span class="fa fa-bars" aria-hidden="true" style="color: rgb(76, 175, 80);"></span> Customer Ledger Report</h1><hr>
+                                                    <h1 style="padding-left: 20px;"><span class="fa fa-bars" aria-hidden="true" style="color: rgb(76, 175, 80);"></span> Customer Ledger <small>| Report</small> </h1><hr>
                                                     <div class="panel-body table-responsive" >
                                                     
                                                         <div class="col-xs-12 col-sm-4" style="margin-bottom: 10px;">

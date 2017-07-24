@@ -108,12 +108,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="div_category_fields">
-                                                <div class="panel panel-default">
+                                                <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
                                                     <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp;Services Category Management</b>
                                                     </div> -->
-                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Category <small> | Category</small></h1><hr>
+                                                    <h1 style="padding-left: 20px;"><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Category <small> | Category</small></h1><hr>
+                                                    <div class="panel-body table-responsive" >
+                                                        
                                                         <table id="tbl_categories" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
@@ -132,12 +133,13 @@
                                             </div>
                                                 <div id="modal_categories" class="modal fade" role="dialog">
                                                     <div class="modal-dialog modal-md">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
                                                             <!-- <div class="modal-header">
                                                                 <h3 style="color: white;">Category Management</h3>
                                                             </div> -->
-                                                            <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Category <small class="title-modal"> | Category</small></h1><hr>
+                                                            <h1 style="padding-left: 20px;"><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Category <small class="title-modal"> | Category</small></h1><hr>
+                                                            <div class="modal-body" >
+                                                        
                                                                 <form id="frm_categories" role="form" class="form-horizontal row-border">
                                                                     <div class="form-group">
                                                                         <label class="col-xs-12 ">* Category Name :</label>
@@ -182,7 +184,7 @@
                     <div class="modal-dialog modal-md">
                         
                          <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
-                        <h1 style="padding-left: 20px;"><span class="fa fa-cog" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Category<small> | Confirm Deletion </small></h1><hr>
+                        <h1 style="padding-left: 20px;"><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Category<small> | Confirm Deletion </small></h1><hr>
                            <!--  <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                                 <h4 class="" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>

@@ -123,13 +123,14 @@
 <div class="col-md-12">
 
 <div id="div_user_group_list">
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
 <!--         <div class="panel-heading" >
             <span style="color: white; font-weight: 200; font-size: 16px;"><i class="fa fa-bars"></i>&nbsp;<strong>User Rights Setup</strong></span>
         </div> -->
-        <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+        <h1 style="padding-left: 20px;"><span class="fa fa-code" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Rights <small> | Setup</small></h1><hr>
+        <div class="panel-body table-responsive" >
 
-        <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Rights <small> | Setup</small></h1><hr>
+        
             <table id="tbl_user_group_list" class="table-striped custom-design" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -158,7 +159,7 @@
                 <div class="panel-ctrls" data-actions-container=""></div>
             </div> -->
                         <div>
-                           <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Group<small class="title-modal"> | </small></h1><hr>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-code" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Group<small class="title-modal"> | </small></h1><hr>
                         </div>
             <div class="modal-body">
 
@@ -219,7 +220,7 @@
 
             </div> -->
 <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
-                    <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Group<small> |  Confirm Deletion</small></h1><hr>
+                    <h1 style="padding-left: 20px;"><span class="fa fa-code" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Group<small> |  Confirm Deletion</small></h1><hr>
 
             <div class="modal-body">
                 <p id="modal-body-message">Are you sure ?</p>

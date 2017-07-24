@@ -95,14 +95,14 @@
                                 <div class="col-md-12">
 
                                     <div id="div_tax_list">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
+                                        <div class="panel panel-default"  style="border-top:5px solid rgb(76, 175, 80);">
+                                            
                                              <!--     <span style="color: white; font-weight: 200; font-size: 16px;"><i class="fa fa-bars"></i>&nbsp;<strong>Tax Setup</strong></span>
  -->
-
-                                            </div>
-                                            <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                            <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax <small> | Management</small></h1><hr>
+                                            <h1 style="padding-left: 20px;"><span class="fa fa-cube" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax <small> | Management</small></h1><hr>
+                                            
+                                            <div class="panel-body table-responsive">
+                                            
                                                 <table id="tbl_tax" class="table-striped custom-design" cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>
@@ -193,7 +193,7 @@
                 <div class="modal-dialog modal-md">
                     <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
                         <div>
-                           <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax <small >| Confirm Deletion </small></h1><hr>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-cube" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax <small >| Confirm Deletion </small></h1><hr>
                         </div>
                    
 <!--                         <div class="modal-header">
@@ -222,7 +222,7 @@
                             <h4 id="tax_title" class="modal-title" style="color: white;"></h4> -->
 
                                                     <div>
-                           <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax<small class="title-modal"> | </small></h1><hr>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-cube" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax<small class="title-modal"> | </small></h1><hr>
                         </div>
                         <div class="modal-body">
                             <form id="frm_tax" role="form" class="form-horizontal row-border">
@@ -268,7 +268,7 @@
 
             <div id="modal__group" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-md">
-                    <div class="modal-content"><!---content--->
+                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title"><span id="modal_mode"> </span>New Tax Group</h4>
@@ -313,7 +313,7 @@
                             <button id="btn_create_tax_group" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                             <button id="btn_close_user_group" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
                         </div>
-                    </div><!---content---->
+                    </div>
                 </div>
             </div><!---modal-->
 
@@ -417,7 +417,7 @@
             $('#btn_new').click(function(){
                 _txnMode="new";
                 clearFields();
-                $('.title-modal').text(' | New ');
+                $('.title-modal').text(' | Create ');
                 $('#tax_title').text('New Tax Info');
                 $('#modal_tax').modal('show');
                 //showList(false);
@@ -605,7 +605,7 @@
         function format ( d ) {
             // `d` is the original data object for the row
             //alert(d.photo_path);
-            return '<br /><table style="margin-left:10%;width: 80%;">' +
+            return '<br /><table style="margin-left:10%;width: 80%;border:none!important">' +
             '<thead>' +
             '</thead>' +
             '<tbody>' +

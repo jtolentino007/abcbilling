@@ -110,12 +110,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="div_documents_list">
-                                                <div class="panel panel-default">
+                                                <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small> | Reference</small></h1><hr>
                                                     <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Document Types</b>
                                                     </div> -->
-                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small> | Reference</small></h1><hr>
+                                                    <div class="panel-body table-responsive" >
+                                                        
                                                         <table id="tbl_documents" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
@@ -135,12 +136,13 @@
                                             </div>
                                                 <div id="modal_documents" class="modal fade" role="dialog">
                                                     <div class="modal-dialog modal-md">
-                                                        <div class="modal-content">
+                                                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
                                                             <!-- <div class="modal-header">
                                                                 <h3 style="color: white;">Document Type Information</h3>
                                                             </div> -->
-                                                            <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small class="title-modal"> | Reference</small></h1><hr>
+                                                            <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small class="title-modal"> | Reference</small></h1><hr>
+                                                            <div class="modal-body" >
+                                                        
                                                                 <form id="frm_documents" role="form" class="form-horizontal row-border">
                                                                     <div class="form-group">
                                                                         <label class="col-xs-12 ">* Document Type :</label>

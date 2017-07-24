@@ -27,6 +27,10 @@
         color: #858585!important;
     }
 
+hr {
+    margin-top: 1px!important;
+    margin-bottom: 1px!important;
+}
     input.form-control,
     select.form-control{
         border:1px solid #aaa;

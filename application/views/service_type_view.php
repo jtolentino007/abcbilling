@@ -115,12 +115,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="div_services_list">
-                                                <div class="panel panel-default">
+                                                <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-cog" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Types <small> | Reference</small></h1><hr>
                                                     <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Service Types</b>
                                                     </div> -->
-                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-cog" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Types <small> | Reference</small></h1><hr>
+                                                    <div class="panel-body table-responsive" >
+                                                        
                                                         <table id="tbl_services" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>

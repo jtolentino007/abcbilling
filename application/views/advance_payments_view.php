@@ -82,8 +82,9 @@
                     </ol>
                     <div class="container-fluid">
                         <div id="div_list">
-                            <div class="panel panel-default">
-                                <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);"><h1><span class="fa fa-newspaper-o" style="border: 3px solid rgb(76, 175, 80); padding: 12px 12px 12px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Advance Payments <small> | Clients</small></h1><hr>
+                            <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                            <h1 style="padding-left: 20px;"><span class="fa fa-newspaper-o" style="border: 3px solid rgb(76, 175, 80); padding: 12px 12px 12px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Advance Payments <small> | Clients</small></h1><hr>
+                                <div class="panel-body table-responsive" >
                                     <table id="tbl_advance_payments" width="100%" class="table">
                                         <thead>
                                             <th>Company / Client Name</th>
@@ -97,8 +98,9 @@
                         </div>
                         <div id="modal_entry" class="modal fade" role="dialog"><!--modal-->
                             <div class="modal-dialog modal-md">
-                                <div class="modal-content">
-                                    <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);"><h1><span class="fa fa-newspaper-o" style="border: 3px solid rgb(76, 175, 80); padding: 12px 12px 12px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Advance Payments <small> | New</small></h1><hr>
+                                <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                                <h1 style="padding-left: 20px;"><span class="fa fa-newspaper-o" style="border: 3px solid rgb(76, 175, 80); padding: 12px 12px 12px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Advance Payments <small> | New</small></h1><hr>
+                                    <div class="modal-body" >
                                         <strong>Received From :</strong><br>
                                         <form id="frm_advances">
                                             <select id="cbo_client" name="customer_id" data-error-msg="Client is required" required>
@@ -121,13 +123,14 @@
                     </div> <!-- .container-fluid -->
                 </div> <!-- #page-content -->
                 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content"><!---content-->
-                            <div class="modal-header ">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);"><!---content-->
+                         <h1 style="padding-left: 20px;"><span class="fa fa-newspaper-o" style="border: 3px solid rgb(76, 175, 80); padding: 12px 12px 12px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Advance Payments <small> | Confirm Cancellation</small></h1><hr>
+                            <!-- <div class="modal-header ">
                                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Cancellation</h4>
                             </div>
-
+ -->
                             <div class="modal-body">
                                 <p id="modal-body-message">Are you sure you want to cancel this payment?</p>
                             </div>

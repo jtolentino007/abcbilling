@@ -120,14 +120,14 @@
 
 
                                     <div id="div_company_fields">
-                                        <div class="panel panel-default">
+                                        <div class="panel panel-default" style="border-top: 5px solid #56b65a;">
                                             <!-- <div class="panel-heading">
                                                 <h2>Company Information</h2>
                                                 <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
                                             </div> -->
-
-                                            <div class="panel-body" style="border-top: 5px solid #56b65a;">
-                                            <h1><i class="fa fa-building" style="color: #56b65a"></i>&nbsp;Company Information</h1><hr>
+                                            <h1 style="padding-left: 20px;"><i class="fa fa-institution" style="color: #56b65a"></i>&nbsp;Company Information</h1><hr>
+                                            <div class="panel-body" >
+                                            
                                                <form id="frm_company" role="form" class="form-horizontal row-border">
 
 
@@ -315,11 +315,13 @@
 
             <div id="modal_tax_group" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-md">
-                    <div class="modal-content"><!---content--->
-                        <div class="modal-header">
-                            <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 class="modal-title"><span id="modal_mode"> </span>New Tax Group</h4>
+                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+      
+<!--                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                            <h4 id="tax_title" class="modal-title" style="color: white;"></h4> -->
 
+                                                    <div>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-cube" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax<small> | Create</small></h1><hr>
                         </div>
 
                         <div class="modal-body">
@@ -360,7 +362,7 @@
                             <button id="btn_create_tax_group" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                             <button id="btn_close_user_group" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
                         </div>
-                    </div><!---content---->
+                    </div>
                 </div>
             </div><!---modal-->
 

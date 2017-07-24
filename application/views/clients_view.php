@@ -266,10 +266,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div id="div_supplier_list">
-                                        <div class="panel panel-default">
+                                        <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                                        <h1 style="padding-left: 20px;"><span class="fa fa-user" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Client <small> | Management</small></h1><hr>
                                             <!-- <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Client Management</b></div></a> -->
-                                            <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                                <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Client <small> | Management</small></h1><hr>
+                                            <div class="panel-body table-responsive" >
+                                                
                                                 <table id="tbl_clients" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
@@ -300,7 +301,7 @@
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-md">
                     <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
-                    <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Client<small> | Confirm Deletion </small></h1><hr>
+                    <h1 style="padding-left: 20px;"><span class="fa fa-user" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Client<small> | Confirm Deletion </small></h1><hr>
 <!--                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>

@@ -183,7 +183,7 @@
                                            <!--  <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Accomplishments</b></div></a> -->
 
                                         <div style="border-top:5px solid rgb(76, 175, 80);">
-                                                <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Accomplishments <small> </small></h1><hr>
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-check" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Accomplishments <small> </small></h1><hr>
                                         </div>
                                             <div class="row">
 
