@@ -31,6 +31,14 @@
                 zoom: 85%;
             }
 
+            tr:nth-child(even) {
+                background: transparent;
+            }
+
+            tr {
+                border-bottom: 1px solid #a9daab;
+            }
+
             .numeriCol {
                 text-align: right;
             }
@@ -114,10 +122,8 @@
                     <div class="container-fluid">
                         <div id="payments_list"> 
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Collection Entry</b>
-                                </div>
-                                <div class="panel-body">
+                                <div class="panel-body" style="border-top:5px solid rgb(76, 175, 80);">
+                                    <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Collection Entry <small class="title-modal"> | Transaction</small></h1><hr>
                                     <table id="tbl_payments" class="table-striped custom-design" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -142,12 +148,10 @@
                         </div>
                         <div id="payment_trans">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp;Post Payment</b>
-                                </div>
-                                <div class="panel-body">
+                                <div class="panel-body" style="border-top:5px solid rgb(76, 175, 80);">
+                                    <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Post Collection <small class="title-modal"> | Transaction</small></h1><hr>
                                     <form id="frm_payment_info">
-                                        <div style="border: 1px solid #c0c0c0; padding: 20px 0px 30px 0px; margin-bottom: 10px;">
+                                        <div style="">
                                             <div class="row" style="margin-bottom: 10px;">
                                                 <div class="container-fluid">
                                                         <div class="col-xs-12 col-sm-5">
@@ -204,8 +208,8 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <div style="border: 1px solid #c0c0c0; padding: 10px 20px 30px 20px;margin-bottom: 10px;">
-
+                                    <hr>
+                                    <div style="padding: 10px 20px 30px 20px;margin-bottom: 10px;">
                                         <form id="frm_payment_items">
                                             <div class="row">
                                                 <div class="container-fluid">
@@ -219,50 +223,48 @@
                                             </div><br>
                                             <div class="row">
                                                 <div class="container-fluid">
-                                                    <table id="tbl_receivables" class="table-striped  custom-design" cellspacing="0" width="100%" style="font-font:tahoma;border: 1px solid #c0c0c0;">
+                                                    <table id="tbl_receivables" class="" cellspacing="0" width="100%" style="font-font:tahoma;border: 1px solid #c0c0c0; overflow-x: auto;">
                                                         <thead>
                                                             <tr>
-                                                                <th class="hidden">Billing ID</th>
-                                                                <th class="hidden">Contract ID</th>
-                                                                <th width="7%">Contract/Account #</th>
-                                                                <th width="7%">Billing #</th>
-                                                                <th width="7%">Billing Date</th>
-                                                                <th width="7%">Due Date</th>
-                                                                <th width="7%">Charges</th>
+                                                                <th>Contract #</th>
+                                                                <th>Billing #</th>
+                                                                <th>Date Billed</th>
+                                                                <th>Date Due</th>
+                                                                <th width="10%">Charges</th>
                                                                 <th width="15%">Remarks</th>
                                                                 <th width="10%" style="text-align: right;">Amount Due</th>
+                                                                <th width="10%" style="text-align: right;">Amount (Advances)</th>
                                                                 <th width="10%" style="text-align: right;">Discount</th>
                                                                 <th width="10%" style="text-align: right;">Payment</th>
                                                                 <th width="5%"><center>Action</center></th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody style="overflow-x: auto; max-width: 50px;">
-
+                                                        <tbody>
                                                         </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <td colspan="6" align="right"><b>Total : </b></td>
-                                                                <td id="td_total_amount_due" align="right"><b>0.00</b></td>
-                                                                <td id="td_total_discount" align="right"><b>0.00</b></td>
-                                                                <td colspan="1" id="td_total_payment_amount" align="right"><b>0.00</b></td>
-                                                                <td></td>
-                                                            </tr>
-                                                        </tfoot>
+<tfoot>
+<tr>
+    <td style="background: #d9eed9;" colspan="6" align="right"><b>Total : </b></td>
+    <td style="background: #d9eed9;" id="td_total_amount_due" align="right"><b>0.00</b></td>
+    <td style="background: #d9eed9;" id="td_total_advance" align="right"><b>0.00</b></td>
+    <td style="background: #d9eed9;" id="td_total_discount" align="right"><b>0.00</b></td>
+    <td style="background: #d9eed9;" id="td_total_payment_amount" align="right"><b>0.00</b></td>
+</tr>
+</tfoot>
                                                     </table>
-                                                    <hr>
-                                                    <h4>Total Advance Payment : <strong class="numeric" id="advance_amount">0.00</strong></h4>
                                                 </div>
                                             </div>
                                         </form>
-                                        </div>
-                                        <div style="border: 1px solid #c0c0c0; padding: 10px 20px 30px 20px;">
+                                        </div><hr>
+                                        <div style="padding: 10px 20px 30px 20px;">
                                             <strong>Remarks :</strong><br>
                                             <textarea class="form-control" name="remarks"></textarea>
                                         </div>
                                 </div>
                                 <div class="panel-footer">
-                                    <button id="btn_save" class="btn btn-primary">Record Payment</button>
-                                    <button id="btn_cancel" class="btn btn-default">Cancel</button>
+                                    <div class="container-fluid">
+                                        <button id="btn_save" class="btn btn-primary">Record Payment</button>
+                                        <button id="btn_cancel" class="btn btn-default">Cancel</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -355,15 +357,14 @@
     $(document).ready(function(){
         var _cboCustomers, _cboPayments, _txnMode, _cell;
         var total_after_discount=0; var _advancePayment=0;
-        var rows;
+        var rows; var dtPayments;
 
         var initializeControls=function(){
 
             $('#payment_trans').hide();
-            InitializeDatatable();
+
             _cboCustomers=$("#cbo_customers").select2({
-                placeholder: "Please select Client.",
-                allowClear: true
+                placeholder: "Please select Client."
             });
 
             _cboPayments=$("#cbo_payment_method").select2({
@@ -377,18 +378,98 @@
                 forceParse: false,
                 calendarWeeks: true,
                 autoclose: true
-
             });
 
-            _cboCustomers.select2('val',null);
             _cboPayments.select2('val',null);
+
+            InitializeDatatable();
+            reinitializePaymentDataTable(_cboCustomers.val());
 
             var createToolBarButton=function(){
                 var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New payment" >'+ '<i class="fa fa-plus-circle"></i> New Payment</button>';
                 $("div.toolbar").html(_btnNew);
             }();
-
         }();
+
+        function reinitializePaymentDataTable(customer_id){
+            dtPayments = $($('#tbl_receivables')).DataTable({
+                "bFilter":false,
+                "bLengthChange":false,
+                "bPaginate":false,
+                "bInfo" : false,
+                "ajax" :{ 
+                    "url":"Payments/transactions/get-customer-billings/" + customer_id,
+                    "bDestroy":true
+                },
+                "columns" : [
+                    { "visible": false,targets:[0],data: "contract_no" },
+                    { "visible": false,targets:[1],data: "billing_no" },
+                    { "visible": false,targets:[2],data: "date_billed" },
+                    { "visible": false,targets:[3],data: "date_due" },
+                    { targets:[4],data: "charge_name" },
+                    { 
+                        targets:[5],
+                        data: "notes",
+                        render: function(data,type,full,meta) {
+                            return '<input name="item_remarks[]" type="text" class="form-control" value="' + data + '"/>';
+                        }
+                    },
+                    { 
+                        targets:[6],
+                        data: "amount_due",
+                        render: function(data,type,full,meta) {
+                            return '<input name="amount_due[]" type="text" class="numeric form-control text-right" value="' + data + '" disabled/>';
+                        }
+                    },
+                    { 
+                        targets:[7],
+                        data: "advance_amount",
+                        render: function(data,type,full,meta) {
+                            return '<input name="advance_amount[]" type="text" class="numeric form-control text-right amount-'+ full.billing_no +'" value="0.00"/>';
+                        }
+                    },
+                    { 
+                        targets:[8],
+                        data: "discount",
+                        render: function(data,type,full,meta) {
+                            return '<input name="discount[]" type="text" class="numeric form-control text-right" value="0.00"/>';
+                        }
+                    },
+                    { 
+                        targets:[9],
+                        data: "payment_amount",
+                        render: function(data,type,full,meta) {
+                            return '<input name="payment_amount[]" type="text" class="numeric form-control text-right" value="0.00"/>';
+                        }
+                    },
+                    { 
+                        class: "text-center",
+                        targets:[10],
+                        data: "payment_amount",
+                        render: function(data,type,full,meta) {
+                            return '<button id="btn_pay_all" class="btn btn-success"><i class="fa fa-check"></i></button>';
+                        }
+                    }
+                ],
+                "ordering": false,
+                "order": [[ 1, 'asc' ]],
+                "drawCallback": function ( settings ) {
+                    var api = this.api();
+                    var rows = api.rows( {page:'current'} ).nodes();
+                    var last=null;
+         
+                    api.column(1, {page:'current'} ).data().each( function ( group, i, value ){
+                        if ( last !== group ) {
+                            var rowData = api.row(i).data();
+                            $(rows).eq( i ).before(
+                                '<tr class="group"><td colspan="8" style="background:#d9eed9; border-bottom: 3px solid #a9daab;"> <b>SOA # :</b> '+ group + ' | <b>Contract #</b> : ' + rowData.contract_no + ' | <b>Date Billed</b> : ' + rowData.date_billed + ' | <b>Due Date</b> : ' + rowData.date_due + ' | <b>Total Cash Advance</b> : <span id="total_advance_'+ rowData.billing_no +'" data-value="' + accounting.formatNumber(rowData.advance_payment,2) + '" >'+accounting.formatNumber(rowData.advance_payment,2)+'</span></td></tr>'
+                            );      
+                            last = group;
+                        }
+                    });
+                }
+            });
+        };
 
         function InitializeDatatable() {
             dt=$('#tbl_payments').DataTable({
@@ -456,42 +537,8 @@
             });
 
             _cboCustomers.on('change', function() {
-                $.ajax({
-                    url : 'Payments/transactions/get-customer-billings/'+_cboCustomers.val(),
-                    type : "GET",
-                    dataType: "json",
-                    beforeSend : function(){
-                        $('#tbl_receivables > tbody').html('<tr><td align="center" colspan="8"><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></td></tr>');
-                    },
-                    success : function(response) {
-                        var data=response.data;
-                        $('#tbl_receivables > tbody').html('');
-
-                        $.each(data, function(i,value) {
-                            $('#tbl_receivables > tbody').append(newRowItem({
-                                billing_id : value.billing_id,
-                                contract_id : value.contract_id,
-                                contract_no : value.contract_no,
-                                charge_id : value.charge_id,
-                                charge_name : value.charge_name,
-                                billing_no : value.billing_no,
-                                date_billed : value.date_billed,
-                                date_due : value.date_due,
-                                notes : value.notes,
-                                amount_due : value.amount_due,
-                                discount : value.discount,
-                                payment_amount : value.payment_amount
-                            }));
-                        });
-
-                        _advancePayment = (data[0] == undefined ? 0 : data[0].advance_payment);
-
-                        $('#advance_amount').html(_advancePayment);
-
-                        reInitializeNumeric();
-                        reComputeDetails();
-                    }
-                })
+                dtPayments.destroy();
+                reinitializePaymentDataTable(_cboCustomers.val());
             });
 
             $('#btn_save').on('click', function(){
@@ -519,14 +566,33 @@
                 }
             });
 
-            $('#tbl_receivables > tbody').on('keyup','input.numeric',function(e){
-                var row=$(this).closest('tr');
-
+            $('#tbl_receivables > tbody').on('blur','input.numeric',function(){
+                var row = $(this).closest('tr');
+                var rowData = dtPayments.row(row).data(); 
+                var _totalRowAdvance = getFloat($('#total_advance_'+rowData.billing_no).data('value'));
+                var _advance_amount = row.find('input[name="advance_amount[]"]');
+                var _discount = row.find('input[name="discount[]"]');
+                var _payment_amount = row.find('input[name="payment_amount[]"]');
                 var payment=getFloat(row.find('input[name="payment_amount[]"]').val());
                 var discount=getFloat(row.find('input[name="discount[]"]').val());
                 var payable=getFloat(row.find('input[name="amount_due[]"]').val());
+                var _sumOfAdvances=0;
+
+                $.each($('.amount-'+rowData.billing_no), function(i, value){
+                    _sumOfAdvances+=getFloat($(this).val());
+                });
 
                 var total_after_discount = payment + discount;
+
+                if (_sumOfAdvances > _totalRowAdvance) {
+                    showNotification({
+                        "title": "Invalid!",
+                        "stat" : "error",
+                        "msg" : "Total Cash Advance of all items, must not be higher than the Total Cash Advance."
+                    });
+
+                    $(this).val('');
+                } 
 
                 if (total_after_discount > payable) {
                     showNotification({
@@ -558,11 +624,23 @@
                     $(this).val('');
                 }
 
-                reComputeDetails();
 
+                if(_advance_amount.val() == '')
+                    $(this).val('0.00');
+                if(_discount.val() == '')
+                    $(this).val('0.00');
+                if(_payment_amount.val() == '')
+                    $(this).val('0.00');
+
+                row.find('input[name="advance_amount[]"]').val(accounting.formatNumber(_advance_amount.val(),2));
+                row.find('input[name="discount[]"]').val(accounting.formatNumber(_discount.val(),2));
+                row.find('input[name="payment_amount[]"]').val(accounting.formatNumber(_payment_amount.val(),2));
+
+                reComputeDetails();
             });
 
             $('#tbl_receivables > tbody').on('click','button#btn_pay_all',function(e){
+                e.preventDefault();
                 var row=$(this).closest('tr');
                 var payableAmount=getFloat(row.find('input[name="amount_due[]"]').val());
                 var discountAmount=getFloat(row.find('input[name="discount[]"]').val());
@@ -694,35 +772,39 @@
             }
         };
 
-        var newRowItem=function(d){
-            return '<tr>'+
-            '<td class="hidden"><input name="billing_id[]" type="hidden" value="'+ d.billing_id +'">'+ d.billing_id +'</td>' +
-            '<td class="hidden"><input name="contract_id[]" type="hidden" value="'+ d.contract_id +'">'+ d.contract_id +'</td>' +
-            '<td class="hidden"><input name="charge_id[]" type="hidden" value="'+ d.charge_id +'">'+ d.charge_id +'</td>' +
-            '<td><input name="contract_no[]" type="hidden" value="' + d.contract_no + '">'+ d.contract_no +'</td>' +
-            '<td><input name="billing_no[]" type="hidden" value="'+ d.billing_no +'">'+ d.billing_no +'</td>'+
-            '<td><input name="date_billed[]" type="hidden" value="'+ d.date_billed +'">'+d.date_billed+'</td>'+
-            '<td><input name="date_due[]" type="hidden" value="'+ d.date_due+'">'+ d.date_due +'</td>'+
-            '<td><input name="charge_name[]" type="hidden" value="' + d.charge_name + '">'+ d.charge_name +'</td>' +
-            '<td><input name="item_remarks[]" type="text" class="form-control" value="'+(d.notes == null ? '' : d.notes)+'"></td>'+
-            '<td><input name="amount_due[]" class="numeric form-control" style="text-align: right;" value="'+accounting.formatNumber(d.amount_due,2)+'" disabled></td>'+
-            '<td><input name="discount[]" class="numeric form-control" style="text-align: right;" value="'+accounting.formatNumber(d.discount,2)+'"></td>'+
-            '<td><input name="payment_amount[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(0,2)+'" style="text-align:right;"></td>'+
-            '<td align="center"><button type="button" id="btn_pay_all" class="btn btn-success"><i class="fa fa-check"></i></button></td>'+
-            '</tr>';
-        };
+        // var newRowItem=function(d){
+        //     return '<tr>'+ 
+        //         '<td class="hidden"><input name="billing_id[]" type="hidden" value="'+ d.billing_id +'">'+ d.billing_id +'</td>' +
+        //         '<td class="hidden"><input name="contract_id[]" type="hidden" value="'+ d.contract_id +'">'+ d.contract_id +'</td>' +
+        //         '<td class="hidden"><input name="charge_id[]" type="hidden" value="'+ d.charge_id +'">'+ d.charge_id +'</td>' +
+        //         '<td class="hidden"><input name="contract_no[]" type="hidden" value="' + d.contract_no + '">'+ d.contract_no +'</td>' +
+        //         '<td class="hidden"><input name="billing_no[]" type="hidden" value="'+ d.billing_no +'">'+ d.billing_no +'</td>'+
+        //         '<td class="hidden"><input name="date_billed[]" type="hidden" value="'+ d.date_billed +'">'+d.date_billed+'</td>'+
+        //         '<td class="hidden"><input name="date_due[]" type="hidden" value="'+ d.date_due+'">'+ d.date_due +'</td>'+
+        //         '<td><input name="charge_name[]" type="hidden" value="' + d.charge_name + '">'+ d.charge_name +'</td>' +
+        //         '<td><input name="item_remarks[]" type="text" class="form-control" value="'+(d.notes == null ? '' : d.notes)+'"></td>'+
+        //         '<td><input name="amount_due[]" class="numeric form-control" style="text-align: right;" value="'+accounting.formatNumber(d.amount_due,2)+'" disabled></td>'+
+        //         '<td><input name="cash_advance[]" class="numeric form-control" style="text-align: right;" value="'+accounting.formatNumber(d.cash_advance,2)+'"></td>'+
+        //         '<td><input name="advance_amount[]" class="numeric form-control" style="text-align: right;" value="'+accounting.formatNumber(d.advance_amount,2)+'"></td>'+
+        //         '<td><input name="discount[]" class="numeric form-control" style="text-align: right;" value="'+accounting.formatNumber(d.discount,2)+'"></td>'+
+        //         '<td><input name="payment_amount[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(0,2)+'" style="text-align:right;"></td>'+
+        //         '<td align="center"><button type="button" id="btn_pay_all" class="btn btn-success"><i class="fa fa-check"></i></button></td>'+
+        //     '</tr>';
+        // };
 
         var reComputeDetails=function(){
             rows=$('#tbl_receivables > tbody > tr');
             var total_amount_due=0; var total_payment=0; var total_discount=0; var total_before_discount=0;
+            var total_advance=0;
 
             $.each(rows,function(i,value){
                 var row=$(this);
+                total_advance+=getFloat(row.find('input[name="advance_payment[]"]').val());
                 total_amount_due+=getFloat(row.find('input[name="amount_due[]"]').val());
                 total_discount+=getFloat(row.find('input[name="discount[]"]').val());
                 total_payment+=getFloat(row.find('input[name="payment_amount[]"]').val());
             });
-
+            $('#td_total_advance').html('<b>'+accounting.formatNumber(total_advance,2)+'</b>');
             $('#td_total_amount_due').html('<b>'+accounting.formatNumber(total_amount_due,2)+'</b>');
             $('#td_total_discount').html('<b>'+accounting.formatNumber(total_discount,2)+'</b>');
             $('#td_total_payment_amount').html('<b>'+accounting.formatNumber(total_payment,2)+'</b>');
@@ -738,7 +820,7 @@
             return parseFloat(accounting.unformat(f));
         };
 
-        var reInitializeNumeric=function(){
+        function reInitializeNumeric(){
             $('.numeric').autoNumeric('init',{mDec:2});
         };
     });
