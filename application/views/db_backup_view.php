@@ -84,10 +84,11 @@
 
                             <div id="modal_backup" class="modal fade" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-md">
-                                    <div class="modal-content">
-                                        <div class="modal-header modal-erp">
+                                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                                        <!-- <div class="modal-header modal-erp">
                                             <h4 class="modal-title" style="color: white;"> <i class="fa fa-hdd-o"></i> Backup Database</h4>
-                                        </div>
+                                        </div> -->
+                                        <h1 style="padding-left: 20px;"><span class="fa fa-hdd-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Backup Database<small></small></h1><hr>
                                         <div class="modal-body">
                                             <div class="col-xs-12 col-sm-12 progress-container">
                                                 <div class="progress progress-striped active">

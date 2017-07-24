@@ -131,10 +131,13 @@
                                 <div class="col-md-12">
                                     <div id="div_user_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+                                           <!--  <div class="panel-heading">
                                               <span style="color: white; font-weight: 200; font-size: 16px;"><i class="fa fa-bars"></i>&nbsp;<strong>Create User Account</strong></span>
-                                            </div>
-                                            <div class="panel-body table-responsive">
+                                            </div> -->
+                                            <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+                                            <h1><span class="fa fa-users" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Account <small> | Management</small></h1><hr>
+
+
                                                 <table id="tbl_user_list" class="table-striped custom-design" cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>
@@ -161,12 +164,13 @@
 
                                     <div id="div_user_fields" style="display: none;">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h2>User Information</h2>
-                                                <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
+                                            <div class="panel-heading" style="border-top:5px solid rgb(76, 175, 80);">
+                                                <!-- <h2>User Information</h2>
+                                                <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div> -->
                                             </div>
 
                                             <div class="panel-body">
+                                             <h1><span class="fa fa-users" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Account <small class="title-modal"> | Add</small></h1><hr>
 
 
                                                <form id="frm_users" role="form" class="form-horizontal row-border">
@@ -386,13 +390,14 @@
 
 
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content"><!---content--->
-                        <div class="modal-header">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                     <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> User Account<small> |  Confirm Deletion</small></h1><hr>
+                        <!-- <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
 
-                        </div>
+                        </div> -->
 
                         <div class="modal-body">
                             <p id="modal-body-message">Are you sure ?</p>
@@ -402,7 +407,7 @@
                             <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                             <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
                         </div>
-                    </div><!---content---->
+                    </div>
                 </div>
             </div><!---modal-->
 
@@ -594,6 +599,7 @@
 
             $('#btn_new').click(function(){
                     _txnMode="new";
+                    $('.title-modal').text(' | New');
                     showList(false);
             });
 
@@ -640,6 +646,7 @@
             $('#tbl_user_list tbody').on('click','button[name="edit_info"]',function(){
                     ///alert("ddd");
                     _txnMode="edit";
+                    $('.title-modal').text(' | Edit ');
                     _selectRowObj=$(this).closest('tr');
                     var data=dt.row(_selectRowObj).data();
                     _selectedID=data.user_id;

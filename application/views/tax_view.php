@@ -30,13 +30,13 @@
                 float: left;
             }
 
-            td.details-control {
-                background: url('assets/img/closed.png') no-repeat center center;
-                cursor: pointer;
-            }
-            tr.details td.details-control {
-                background: url('assets/img/open.png') no-repeat center center;
-            }
+        td.details-control {
+            background: url('assets/img/Folder_Closed.png') no-repeat center center;
+            cursor: pointer;
+        }
+        tr.details td.details-control {
+            background: url('assets/img/Folder_Opened.png') no-repeat center center;
+        }
 
             .panel {
                 border: none;
@@ -97,9 +97,12 @@
                                     <div id="div_tax_list">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                 <span style="color: white; font-weight: 200; font-size: 16px;"><i class="fa fa-bars"></i>&nbsp;<strong>Tax Setup</strong></span>
+                                             <!--     <span style="color: white; font-weight: 200; font-size: 16px;"><i class="fa fa-bars"></i>&nbsp;<strong>Tax Setup</strong></span>
+ -->
+
                                             </div>
-                                            <div class="panel-body table-responsive">
+                                            <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+                                            <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax <small> | Management</small></h1><hr>
                                                 <table id="tbl_tax" class="table-striped custom-design" cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>
@@ -187,14 +190,18 @@
 
 
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content"><!---content--->
-                        <div class="modal-header">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                        <div>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax <small >| Confirm Deletion </small></h1><hr>
+                        </div>
+                   
+<!--                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
 
                         </div>
-
+ -->
                         <div class="modal-body">
                             <p id="modal-body-message">Are you sure ?</p>
                         </div>
@@ -203,16 +210,19 @@
                             <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                             <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         </div>
-                    </div><!---content---->
+                    </div>
                 </div>
-            </div><!---modal-->
+            </div>
 
             <div id="modal_tax" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                            <h4 id="tax_title" class="modal-title" style="color: white;"></h4>
+                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+      
+<!--                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                            <h4 id="tax_title" class="modal-title" style="color: white;"></h4> -->
+
+                                                    <div>
+                           <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Tax<small class="title-modal"> | </small></h1><hr>
                         </div>
                         <div class="modal-body">
                             <form id="frm_tax" role="form" class="form-horizontal row-border">
@@ -407,6 +417,7 @@
             $('#btn_new').click(function(){
                 _txnMode="new";
                 clearFields();
+                $('.title-modal').text(' | New ');
                 $('#tax_title').text('New Tax Info');
                 $('#modal_tax').modal('show');
                 //showList(false);
@@ -439,7 +450,7 @@
                     });
 
                 });
-
+                $('.title-modal').text(' | Edit ');
                 $('img[name="img_supplier"]').attr('src',data.photo_path);
                 $('#tax_title').text('Edit Tax Info');
                 $('#modal_tax').modal('show');

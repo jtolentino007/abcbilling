@@ -73,11 +73,11 @@
             float: left;
         }
         td.details-control {
-            background: url('assets/img/closed.png') no-repeat center center;
+            background: url('assets/img/Folder_Closed.png') no-repeat center center;
             cursor: pointer;
         }
         tr.details td.details-control {
-            background: url('assets/img/open.png') no-repeat center center;
+            background: url('assets/img/Folder_Opened.png') no-repeat center center;
         }
         .child_table{
             padding: 5px;
@@ -170,12 +170,15 @@
             </div>
 
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                    <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small> | Confirm Deletion</small></h1><hr>
+
+
+                   <!--      <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
-                        </div>
+                        </div> -->
                         <div class="modal-body">
                             <p id="modal-body-message">Are you sure ?</p>
                         </div>
@@ -188,12 +191,13 @@
             </div><!---modal-->
 
             <div id="modal_confirm_cancel" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                    <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Contracts<small> | Confirm Cancellation</small></h1><hr>
+<!--                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color: white"><span id="modal_mode"> </span>Confirm Cancellation</h4>
-                        </div>
+                        </div> -->
                         <div class="modal-body">
                             <p id="modal-body-message">Are you sure ?</p>
                         </div>

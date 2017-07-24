@@ -113,10 +113,11 @@
                                         <div class="col-md-12">
                                             <div id="div_documents_list">
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                    <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp;Charges Settings</b>
-                                                    </div>
-                                                    <div class="panel-body table-responsive">
+                                                    </div> -->
+                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
+                                                    <h1><span class="fa fa-money" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Charges <small> | Management</small></h1><hr>
                                                         <table id="tbl_charges" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
@@ -136,9 +137,12 @@
                                             </div>
                                                 <div id="modal_charges" class="modal fade" role="dialog">
                                                     <div class="modal-dialog modal-md">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
+                                                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                                                            <!-- <div class="modal-header">
                                                                 <h3 style="color: white;">Charge Settings</h3>
+                                                            </div> -->
+                                                            <div>
+                                                               <h1 style="padding-left: 20px;"><span class="fa fa-money" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Charges <small class="title-modal"> | </small></h1><hr>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form id="frm_charges" role="form" class="form-horizontal row-border">
@@ -188,13 +192,15 @@
                     </div> <!-- #page-content -->
                 </div>
 
-                <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content"><!---content--->
-                            <div class="modal-header">
+                <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-md">
+                        
+                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                    <h1 style="padding-left: 20px;"><span class="fa fa-money" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Charges <small class="title-modal"> | </small></h1><hr>
+                            <!-- <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                                 <h4 class="" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
-                            </div>
+                            </div> -->
 
                             <div class="modal-body">
                                 <p id="modal-body-message">Are you sure ?</p>
@@ -204,9 +210,9 @@
                                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                             </div>
-                        </div><!---content---->
+                        </div>
                     </div>
-                </div><!---modal-->
+                </div>
 
                 <footer role="contentinfo">
                     <div class="clearfix">
@@ -289,6 +295,7 @@
                 _txnMode="new";
                 //showList(false);
                 clearFields();
+                $('.title-modal').text(' | Create');
                  $('#modal_charges').modal('show');
             });
 
@@ -306,7 +313,7 @@
                         }
                     });
                 });
-
+                $('.title-modal').text(' | Edit ');
                 $('#modal_charges').modal('show');
             });
 
@@ -314,7 +321,7 @@
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID = data.charge_id;
-
+                $('.title-modal').text(' | Confirm Deletion ');
                 $('#modal_confirmation').modal('show');
             });
 

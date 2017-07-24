@@ -109,10 +109,11 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="div_documents_list">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                                                <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                                                    <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Collection Report</b>
-                                                    </div>
+                                                    </div> -->
+                                                    <h1 style="padding-left: 20px;"><span class="fa fa-bars" aria-hidden="true" style="color: rgb(76, 175, 80);"></span> Collection Report</h1><hr>
                                                     <div class="panel-body table-responsive">
                                                         <div class="col-xs-12 col-sm-4" style="margin-bottom: 10px;">
                                                             <strong>Start Date : </strong><br>

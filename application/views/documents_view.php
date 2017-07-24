@@ -238,13 +238,14 @@
                 </div>
 
                 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content"><!---content--->
-                            <div class="modal-header">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                        <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents<small> | Confirm Deletion </small></h1><hr>
+                            <!-- <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
                             </div>
-
+ -->
                             <div class="modal-body">
                                 <p id="modal-body-message">Are you sure ?</p>
                             </div>
@@ -253,7 +254,7 @@
                                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                             </div>
-                        </div><!---content---->
+                        </div>
                     </div>
                 </div><!---modal-->
 
