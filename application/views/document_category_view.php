@@ -108,12 +108,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="div_documents_list">
-                                                <div class="panel panel-default">
+                                                <div class="panel panel-default" style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small> | Category</small></h1><hr>
                                                     <!-- <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Document Category</b>
                                                     </div> -->
-                                                    <div class="panel-body table-responsive" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small> | Category</small></h1><hr>
+                                                    <div class="panel-body table-responsive" >
+                                                        
                                                         <table id="tbl_documents_category" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
@@ -132,12 +133,12 @@
                                             </div>
                                             <div id="modal_documents" class="modal fade" role="dialog">
                                                 <div class="modal-dialog modal-md">
-                                                    <div class="modal-content">
+                                                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
                                                         <!-- <div class="modal-header">
                                                             <h3 style="color: white;">Document Category Information</h3>
-                                                        </div> -->
-                                                        <div class="modal-body" style="border-top:5px solid rgb(76, 175, 80);">
-                                                        <h1><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small class="title-modal"> | Category</small></h1><hr>
+                                                        </div> --><h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small class="title-modal"> | Category</small></h1><hr>
+                                                        <div class="modal-body" >
+                                                        
                                                             <form id="frm_documents" role="form" class="form-horizontal row-border">
                                                                 <div class="form-group">
                                                                     <label class="col-xs-12 ">* Document Category :</label>
@@ -180,12 +181,9 @@
                 </div>
 
                 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content"><!---content--->
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
-                            </div>
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content"  style="border-top:5px solid rgb(76, 175, 80);">
+                        <h1 style="padding-left: 20px;"><span class="fa fa-files-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small> | Confirm Deletion</small></h1><hr>
 
                             <div class="modal-body">
                                 <p id="modal-body-message">Are you sure ?</p>
@@ -195,7 +193,7 @@
                                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                             </div>
-                        </div><!---content---->
+                        </div>
                     </div>
                 </div><!---modal-->
 

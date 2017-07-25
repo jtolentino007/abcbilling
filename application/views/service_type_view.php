@@ -175,7 +175,7 @@
                                                                     <div class="form-group">
                                                                         <label class="col-xs-12 ">Category :</label>
                                                                         <div class="col-xs-12">
-                                                                            <select id="cbo_category" name="category_id" class="form-control">
+                                                                            <select id="cbo_category" name="category_id" class="form-control" required data-error-msg="Category is required!">
                                                                                 <option value="0">[Create New Category]</option>
                                                                                 <?php foreach($categories as $category) { ?>
                                                                                     <option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option>
@@ -235,10 +235,11 @@
 
                 <div id="modal_categories" class="modal fade" role="dialog">
                     <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header">
+                        <div class="modal-content"  style="border-top:5px solid rgb(76, 175, 80);">
+<!--                             <div class="modal-header">
                                 <h3 style="color: white;">Create New Category</h3>
-                            </div>
+                            </div> -->
+                            <h1 style="padding-left: 20px;"><span class="fa fa-cogs" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Service Category <small class="title-modal"> | Create</small></h1><hr>
                             <div class="modal-body">
                                 <form id="frm_categories" role="form" class="form-horizontal row-border">
                                     <div class="form-group">
@@ -462,18 +463,24 @@
                if(validateRequiredFields($('#frm_categories'))){
                     createCategory().done(function(response){
                         showNotification(response);
+                        hideSpinningProgress($('#btn_save_category'));
                     }).done(function(response){
                         var category=response.row_added[0];
                         $('#cbo_category').append('<option value="'+category.category_id+'" selected>'+category.category_name+'</option>');
                         _cboCategory.select2('val',category.category_id);
                         $('#modal_categories').modal('hide');
                         $('#modal_services').modal('show');
-                    });
+                    })
+
+
+                    ;
                 }
             });
 
             $('#btn_cancel_category').click(function(){
                 $('#modal_categories').modal('hide');
+                _cboCategory.select2('val',null);
+                $('#modal_services').modal('show');
             })
 
             $('#btn_save').click(function(){
@@ -502,18 +509,33 @@
         })();
 
         var validateRequiredFields=function(f){
-            var stat=true;
-
-            $('div.form-group').removeClass('has-error');
-            $('input[required],textarea[required]',f).each(function(){
-                if($(this).val()==""){
+        var stat=true;
+        $('div.form-group').removeClass('has-error');
+        $('input[required],textarea[required],select[required]',f).each(function(){
+            if($(this).is('select')){
+                if($(this).select2('val')==0||$(this).select2('val')==null){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
+                    $(this).focus();
                     stat=false;
                     return false;
                 }
-            });
-            return stat;
+            }else{
+
+                if($(this).val()==""){
+                    showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                    $(this).closest('div.form-group').addClass('has-error');
+                    $(this).focus();
+                    stat=false;
+                    return false;
+                }
+            }
+        });
+
+
+
+        return stat;
+
         };
 
         var createCategory=function(){
@@ -585,6 +607,10 @@
 
         var showSpinningProgress=function(e){
             $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+        var hideSpinningProgress=function(e){
+            $(e).find('span').toggleClass('hidden');
         };
 
         var clearFields=function(){

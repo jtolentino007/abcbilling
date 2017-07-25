@@ -248,11 +248,12 @@
 
             <div id="modal_process_billing" class="modal fade" role="dialog"><!--modal-->
                 <div class="modal-dialog" style="width: 65%;">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color:#2ecc71;">
+                    <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                                                <h1 style="padding-left: 20px;"><span class="fa fa-bars" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Billing Statement <small> | Processing</small></h1><hr>
+<!--                         <div class="modal-header" style="background-color:#2ecc71;">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Billing Statement</h4>
-                        </div>
+                        </div> -->
                         <div class="modal-body">
                             <form id="frm_billing">
                             <div style="border: 1px solid gray;padding: 2%;border-radius: 5px;">
@@ -915,7 +916,7 @@
             return '<tr>'+
                         '<td>'+ d.charge_name +'<input name="current_charge_id[]" type="hidden" value="'+ d.charge_id+'" readonly></td>'+
                         '<td><input name="current_charge_description[]" class="form-control" value="'+ d.charge_description +'" /></td>'+
-                        '<td align="right"><input name="current_charge_amount[]" class="numeric form-control" value="0.00" style="text-align: right;" /></td>'+
+                        '<td align="right"><input name="current_charge_amount[]" class="numeric form-control" value="'+ d.charge_amount+'" style="text-align: right;" /></td>'+
                         '<td align="center"><button name="remove_charge" class="btn btn-default"><i class="fa fa-trash"></i></button></td>'+
                     '</tr>';
         };

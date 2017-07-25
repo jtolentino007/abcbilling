@@ -109,7 +109,7 @@
                                                 <?php } ?>
                                             </select>
                                             <strong>Amount :</strong><br>
-                                            <input type="number" class="form-control text-right" name="advance_payment_amount" value="0.00" data-error-msg="Amount is required" required>
+                                            <input type="text" class="form-control text-right number" name="advance_payment_amount" value="0.00" data-error-msg="Amount is required" required>
                                         </form>
                                     </div>
 
@@ -317,6 +317,14 @@ $(document).ready(function(){
             "url":"Advance_payment/transaction/cancel",
             "data": {advance_payment_id : _selectedID}
         });
+    };
+
+        var reInitializeNumeric=function(){
+
+
+
+        $('.number').autoNumeric('init', {mDec:2});
+
     };
 });
 

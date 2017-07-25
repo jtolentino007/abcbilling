@@ -158,7 +158,7 @@
                                                                     <div class="form-group">
                                                                         <label class="col-xs-12">* Document Category :</label>
                                                                         <div class="col-xs-12">
-                                                                            <select id="cbo_document_category" class="form-control" name="document_category_id">
+                                                                            <select id="cbo_document_category" class="form-control" name="document_category_id" required data-error-msg="Document Category is required!">
                                                                                 <option value="0">[ Create New Document Category ]</option>
                                                                                 <?php foreach ($documents_categories as $document_category) { ?>
                                                                                     <option value="<?php echo $document_category->document_category_id; ?>">
@@ -199,10 +199,11 @@
 
                 <div id="modal_document_category" class="modal fade" role="dialog">
                     <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header">
+                        <div class="modal-content" style="border-top:5px solid rgb(76, 175, 80);">
+                            <!-- <div class="modal-header">
                                 <h3 style="color: white;">Document Category Information</h3>
-                            </div>
+                            </div> -->
+                            <h1 style="padding-left: 20px;"><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Documents <small > | New Category</small></h1><hr>
                             <div class="modal-body">
                                 <form id="frm_document_category" role="form" class="form-horizontal row-border">
                                     <div class="form-group">
@@ -468,18 +469,29 @@
         })();
 
         var validateRequiredFields=function(f){
-            var stat=true;
-
-            $('div.form-group').removeClass('has-error');
-            $('input[required],textarea[required]',f).each(function(){
-                if($(this).val()==""){
+        var stat=true;
+        $('div.form-group').removeClass('has-error');
+        $('input[required],textarea[required],select[required]',f).each(function(){
+            if($(this).is('select')){
+                if($(this).select2('val')==0||$(this).select2('val')==null){
                     showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
                     $(this).closest('div.form-group').addClass('has-error');
+                    $(this).focus();
                     stat=false;
                     return false;
                 }
-            });
-            return stat;
+            }else{
+
+                if($(this).val()==""){
+                    showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                    $(this).closest('div.form-group').addClass('has-error');
+                    $(this).focus();
+                    stat=false;
+                    return false;
+                }
+            }
+        });
+        return stat;
         };
 
         var createDocumentCategory=function(){
