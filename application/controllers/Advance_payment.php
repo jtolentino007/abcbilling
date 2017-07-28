@@ -39,7 +39,7 @@
 
 					$response['data'] = $m_advances->get_list(
 						'advance_payments.is_active=TRUE',
-						'cs.*, advance_payments.advance_payment_id, FORMAT(advance_payments.advance_payment_amount,2) AS advance_payment_amount',
+						'cs.*, advance_payments.advance_payment_id,advance_payments.advance_payment_remarks, FORMAT(advance_payments.advance_payment_amount,2) AS advance_payment_amount',
 						array(
 							array('customers_info cs','cs.customer_id = advance_payments.customer_id','left')
 						)
@@ -54,6 +54,7 @@
 					$m_advances->begin();
 
 					$m_advances->customer_id = $this->input->post('customer_id',TRUE);
+					$m_advances->advance_payment_remarks = $this->input->post('advance_payment_remarks',TRUE);
 					$m_advances->advance_payment_amount = $this->get_numeric_value($this->input->post('advance_payment_amount',TRUE));
 					$m_advances->save();
 
@@ -66,7 +67,7 @@
                     $response['msg'] = 'Advance payment successfully posted.';
                     $response['row_added']=$m_advances->get_list(
 						'advance_payments.is_active=TRUE AND advance_payments.advance_payment_id='.$advance_payment_id,
-						'cs.*, FORMAT(advance_payments.advance_payment_amount,2) AS advance_payment_amount',
+						'cs.*, advance_payments.advance_payment_remarks,FORMAT(advance_payments.advance_payment_amount,2) AS advance_payment_amount',
 						array(
 							array('customers_info cs','cs.customer_id = advance_payments.customer_id','left')
 						)

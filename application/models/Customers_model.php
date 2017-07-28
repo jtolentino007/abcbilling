@@ -77,13 +77,15 @@ class Customers_model extends CORE_Model {
 
                 (SELECT
                 unpaid.billing_id,
+                unpaid.advance_payment_id,
                 IFNULL(unpaid.amount,0) AS amount,
                 IFNULL(paid.advance_amount,0) AS advance_amount,
                 IFNULL(unpaid.amount,0) - IFNULL(paid.advance_amount,0) AS new_advance
                 FROM
                 (SELECT
                 bi.*,
-                IFNULL(ba.amount,0) AS amount
+                IFNULL(ba.amount,0) AS amount,
+                ba.advance_payment_id
                 FROM billing_info bi
                 LEFT JOIN billing_advances ba ON ba.billing_id = bi.billing_id
                 WHERE customer_id = $customer_id
@@ -105,7 +107,15 @@ class Customers_model extends CORE_Model {
 
                 ON paid.billing_id = unpaid.billing_id) AS advances
 
-                ON advances.billing_id = unpaid_paid.billing_id";
+                ON advances.billing_id = unpaid_paid.billing_id
+
+                LEFT JOIN
+
+                (SELECT * FROM advance_payments) as remarks
+
+                ON remarks.advance_payment_id = advances.advance_payment_id
+
+                ";
 
         return $this->db->query($sql)->result();
     }
@@ -647,10 +657,7 @@ class Customers_model extends CORE_Model {
     $sql=" SELECT
  
             DISTINCT unpaid_paid.company_name,
- 
-            unpaid_paid.customer_id,
- 
-            date_format(datea.old_date,'%M %d, %Y') AS old_date
+            unpaid_paid.customer_id
  
             
  
@@ -882,19 +889,7 @@ class Customers_model extends CORE_Model {
  
                 ON advances.billing_id = unpaid_paid.billing_id
  
-                
- 
-                LEFT JOIN
- 
-                
- 
-                (SELECT min(date_due) AS old_date,customer_id
- 
-                    FROM billing_info GROUP BY customer_id ) AS datea
- 
-                
- 
-                ON datea.customer_id = unpaid_paid.customer_id
+    
  
                 
  

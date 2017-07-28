@@ -246,7 +246,7 @@
  
                                                                     <th style="width:35%;">Company Name</th>
  
-                                                                    <th style="width:35%;">Date Due (Oldest)</th>
+                                                                    
  
                                                                     <th style="width:10%;">Print</th>
  
@@ -476,11 +476,11 @@
  
                         { targets:[0],data: "company_name" },
  
-                        { targets:[1],data: "old_date" },
+                     
  
                                       
  
-                        {  targets:[2],
+                        {  targets:[1],
  
                     render: function (data, type, full, meta){
  

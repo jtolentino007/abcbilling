@@ -87,9 +87,10 @@
                                 <div class="panel-body table-responsive" >
                                     <table id="tbl_advance_payments" width="100%" class="table">
                                         <thead>
-                                            <th>Company / Client Name</th>
-                                            <th class="text-right">Advance Payment Amount</th>
-                                            <th class="text-center">Action</th>
+                                            <th style="width: 35%">Company / Client Name</th>
+                                            <th style="width: 15%" class="text-right">Advance Payment Amount</th>
+                                            <th style="text-align: left!important;width: 40%">Remarks</th>
+                                            <th style="width: 10%" class="text-center">Action</th>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
@@ -110,6 +111,8 @@
                                             </select>
                                             <strong>Amount :</strong><br>
                                             <input type="text" class="form-control text-right number" name="advance_payment_amount" value="0.00" data-error-msg="Amount is required" required>
+                                            <strong>Remarks :</strong><br>
+                                            <input type="text" class="form-control" name="advance_payment_remarks" data-error-msg="Remarks is required" required>
                                         </form>
                                     </div>
 
@@ -164,7 +167,8 @@
 <!-- Select2 -->
 <script src="assets/plugins/select2/select2.full.min.js"></script>
 
-
+    <script src="assets/plugins/formatter/autoNumeric.js" type="text/javascript"></script>
+    <script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
 <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
 
@@ -174,12 +178,13 @@ $(document).ready(function(){
     var _cboClients; var dt;
 
     var InitializeControls = function() {
+
         $('#div_trans').hide();
 
         _cboClients = $('#cbo_client').select2({
             placeholder: 'Select Client'
         });
-
+       
         dt = $('#tbl_advance_payments').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
@@ -193,7 +198,8 @@ $(document).ready(function(){
             "columns": [
                 { targets:[0],data: "company_name" },
                 { class: 'text-right', targets:[1], data: "advance_payment_amount" },
-                { targets:[8],
+                { targets:[2], data: "advance_payment_remarks" },
+                { targets:[3],
                     render: function (data, type, full, meta){
                         var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-times"></i> </button>';
 
@@ -208,6 +214,8 @@ $(document).ready(function(){
                 '<i class="fa fa-plus-circle"></i> New Advance Payment</button>';
             $("div.toolbar").html(_btnNew);
         }();
+
+
     }();
 
     var bindEventHandlers = function() {
@@ -215,6 +223,7 @@ $(document).ready(function(){
             $('#modal_entry').modal('show');
             clearFields($('#frm_advances'));
             $('#btn_save').removeAttr('disabled','disabled');
+            reInitializeNumeric();
         });
 
         $('#btn_save').click(function(){
@@ -288,7 +297,8 @@ $(document).ready(function(){
     };
 
     var clearFields = function(frm) {
-        $('input[type="number"],textarea',frm).val('');
+        $('input,textarea',frm).val('');
+         $('input[type="number"]',frm).val('0.00');
         $(frm).find('input:first').focus();
         _cboClients.select2('val',null);
     };
