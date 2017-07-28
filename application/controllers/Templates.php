@@ -119,24 +119,6 @@ class Templates extends CORE_Controller {
                 $this->load->view('template/user_customers_expandable_details',$data);
                 break;
 
-
-        case 'collection':
-                $m_customers=$this->Customers_model;
-                $m_user_customers=$this->User_customers_model;
-                $m_users=$this->Users_model;
-                $m_company=$this->Company_model;
-
-                $id=$this->input->get('id',TRUE);
-                $data['id']=$id;
-                $data['customers']=$m_customers->get_collection_notice($id);
-                $data['items']=$m_customers->get_collection_notice_batch($id); 
-
-                
-                $company_info=$m_company->get_list();
-                    $data['company_info']=$company_info[0];
-                $this->load->view('template/collection_report_notice',$data);
-                break;
-
             case 'trial':
             $data['documents'] = $this->Documents_model->get_list('is_active=TRUE AND is_deleted=FALSE');
             $data['taxes'] = $this->Tax_types_model->get_list('is_deleted=FALSE');
