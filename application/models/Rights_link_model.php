@@ -39,7 +39,8 @@ class Rights_link_model extends CORE_Model{
                                           (22,'1','1-5','Document Category Management'),
                                           (23,'1','1-6','Business Style Management'),
                                           (24,'1','1-7','Engagement Details Management'),
-                                          (25,'4','4-4','Advance Payments')
+                                          (25,'4','4-4','Advance Payments'),
+                                          (26,'5','5-3','Collection Notice')
             ";
 
 

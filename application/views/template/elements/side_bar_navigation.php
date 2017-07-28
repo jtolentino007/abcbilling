@@ -73,6 +73,7 @@
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('2-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Clients"><i class="fa fa-user"></i> Client Management</a></li>
                                 <li class="<?php echo (in_array('2-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Contracts"><i class="fa fa-file-text-o"></i> Contract Management</a></li>
+
                             </ul>
                         </li>
 
@@ -91,6 +92,7 @@
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('5-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Customer_ledger">Clients Ledger</a></li>
                                 <li class="<?php echo (in_array('5-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Collection_report">Collection Report</a></li>
+                                <li class="<?php echo (in_array('5-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Collection_notice"> Collection Notice</a></li>
                             </ul>
                         </li>
                     </ul>
