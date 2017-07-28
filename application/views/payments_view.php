@@ -138,7 +138,7 @@
                                                 <th width="15%">Posted by</th>
                                                 <th width="10%">Date Paid</th>
                                                 <th width="5%">Status</th>
-                                                <th width="10%" style="text-align: right;">Amount</th>
+                                                <th width="10%" style="text-align: right;">Payment Amount</th>
                                                 <th>
                                                     <center>Action</center>
                                                 </th>
