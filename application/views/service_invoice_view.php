@@ -827,7 +827,7 @@
                         $('#tbl_advances tbody').append(
                             '<tr>' + 
                                 '<td>' + 
-                                    value.new_advance_amount +
+                                    accounting.formatNumber(value.new_advance_amount,2) +
                                 '</td>' +
                                 '<td>' + 
                                     '<center><button id="' + value.new_advance_amount + '" class="btn btn-success" data-advance-id="'+ value.advance_payment_id +'"><i class="fa fa-check"></i></button></center>'+
