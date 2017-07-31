@@ -415,6 +415,7 @@
         </div>
     </div>
 </div>
+
 <?php echo $_switcher_settings; ?>
 <?php echo $_def_js_files; ?>
 <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
