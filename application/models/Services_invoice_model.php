@@ -174,6 +174,49 @@
 
                 return $this->db->query($sql)->result();
         }
+// SQL BEFORE MODIFYING FOR ADVANCED PAYMENTS 07312017
+        // function get_customer_ledger($customer_id,$asOfDate) {
+        //     $variable="SET @vRunBalance:=0.00;";
+        //     $this->db->query($variable);
+
+        //     $sql = "SELECT
+        //             trans2.*,
+        //             @vRunBalance:=(@vRunBalance+(trans2.debit_amount-trans2.credit_amount))as balance
+        //             FROM
+        //             (SELECT trans.*
+
+        //             FROM
+
+        //             (SELECT 
+        //                 date_billed as txn_date,
+        //                 bi.customer_id,
+        //                 bi.billing_no,
+        //                 '-' as receipt_no,
+        //                 bi.remarks,
+        //                 bi.total_billing_current_amount as debit_amount,
+        //                 0 as credit_amount 
+        //             FROM billing_info as bi
+        //             WHERE bi.customer_id=$customer_id AND bi.date_billed <= '$asOfDate'
+        //             AND is_deleted=FALSE AND is_active=TRUE
+
+        //             UNION ALL
+
+        //             SELECT 
+        //                 pi.date_paid as txn_date,
+        //                 pi.customer_id,
+        //                 '-' as billing_no,
+        //                 pi.receipt_no,
+        //                 pi.remarks,
+        //                 0 as debit_amount,
+        //                 pi.total_amount_paid as credit_amount
+        //             FROM payment_info as pi
+        //             WHERE 
+        //             pi.customer_id=$customer_id AND pi.date_paid <= '$asOfDate'
+        //             AND is_deleted=FALSE AND is_active=TRUE) as trans
+        //             ORDER BY trans.txn_date) AS trans2";
+
+        //     return $this->db->query($sql)->result();
+        // }
 
         function get_customer_ledger($customer_id,$asOfDate) {
             $variable="SET @vRunBalance:=0.00;";
@@ -181,7 +224,7 @@
 
             $sql = "SELECT
                     trans2.*,
-                    @vRunBalance:=(@vRunBalance+(trans2.debit_amount-trans2.credit_amount))as balance
+                    @vRunBalance:=(@vRunBalance+(trans2.debit_amount-trans2.credit_amount-trans2.advance_amount))as balance
                     FROM
                     (SELECT trans.*
 
@@ -194,30 +237,52 @@
                         '-' as receipt_no,
                         bi.remarks,
                         bi.total_billing_current_amount as debit_amount,
-                        0 as credit_amount 
+                        0 as credit_amount,
+                        0 as advance_amount
+
                     FROM billing_info as bi
                     WHERE bi.customer_id=$customer_id AND bi.date_billed <= '$asOfDate'
                     AND is_deleted=FALSE AND is_active=TRUE
 
                     UNION ALL
 
+
                     SELECT 
+                        pi.txn_date,
+                        pi.customer_id,
+                        '-' as billing_no,
+                        pi.receipt_no,
+                        pi.remarks,
+                        0 as debit_amount,
+                        pi.credit_amount,
+                        pi.advance_amount
+                    FROM
+/*   LEFT JOIN GROUP BY payment id - to sum up total advance_amount into one row
+        (It must be one row because there is only one transaction for those rows 
+            (those two rows are splitted in the transaction by SOA number(Two SOA payments in one Transaction)))    */                   
+                    (SELECT 
                         pi.date_paid as txn_date,
                         pi.customer_id,
                         '-' as billing_no,
                         pi.receipt_no,
                         pi.remarks,
                         0 as debit_amount,
-                        pi.total_amount_paid as credit_amount
+                        pi.total_amount_paid as credit_amount,
+                        SUM(pit.advance_amount) as advance_amount,
+                        pi.is_deleted,
+                        pi.is_active
                     FROM payment_info as pi
+                    
+                    LEFT JOIN payment_items pit on pit.payment_id = pi.payment_id
+                    GROUP BY pit.payment_id) AS pi
+                    
                     WHERE 
-                    pi.customer_id=$customer_id AND pi.date_paid <= '$asOfDate'
-                    AND is_deleted=FALSE AND is_active=TRUE) as trans
+                    pi.customer_id=$customer_id AND pi.txn_date <= '$asOfDate'
+                    AND pi.is_deleted=FALSE AND pi.is_active=TRUE) as trans
                     ORDER BY trans.txn_date) AS trans2";
 
             return $this->db->query($sql)->result();
         }
-
         function get_collection_percentage() {
             $sql = "SELECT
             IFNULL((no_fully_paid / no_billing) * 100, 0) AS pc
