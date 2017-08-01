@@ -116,63 +116,63 @@
                                                     <h1 style="padding-left: 20px;"><span class="fa fa-bars" aria-hidden="true" style="color: rgb(76, 175, 80);"></span> Statement of Account <small>| Report</small></h1><hr>
                                                     <div class="panel-body table-responsive">
                                                         <div class="col-xs-12 col-sm-4" style="margin-bottom: 10px;">
-                                                        <div class="form-group">
-                                                            <strong>Month: </strong><br>
-                                                            <div >
-                                                            <select name="month" id="month" class="form-control">
-                                                                <option value="1">January</option>
-                                                                <option value="2">February</option>
-                                                                <option value="3">March</option>
-                                                                <option value="4">April</option>
-                                                                <option value="5">May</option>
-                                                                <option value="6">June</option>
-                                                                <option value="7" selected>July</option>
-                                                                <option value="8">August</option>
-                                                                <option value="9">September</option>
-                                                                <option value="10">October</option>
-                                                                <option value="11">November</option>
-                                                                <option value="12">December</option>
-                                                            </select>
+                                                            <div class="form-group">
+                                                                <strong>Month: </strong><br>
+                                                                <div >
+                                                                <select name="month" id="month" class="form-control">
+                                                                    <option value="1">January</option>
+                                                                    <option value="2">February</option>
+                                                                    <option value="3">March</option>
+                                                                    <option value="4">April</option>
+                                                                    <option value="5">May</option>
+                                                                    <option value="6">June</option>
+                                                                    <option value="7" selected>July</option>
+                                                                    <option value="8">August</option>
+                                                                    <option value="9">September</option>
+                                                                    <option value="10">October</option>
+                                                                    <option value="11">November</option>
+                                                                    <option value="12">December</option>
+                                                                </select>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                       
-                                                            <strong>Year: </strong><br>
-                                                            <div >
-                                                            <select name="year" id="year" class="form-control">
-                                                                <option value="2010">2010</option>
-                                                                <option value="2011">2011</option>
-                                                                <option value="2012">2012</option>
-                                                                <option value="2013">2013</option>
-                                                                <option value="2014">2014</option>
-                                                                <option value="2015">2015</option>
-                                                                <option value="2016">2016</option>
-                                                                <option value="2017" selected>2017</option>
-                                                            </select>
+                                                        <div class="col-xs-12 col-sm-4" style="margin-bottom: 10px;">
+                                                            <div class="form-group">
+                                                                <strong>Year: </strong><br>
+                                                                <div >
+                                                                <select name="year" id="year" class="form-control">
+                                                                    <option value="2010">2010</option>
+                                                                    <option value="2011">2011</option>
+                                                                    <option value="2012">2012</option>
+                                                                    <option value="2013">2013</option>
+                                                                    <option value="2014">2014</option>
+                                                                    <option value="2015">2015</option>
+                                                                    <option value="2016">2016</option>
+                                                                    <option value="2017" selected>2017</option>
+                                                                </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                         </div>
                                                         <div class="col-xs-12 col-sm-2" style="margin-bottom: 10px;">
-                                                            <button id="btn_print" class="btn btn-primary" style="margin-top: 20px;"><i class="fa fa-file-o"></i>&nbsp;Print Report</button>
+                                                            <button id="btn_print" class="btn btn-success" style="margin-top: 20px;"><i class="fa fa-file-excel-o"></i>&nbsp;Export to excel</button>
                                                         </div>
-
                                                         <table id="tbl_collection" class="table-striped custom-design" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>SOA Number</th>
-                                                                    <th>Account Code</th>
-                                                                    <th>Trade Name</th>
-                                                                    <th>Client Name</th>
-                                                                    <th>Description</th>
-                                                                    <th>Beginning Balance</th>
-                                                                    <th>Billed AMount</th>
-                                                                    <th>Amount Due</th>
-                                                                    <th>Amount Paid</th>
-                                                                    <th>Discount</th>
-                                                                    <th>Cash Advance</th>
-                                                                    <th>Ending Balance</th>
-                                                                    <th>Billing Date</th>
-                                                                    <th>Due Date</th>
+                                                                    <th width="10%">SOA Number</th>
+                                                                    <th width="7%">Account Code</th>
+                                                                    <th width="7%">Trade Name</th>
+                                                                    <th width="15%">Client Name</th>
+                                                                    <th width="15%">Description</th>
+                                                                    <th width="7%">Beginning Balance</th>
+                                                                    <th width="7%">Current Charges</th>
+                                                                    <th width="7%">Amount Due</th>
+                                                                    <th width="7%">Amount Paid</th>
+                                                                    <th width="7%">Discount</th>
+                                                                    <th width="7%">Cash Advance</th>
+                                                                    <th width="7%">Ending Balance</th>
+                                                                    <th width="7%">Billing Date</th>
+                                                                    <th width="7%">Due Date</th>
                                                                     <th>Remarks</th>
                                                                 </tr>
                                                             </thead>
@@ -260,9 +260,9 @@
                 });
 
 
-                // $('#btn_print').on('click',function(){
-                //     window.open('Statement_of_account/transaction/report?sDate='+$('#startDate').val()+'&eDate='+$('#endDate').val());
-                // });
+                $('#btn_print').on('click',function(){
+                    window.open('Statement_of_account/transaction/export?m='+$('#month').val()+'&y='+$('#year').val());
+                });
             }();
 
             function initializeDataTable() {
@@ -284,20 +284,61 @@
                     "columns":[
                         { targets:[0],data: "billing_no" },
                         { targets:[1],data: "customer_code" },
-                        { targets:[2],data: "trade_name" },
+                        { visible:false,targets:[2],data: "trade_name" },
                         { targets:[3],data: "company_name" },
                         { targets:[4],data: "payment_details" },
-                        { targets:[5],data: "beginning_balance" },
-                        { targets:[6],data: "billed_amount" },
-                        { targets:[7],data: "monthly_due" },
-                        { targets:[8],data: "collected" },
-                        { targets:[9],data: "discount" },
-                        { targets:[10],data: "advance_amount" },
-                         { targets:[11],data: "outstanding_balance" },
-                        { targets:[12],data: "billing_date" },
-                        { targets:[13],data: "due_date" },
-                        
-                        { targets:[14],data: "remarks" },
+                        { 
+                            class:"text-right",
+                            targets:[5],data: "beginning_balance",
+                            render:function(data,type,full,meta){
+                                return accounting.formatNumber(data,2);
+                            }
+                        },
+                        { 
+                            class:"text-right",
+                            targets:[6],data: "billed_amount",
+                            render:function(data,type,full,meta){
+                                return accounting.formatNumber(data,2);
+                            }
+                        },
+                        { 
+                            class:"text-right",
+                            targets:[7],data: "monthly_due",
+                            render:function(data,type,full,meta){
+                                return accounting.formatNumber(data,2);
+                            }
+                        },
+                        { 
+                            class:"text-right",
+                            targets:[8],data: "collected",
+                            render:function(data,type,full,meta){
+                                return accounting.formatNumber(data,2);
+                            }
+                        },
+                        { 
+                            class:"text-right",
+                            targets:[9],data: "discount",
+                            render:function(data,type,full,meta){
+                                return accounting.formatNumber(data,2);
+                            }
+                        },
+                        { 
+                            class:"text-right",
+                            targets:[10],data: "advance_amount",
+                            render:function(data,type,full,meta){
+                                return accounting.formatNumber(data,2);
+                            }
+                        },
+                        { 
+                            class:"text-right",
+                            targets:[11],data: "outstanding_balance",
+                            render:function(data,type,full,meta){
+                                return accounting.formatNumber(data,2);
+                            }
+                        },
+                        { visible:false,targets:[12],data: "billing_date" },
+                        { visible:false,targets:[13],data: "due_date" },
+                        { visible:false,targets:[14],data: "remarks" },
                     ]
                 });
             }

@@ -41,7 +41,8 @@ class Rights_link_model extends CORE_Model{
                                           (24,'1','1-7','Engagement Details Management'),
                                           (25,'4','4-4','Advance Payments'),
                                           (26,'5','5-3','Collection Notice'),
-                                          (27,'5','5-4','Client Payment Summary')
+                                          (27,'5','5-4','Client Payment Summary'),
+                                          (28,'5','5-5','Statement of Account Monitoring')
 
                                           ON DUPLICATE KEY UPDATE
                                           rights_links.parent_code=VALUES(rights_links.parent_code),

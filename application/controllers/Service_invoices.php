@@ -242,7 +242,6 @@
                     //query list of billing id
                     // id_list = get_list_of_billing();
 
-
                     $billing_id=$this->input->get('bid', TRUE);
 
                     $company_info=$m_company_info->get_list();
