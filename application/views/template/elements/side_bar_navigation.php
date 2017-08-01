@@ -92,6 +92,7 @@
                                 <li class="<?php echo (in_array('5-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Customer_ledger">Clients Ledger</a></li>
                                 <li class="<?php echo (in_array('5-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Collection_report">Collection Report</a></li>
                                 <li class="<?php echo (in_array('5-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Collection_notice"> Collection Notice</a></li>
+                                <li class="<?php echo (in_array('5-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Client_summary_report"> Client Payment Summary Rport</a></li>
                             </ul>
                         </li>
                     </ul>
