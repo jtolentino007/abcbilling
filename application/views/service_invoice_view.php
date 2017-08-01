@@ -231,8 +231,10 @@
                         <div class="modal-body">
                             <table id="tbl_advances" width="100%">
                                 <thead>
-                                    <th>Advance Payment Amount</th>
-                                    <th class="text-center">Action</th>
+                                <th>Payment Date</th>
+                                <th>Remarks</th>
+                                <th>Advance Payment Amount</th>
+                                <th class="text-center">Action</th>
                                 </thead>
                                 <tbody>
                                     
@@ -827,12 +829,19 @@
                     $.each(data, function(index, value){
                         $('#tbl_advances tbody').append(
                             '<tr>' + 
+                                '<td>' +
+                                    value.date_payment +
+                                '</td>' +
+                                '<td>' +
+                                    value.advance_payment_remarks +
+                                '</td>' +
                                 '<td>' + 
                                     accounting.formatNumber(value.new_advance_amount,2) +
                                 '</td>' +
                                 '<td>' + 
                                     '<center><button id="' + value.new_advance_amount + '" class="btn btn-success" data-advance-id="'+ value.advance_payment_id +'"><i class="fa fa-check"></i></button></center>'+
                                 '</td>' +
+
                             '</tr>'
                         );
                     });

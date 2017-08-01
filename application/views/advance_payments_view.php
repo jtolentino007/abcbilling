@@ -88,8 +88,10 @@
                                     <table id="tbl_advance_payments" width="100%" class="table">
                                         <thead>
                                             <th style="width: 35%">Company / Client Name</th>
+                                            <th width="10%">Payment Date</th>
+                                            <th style="text-align: left!important;width: 30%">Remarks</th>
                                             <th style="width: 15%" class="text-right">Advance Payment Amount</th>
-                                            <th style="text-align: left!important;width: 40%">Remarks</th>
+                                            
                                             <th style="width: 10%" class="text-center">Action</th>
                                         </thead>
                                         <tbody></tbody>
@@ -111,8 +113,17 @@
                                             </select>
                                             <strong>Amount :</strong><br>
                                             <input type="text" class="form-control text-right number" name="advance_payment_amount" value="0.00" data-error-msg="Amount is required" required>
+                                            <strong>Payment Date :</strong><br>
+                                            <div class="input-group">
+                                                                <span class="input-group-addon fa fa-calendar"></span>
+                                                                <input id="date_payment" style="text-align: right;" name="date_payment" type="text" value="<?php echo date('m/d/Y'); ?>" class="date-picker form-control">
+                                            </div>
+                                            <br>
                                             <strong>Remarks :</strong><br>
-                                            <input type="text" class="form-control" name="advance_payment_remarks" data-error-msg="Remarks is required" required>
+                                            <div class="form-group">
+                                                    <textarea placeholder="Remarks" name="advance_payment_remarks" class="form-control" data-error-msg="Remarks is required" required>
+                                                    </textarea>
+                                            </div>
                                         </form>
                                     </div>
 
@@ -166,9 +177,9 @@
 <script src="assets/plugins/spinner/dist/ladda.min.js"></script>
 <!-- Select2 -->
 <script src="assets/plugins/select2/select2.full.min.js"></script>
-
-    <script src="assets/plugins/formatter/autoNumeric.js" type="text/javascript"></script>
-    <script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
+<script src="assets/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="assets/plugins/formatter/autoNumeric.js" type="text/javascript"></script>
+<script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
 <script type="text/javascript" src="assets/plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
 
@@ -178,6 +189,16 @@ $(document).ready(function(){
     var _cboClients; var dt;
 
     var InitializeControls = function() {
+
+        $('.date-picker').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true
+
+                });
+
 
         $('#div_trans').hide();
 
@@ -197,9 +218,10 @@ $(document).ready(function(){
             },
             "columns": [
                 { targets:[0],data: "company_name" },
-                { class: 'text-right', targets:[1], data: "advance_payment_amount" },
+                { targets:[1],data: "date_payment" },
                 { targets:[2], data: "advance_payment_remarks" },
-                { targets:[3],
+                { class: 'text-right', targets:[3], data: "advance_payment_amount" },
+                { targets:[4],
                     render: function (data, type, full, meta){
                         var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-times"></i> </button>';
 
@@ -220,10 +242,12 @@ $(document).ready(function(){
 
     var bindEventHandlers = function() {
         $('#btn_new').click(function(){
+
             $('#modal_entry').modal('show');
             clearFields($('#frm_advances'));
             $('#btn_save').removeAttr('disabled','disabled');
             reInitializeNumeric();
+            $('input[name="advance_payment_amount"]').val('0.00');
         });
 
         $('#btn_save').click(function(){
@@ -297,7 +321,7 @@ $(document).ready(function(){
     };
 
     var clearFields = function(frm) {
-        $('input,textarea',frm).val('');
+        $('input:not(.date-picker),textarea',frm).val('');
          $('input[type="number"]',frm).val('0.00');
         $(frm).find('input:first').focus();
         _cboClients.select2('val',null);
