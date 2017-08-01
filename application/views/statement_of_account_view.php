@@ -82,6 +82,9 @@
                 from { -webkit-transform: rotate(0deg); }
                 to { -webkit-transform: rotate(360deg); }
             }
+            .numericCol{
+              text-align:right;
+            }
 
         </style>
 
@@ -126,7 +129,7 @@
                                                                     <option value="4">April</option>
                                                                     <option value="5">May</option>
                                                                     <option value="6">June</option>
-                                                                    <option value="7" selected>July</option>
+                                                                    <option value="7">July</option>
                                                                     <option value="8">August</option>
                                                                     <option value="9">September</option>
                                                                     <option value="10">October</option>
@@ -141,14 +144,16 @@
                                                                 <strong>Year: </strong><br>
                                                                 <div >
                                                                 <select name="year" id="year" class="form-control">
-                                                                    <option value="2010">2010</option>
-                                                                    <option value="2011">2011</option>
-                                                                    <option value="2012">2012</option>
-                                                                    <option value="2013">2013</option>
-                                                                    <option value="2014">2014</option>
-                                                                    <option value="2015">2015</option>
-                                                                    <option value="2016">2016</option>
-                                                                    <option value="2017" selected>2017</option>
+                                                                    <?php 
+                                                                    $now = date('Y');
+
+                                                                    $minyear=date('Y', strtotime('-3 years')); 
+                                                                    $maxyear=date('Y', strtotime('+3 years'));
+                                                                      while($minyear!=$maxyear){
+                                                                          echo '<option value='.$minyear.' '.($now == $minyear ? 'selected' : '').'>'.$minyear.'</option>';
+                                                                          $minyear++;
+                                                                      }
+                                                                    ?>
                                                                 </select>
                                                                 </div>
                                                             </div>
@@ -269,8 +274,10 @@
                 dt=$('#tbl_collection').DataTable({
                     "dom":'<"toolbar">frtip',
                     "bLengthChange":false,
+
                     "bFilter":false,
                     "ajax": {
+
                         "url":"Statement_of_account/transaction/list",
                         "type":"GET",
                         "bDestroy":true,
@@ -282,7 +289,11 @@
                         }
                     },
                     "columns":[
-                        { targets:[0],data: "billing_no" },
+                                { targets:[0], data: null, render: function ( data, type, row ) {
+                // Combine the first and last names into a single table field
+                return data.billing_no+' '+d;
+            } },
+                    // { targets:[0],data: "billing_no" },
                         { targets:[1],data: "customer_code" },
                         { visible:false,targets:[2],data: "trade_name" },
                         { targets:[3],data: "company_name" },
