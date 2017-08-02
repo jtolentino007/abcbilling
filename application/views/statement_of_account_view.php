@@ -289,11 +289,11 @@
                         }
                     },
                     "columns":[
-                                { targets:[0], data: null, render: function ( data, type, row ) {
-                // Combine the first and last names into a single table field
-                return data.billing_no+' '+d;
-            } },
-                    // { targets:[0],data: "billing_no" },
+            //                     { targets:[0], data: null, render: function ( data, type, row ) {
+            //     // Combine the first and last names into a single table field
+            //     return data.billing_no+' '+d;
+            // } },
+                    { targets:[0],data: "billing_no" },
                         { targets:[1],data: "customer_code" },
                         { visible:false,targets:[2],data: "trade_name" },
                         { targets:[3],data: "company_name" },

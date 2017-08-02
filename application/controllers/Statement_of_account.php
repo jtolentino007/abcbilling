@@ -50,7 +50,7 @@
 					$month=$this->input->get('month',TRUE);
 					$year=$this->input->get('year',TRUE);
 
-					$response['data']=$m_payments->get_client_summary_report($month,$year);
+					$response['data']=$m_payments->get_client_summary_report_updated($month,$year);
 
 					echo json_encode($response);
 				break;
@@ -63,9 +63,10 @@
 	                $month=$this->input->get('m',TRUE);
 	                $year=$this->input->get('y',TRUE);
 
-					$dateObj = DateTime::createFromFormat('!m', $month);
-					$monthName = $dateObj->format('F'); // March
+					// $dateObj = DateTime::createFromFormat('!m', $month);
+					// $monthName = $dateObj->format('F'); // March
 
+					$monthName = date('F', mktime(0, 0, 0, $month));
 	                $excel=$this->excel;
 
 	                $excel->setActiveSheetIndex(0);
@@ -135,7 +136,7 @@
 	                $this->MergeCenterCell('H6:H7');
 	                $this->MergeCenterCell('I6:I7');
 
-	                $client_summaries = $m_payments->get_client_summary_report($month,$year);
+	                $client_summaries = $m_payments->get_client_summary_report_updated($month,$year);
 
 	                $BStyle  = array(
 					  'borders' => array(
