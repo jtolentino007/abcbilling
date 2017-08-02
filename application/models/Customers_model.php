@@ -12,7 +12,7 @@ class Customers_model extends CORE_Model {
         $sql = "SELECT
         billed.*,
         paid.*,
-        IFNULL(IFNULL(billed.billed_amount,0) - IFNULL(paid.total_collected,0) - IFNULL(paid.advance_amount,0),'-') outstanding_balance
+        IFNULL(IFNULL(billed.billed_amount,0) - IFNULL(paid.collected,0) - IFNULL(paid.advance_amount,0),'-') outstanding_balance
         FROM
         (SELECT
         bi.billing_id,
@@ -38,7 +38,44 @@ class Customers_model extends CORE_Model {
         AND YEAR(bi.date_billed) = YEAR(NOW())
         GROUP BY bi.billing_id) billed 
         LEFT JOIN
-        (SELECT
+        (SELECT 
+            SUM(pp.amount_due) as amount_due,
+            SUM(pp.discount) as discount,
+            SUM(pp.collected) as collected,
+            SUM(pp.advance_amount) as advance_amount,
+            pp.payment_id,
+            pp.billing_id,
+            GROUP_CONCAT(pp.receipt_no SEPARATOR ', ') receipt_no,
+            GROUP_CONCAT(pp.date_deposited SEPARATOR ', ') date_deposited,
+
+            pp.remarks
+
+
+             FROM (
+            SELECT
+            pi.payment_id,
+            max(pi.receipt_no) receipt_no,
+            GROUP_CONCAT(pi.receipt_no SEPARATOR ', ') rere,
+            max(pi.date_paid) date_deposited,
+            max(pitems.billing_id) as billing_id,
+            IFNULL(pitems.amount_due,0) amount_due,
+            IFNULL(SUM(pitems.discount),0) discount,
+            IFNULL(SUM(pitems.payment_amount),0) collected,
+            IFNULL(SUM(pitems.advance_amount),0) advance_amount,
+
+            pi.remarks
+            FROM
+            payment_info pi
+            INNER JOIN payment_items pitems ON pitems.payment_id = pi.payment_id
+            WHERE pi.is_deleted=FALSE
+            AND pi.is_active=TRUE
+            ". ($customer_id == null ? "" : "AND pi.customer_id = $customer_id")."
+            GROUP BY pitems.payment_id) as pp
+            
+            GROUP BY billing_id
+
+            /*
+        SELECT
         pi.payment_id,
         pi.receipt_no,
         pi.date_paid date_deposited,
@@ -55,9 +92,13 @@ class Customers_model extends CORE_Model {
         WHERE pi.is_deleted=FALSE
         AND pi.is_active=TRUE
         ". ($customer_id == null ? "" : "AND pi.customer_id = $customer_id")."
-        GROUP BY pitems.billing_id) paid
+        GROUP BY pitems.billing_id
+
+        */
+
+        ) paid
         ON paid.billing_id = billed.billing_id
-        GROUP BY billed.billing_id";
+        GROUP BY billed.billing_id,paid.payment_id";
         
         return $this->db->query($sql)->result();
     }
