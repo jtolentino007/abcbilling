@@ -12,7 +12,7 @@ class Customers_model extends CORE_Model {
         $sql = "SELECT
         billed.*,
         paid.*,
-        IFNULL(IFNULL(billed.billed_amount,0) - IFNULL(paid.collected,0) - IFNULL(paid.advance_amount,0),'-') outstanding_balance
+        IFNULL(IFNULL(billed.monthly_due,0) - IFNULL(paid.collected,0) - IFNULL(paid.advance_amount,0),'-') outstanding_balance
         FROM
         (SELECT
         bi.billing_id,
@@ -20,9 +20,11 @@ class Customers_model extends CORE_Model {
         bi.customer_id,
         ci.trade_name,
         ci.company_name,
-        bi.total_billing_current_amount monthly_due,
+         /*bi.total_billing_current_amount monthly_due, */
+         bi.total_billing_amount monthly_due,
         bi.total_billing_previous_amount beginning_balance,
-        IFNULL(bi.total_billing_amount,0) - IFNULL(bi.advance_payment,0) billed_amount,
+        /*IFNULL(bi.total_billing_amount,0) - IFNULL(bi.advance_payment,0) billed_amount, */
+        IFNULL(bi.total_billing_current_amount,0) - IFNULL(bi.advance_payment,0) billed_amount,
         bi.date_billed billing_date,
         bi.date_due due_date,
         GROUP_CONCAT(ch.charge_name SEPARATOR ', ') AS payment_details
