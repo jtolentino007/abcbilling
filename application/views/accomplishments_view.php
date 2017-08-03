@@ -232,7 +232,7 @@
 
             <div id="modal_update_status" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-md">
-                    <div class="modal-content"><!---content--->
+                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span></h4>
@@ -248,7 +248,7 @@
                             <button id="btn_mark_completed" type="button" class="btn btn-primary" data-dismiss="modal">Mark as Completed</button>
                             <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         </div>
-                    </div><!---content---->
+                    </div>
                 </div>
             </div><!---modal-->
 
@@ -342,6 +342,9 @@
 
                 $("div.toolbar").html(_btnNew);
             }();
+            setTimeout(function(){
+                $('.hidden').remove();
+             }, 200);
         };
 
 

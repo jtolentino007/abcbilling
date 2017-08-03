@@ -250,8 +250,8 @@
                     {
                         targets:[2],
                         render: function (data, type, full, meta){
-                            var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                            var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
+                            var btn_edit='<button class="btn btn-primary btn-sm <?php echo (in_array('1-6-e',$this->session->user_rights)?'':'hidden'); ?>" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                            var btn_trash='<button class="btn btn-danger btn-sm <?php echo (in_array('1-6-d',$this->session->user_rights)?'':'hidden'); ?>" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
 
                             return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';
                         }
@@ -260,10 +260,13 @@
             });
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Business Style" >'+
+                var _btnNew='<button class="btn btn-primary <?php echo (in_array('1-6-a',$this->session->user_rights)?'':'hidden'); ?>"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Business Style" >'+
                     '<i class="fa fa-plus-circle"></i> New Business Style</button>';
                 $("div.toolbar").html(_btnNew);
             }();
+            setTimeout(function(){
+                $('.hidden').remove();
+             }, 200);
         }();
 
         var bindEventHandlers=(function(){

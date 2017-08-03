@@ -18,7 +18,16 @@
 					<td><?php echo $customer->trade_name; ?></td>
 					<td><?php echo $customer->office_address; ?></td>
 					<td><?php echo $customer->contact_person; ?></td>
-					<td><center><button name="btn_assign" type="button" class="btn <?php echo ($customer->is_assign==1 ? 'btn-success' : 'btn-danger'); ?>" value="<?php echo $customer->customer_id; ?>"><i class="<?php echo ($customer->is_assign==1 ? 'fa fa-check' : 'fa fa-times'); ?>"></i></button></center></td>
+					<td><center>
+					<?php  if (in_array('3-3-a', $this->session->user_rights)) { ?>
+						<button name="btn_assign" type="button" class="btn <?php echo ($customer->is_assign==1 ? 'btn-success' : 'btn-danger'); ?>" value="<?php echo $customer->customer_id; ?>"><i class="<?php echo ($customer->is_assign==1 ? 'fa fa-check' : 'fa fa-times'); ?>"></i></button>
+  					<?php } else { ?>
+						<i class="<?php echo ($customer->is_assign==1 ? 'fa fa-check' : 'fa fa-times'); ?>"></i>
+						
+					<?php } ?>
+					
+
+					</center></td>
 				</tr>
 			<?php } ?>
 		</tbody>

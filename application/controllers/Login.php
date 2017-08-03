@@ -105,15 +105,30 @@ class Login extends CORE_Controller {
                             array(
                                 'user_group_rights.user_group_id'=>$result->row()->user_group_id
                             ),
-                            'user_group_rights.link_code'
+                            'user_group_rights.link_code,
+                            user_group_rights.add_code,
+                            user_group_rights.view_code,
+                            user_group_rights.edit_code,
+                            user_group_rights.delete_code'
+                            
                         );
 
                         $user_rights=array();
                         $parent_links=array();
+          
                         foreach($rights as $right){
+                            // $i++;
                             $main=explode('-',$right->link_code);
                             $user_rights[]=$right->link_code;
+                            $user_rights[]=$right->add_code;
+                            $user_rights[]=$right->view_code;
+                            $user_rights[]=$right->edit_code;
+                            $user_rights[]=$right->delete_code;
+
                             $parent_links[]=$main[0];
+
+                         //   $response['rightd'] = $right[$i];
+                         // echo json_encode($response);
                         }
 
 
@@ -134,13 +149,13 @@ class Login extends CORE_Controller {
                         $response['title']='Success';
                         $response['stat']='success';
                         $response['msg']='User successfully authenticated.';
-
                         echo json_encode($response);
 
                     }else{ //not valid
                         $response['title']='Error';
                         $response['stat']='error';
                         $response['msg']='Invalid username or password.';
+
                         echo json_encode($response);
 
                     }

@@ -12,7 +12,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="user_rights_<?php echo $user_group_id; ?>" style="min-height: 300px;">
-
+                            <?php echo $user_group_id; ?>
                             <form id="frm_user_group_rights_<?php echo $user_group_id; ?>">
 
                             <input type="hidden" name="user_group_id" value="<?php echo $user_group_id; ?>">
@@ -22,23 +22,25 @@
                             <div class="table-responsive">
                                 <table id="tbl_user_group_rights" class="custom-design table-striped" style="background-color: white;" cellspacing="0" width="100%">
                                     <thead>
-                                    <tr>
                                         <th width="80%">Description</th>
-                                        <th width="20%">Permission</th>
-                                    </tr>
+                                        <th width="20%" style="text-align: center;">Permission</th>                             
                                     </thead>
                                     <tbody>
-                                        <?php foreach($rights as $right){ ?>
-                                            <tr style="border: 1px solid lightgray;">
-                                                <td><?php echo $right->link_name; ?></td>
-                                                <td>
-                                                    <select name="link_code[]" class="cbo_links">
-                                                        <option value="<?php echo $right->link_code; ?>" <?php echo ($right->is_allowed?'selected':''); ?>>Enable</option>
-                                                        <option value="0" <?php echo ($right->is_allowed?'':'selected'); ?>>Disable</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
+                                        <?php 
+                                        $t = $user_group_id; 
+                                        foreach ($references as $reference) { ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo $reference->link_name; ?>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" name="link_code[]" value="<?php echo $reference->link_code; ?>">
+                                                <input type="checkbox" name="add_code[]" id="<?php echo $t; ?><?php echo $reference->link_code; ?>" class="css-checkbox" value="<?php echo $reference->add_code; ?>" <?php echo ($reference->add_is_allowed == 1?' checked':''); ?>/>
+                                                <label for="<?php echo
+                                                     $t; ?><?php echo $reference->link_code; ?>" class="css-label "><?php echo $reference->add_is_allowed;?><?php echo $reference->add_code; ?></label>
+                                             </td>
+                                        </tr>
+                                        <?php  } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -49,7 +51,8 @@
                             <hr />
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <button id="btn_user_group_rights_<?php echo $user_group_id; ?>" class="btn btn-primary <?php echo ($user_group_id==1?'disabled':''); ?>" style="text-transform: none;"><i class="fa fa-check-circle"></i><span class=""></span> Save User Group Rights</button>
+
+                                    <button id="btn_user_group_rights_<?php echo $user_group_id; ?>" class="<?php echo (in_array('3-2-a',$this->session->user_rights)?'':'hidden'); ?> btn btn-primary <?php echo ($user_group_id==1?'disabled':''); ?>" style="text-transform: none;"><i class="fa fa-check-circle"></i><span class=""></span> Save User Group Rights</button>
                                 </div>
                             </div>
 

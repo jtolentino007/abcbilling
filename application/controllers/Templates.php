@@ -99,6 +99,8 @@ class Templates extends CORE_Controller {
                 $id=$this->input->get('id',TRUE);
 
                 $data['rights']=$m_rights->get_user_group_rights($id);
+                $data['references']=$m_rights->get_user_group_references($id);
+               
                 $data['user_group_id']=$id;
 
                 $this->load->view('template/user_group_rights',$data);

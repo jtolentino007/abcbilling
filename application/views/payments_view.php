@@ -390,9 +390,12 @@
             }, 300);
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New payment" >'+ '<i class="fa fa-plus-circle"></i> New Payment</button>';
+                var _btnNew='<button class="btn btn-primary <?php echo (in_array('4-3-a',$this->session->user_rights)?'':'hidden'); ?>"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New payment" >'+ '<i class="fa fa-plus-circle"></i> New Payment</button>';
                 $("div.toolbar").html(_btnNew);
             }();
+            setTimeout(function(){
+                $('.hidden').remove();
+             }, 200);
         }();
 
         function reinitializePaymentDataTable(customer_id) {
@@ -514,7 +517,7 @@
                         targets:[8],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                            var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-times"></i> </button>';
+                            var btn_trash='<button class="btn btn-danger btn-sm <?php echo (in_array('4-3-d',$this->session->user_rights)?'':'hidden'); ?>" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-times"></i> </button>';
 
                             return '<center>'+btn_trash+'</center>';
                         }

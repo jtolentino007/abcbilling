@@ -23,7 +23,7 @@
                         <td><?php echo $service->service_name;  ?></td>
                         <td><?php echo $service->narration;  ?></td>
                         <td><?php echo $service->date_accomplished;;  ?></td>
-                        <td align="center"><a href="#" id="link_accomplished" data-customer-id="<?php echo $customer_id; ?>" data-service-id="<?php echo $service->service_id; ?>"><i class="fa fa-<?php echo ($service->status?'check':'times'); ?>-circle" style="color: <?php echo ($service->status?'green':'red'); ?>"></i></a> </td>
+                        <td align="center"><a href="#" id="link_accomplished" class="<?php echo (in_array('4-2-a',$this->session->user_rights)?'':'hidden'); ?>" data-customer-id="<?php echo $customer_id; ?>" data-service-id="<?php echo $service->service_id; ?>"><i class="fa fa-<?php echo ($service->status?'check':'times'); ?>-circle" style="color: <?php echo ($service->status?'green':'red'); ?>"></i></a> </td>
                     </tr>
                 <?php } ?>
                 </tbody>

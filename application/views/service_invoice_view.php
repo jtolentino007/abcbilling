@@ -543,7 +543,7 @@
                     {
                         targets:[6],
                         render: function(data, type, full, meta){
-                            return "<center><button name='process_billling' class='btn btn-primary' style='text-transform: none;'><i class='fa fa-bars'></i> Process</button></center>";
+                            return "<center><button name='process_billling' class='btn btn-primary <?php echo (in_array('4-1-a',$this->session->user_rights)?'':'hidden'); ?>' style='text-transform: none;'><i class='fa fa-bars'></i> Process</button></center>";
                         }
                     }
                 ]

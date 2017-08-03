@@ -223,7 +223,7 @@ $(document).ready(function(){
                 { class: 'text-right', targets:[3], data: "advance_payment_amount" },
                 { targets:[4],
                     render: function (data, type, full, meta){
-                        var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-times"></i> </button>';
+                        var btn_trash='<button class="btn btn-danger btn-sm <?php echo (in_array('4-4-d',$this->session->user_rights)?'':'hidden'); ?>" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-times"></i> </button>';
 
                         return '<center>'+btn_trash+'</center>';
                     } 
@@ -232,12 +232,14 @@ $(document).ready(function(){
         });
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Document Category" >'+
+            var _btnNew='<button class="btn btn-primary <?php echo (in_array('4-4-a',$this->session->user_rights)?'':'hidden'); ?>"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Document Category" >'+
                 '<i class="fa fa-plus-circle"></i> New Advance Payment</button>';
             $("div.toolbar").html(_btnNew);
         }();
 
-
+        setTimeout(function(){
+                $('.hidden').remove();
+             }, 200);
     }();
 
     var bindEventHandlers = function() {

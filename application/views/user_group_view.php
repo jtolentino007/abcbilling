@@ -321,9 +321,9 @@ $(document).ready(function(){
                 {
                     targets:[4],
                     render: function (data, type, full, meta){
-                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                        var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
-                        var btn_rights='<button class="btn btn-default btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Setup User Rights"><i class="fa fa-gear"></i> Setup User Rights</button>';
+                        var btn_edit='<button class="btn btn-primary btn-sm <?php echo (in_array('3-2-e',$this->session->user_rights)?'':'hidden'); ?>" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        var btn_trash='<button class="btn btn-danger btn-sm <?php echo (in_array('3-2-d',$this->session->user_rights)?'':'hidden'); ?>" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
+                        var btn_rights='<button class="btn btn-default btn-sm " name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Setup User Rights"><i class="fa fa-gear"></i> Setup User Rights</button>';
 
 
                         return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';
@@ -334,12 +334,15 @@ $(document).ready(function(){
 
 
         var createToolBarButton=function(){
-            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Create User Group" >'+
+            var _btnNew='<button class="btn btn-primary <?php echo (in_array('3-2-a',$this->session->user_rights)?'':'hidden'); ?>"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Create User Group" >'+
                 '<i class="fa fa-plus-circle"></i> Create User Rights</button>';
             $("div.toolbar").html(_btnNew);
         }();
 
 
+        setTimeout(function(){
+                $('.hidden').remove();
+             }, 200);
 
 
 
@@ -586,19 +589,18 @@ $(document).ready(function(){
         var parentDiv=$('#user_rights_'+id);
         parentDiv.on('click','button#btn_user_group_rights_'+id,function(){
             var btn=this;
-            var _data=parentDiv.find('form').serializeArray();
-
-            $.ajax({
-                "dataType":"json",
-                "type":"POST",
-                "url":"User_groups/transaction/save-rights",
-                "data":_data,
-                "beforeSend": showSpinningProgress(btn)
-            }).done(function(response){
-                showNotification(response);
-            }).always(function(){
-                showSpinningProgress(btn);
-            });
+             var _data=parentDiv.find('form').serializeArray();
+            // $.ajax({
+            //     "dataType":"json",
+            //     "type":"POST",
+            //     "url":"User_groups/transaction/save-rights",
+            //     "data":_data,
+            //     "beforeSend": showSpinningProgress(btn)
+            // }).done(function(response){
+            //     showNotification(response);
+            // }).always(function(){
+            //     showSpinningProgress(btn);
+            // });
 
 
         });

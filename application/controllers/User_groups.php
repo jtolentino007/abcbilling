@@ -94,15 +94,18 @@ class User_groups extends CORE_Controller
                 $m_rights->delete_via_fk($id);
 
                 $link_code=$this->input->post('link_code',TRUE);
-                foreach($link_code as $link){
-                    if($link!="0"){
-                        $m_rights->user_group_id=$id;
-                        $m_rights->link_code=$link;
-                        $m_rights->save();
+                $add_code=$this->input->post('add_code',TRUE);
+                $edit=$this->input->post('edit_code',TRUE);
+                $delete=$this->input->post('delete_code',TRUE);
+
+
+                for($i=0;$i<count($link_code);$i++) {
+                    $m_rights->user_group_id=$id;
+                    $m_rights->link_code=$link_code[$i];
+                    $m_rights->add_code=$add_code[$i];
+                    $m_rights->save();
                     }
-                }
-
-
+                
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';
                 $response['msg'] = 'User rights successfully saved.';
