@@ -25,8 +25,10 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['_chat_template'] = $this->load->view('template/elements/chat_view','',TRUE);
 	        $data['title'] = 'Client payment summary Report';
-
-	        $this->load->view('client_summary_report_view',$data);
+	                (in_array('5-4',$this->session->user_rights)? 
+        $this->load->view('client_summary_report_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn) 

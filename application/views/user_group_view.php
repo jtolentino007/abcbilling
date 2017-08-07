@@ -280,13 +280,35 @@
 
 
 
+<script type="text/javascript">
 
+
+
+
+
+
+</script>
 
 <script>
 $(document).ready(function(){
+
+
+
+
+
+
+
+
+
+
+
+
+
     var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboUserGroup;
 
     var initializeControls=function(){
+
+
 
         dt=$('#tbl_user_group_list').DataTable({
             "dom": '<"toolbar">frtip',
@@ -356,6 +378,9 @@ $(document).ready(function(){
     var bindEventHandlers=(function(){
         var detailRows = [];
 
+
+
+
         $('#tbl_user_group_list tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = dt.row( tr );
@@ -387,6 +412,7 @@ $(document).ready(function(){
 
                     reInitializeLinksDropDown();
                     reInitializeSpecificButton(d.user_group_id);
+                    reInitializeSpecific();
 
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
@@ -466,6 +492,7 @@ $(document).ready(function(){
             }
 
         });
+
 
 
     })();
@@ -588,30 +615,53 @@ $(document).ready(function(){
     var reInitializeSpecificButton=function(id){
         var parentDiv=$('#user_rights_'+id);
         parentDiv.on('click','button#btn_user_group_rights_'+id,function(){
-            var btn=this;
-             var _data=parentDiv.find('form').serializeArray();
-            // $.ajax({
-            //     "dataType":"json",
-            //     "type":"POST",
-            //     "url":"User_groups/transaction/save-rights",
-            //     "data":_data,
-            //     "beforeSend": showSpinningProgress(btn)
-            // }).done(function(response){
-            //     showNotification(response);
-            // }).always(function(){
-            //     showSpinningProgress(btn);
-            // });
+
+        $('input:checkbox[name^=access_code]').each(function () {
+        $(this).prop("checked") ? $(this).attr('value') : $(this).html("<input type='hidden' name='access_code[]' value='0' />");
+        });
+
+        $('input:checkbox[name^=add_code]').each(function () {
+        $(this).prop("checked") ? $(this).attr('value') : $(this).html("<input type='hidden' name='add_code[]' value='0' />");
+        });
+
+        $('input:checkbox[name^=edit_code]').each(function () {
+        $(this).prop("checked") ? $(this).attr('value') : $(this).html("<input type='hidden' name='edit_code[]' value='0' />");
+        });
+
+        $('input:checkbox[name^=delete_code]').each(function () {
+        $(this).prop("checked") ? $(this).attr('value') : $(this).html("<input type='hidden' name='delete_code[]' value='0' />");
+        });
+
+        var btn=this;
+        var _data=parentDiv.find('form').serializeArray();
+
+        $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"User_groups/transaction/save-rights",
+                "data":_data,
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+            }).always(function(){
+                showSpinningProgress(btn);
+            });
 
 
         });
     };
 
 
+var reInitializeSpecific=function(){
+    $('.selectall').click(function() {
+        if ($(this).is(':checked')) {
+            $(this).closest('tr').find('.css-checkbox').prop('checked', true);
+        } else {
+            $(this).closest('tr').find('.css-checkbox').prop('checked', false);
+        }
+    });
 
-
-
-
-
+};
 
 
 

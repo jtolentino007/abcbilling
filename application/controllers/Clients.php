@@ -43,8 +43,10 @@ class Clients extends CORE_Controller {
         $m_company= $this->Company_model;
         $company=$m_company->get_list();
         $data['company_info']=$company[0];
-
-        $this->load->view('clients_view',$data);
+        (in_array('2-1',$this->session->user_rights)? 
+        $this->load->view('clients_view',$data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function test($A,$K){

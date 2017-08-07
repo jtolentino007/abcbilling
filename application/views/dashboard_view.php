@@ -272,6 +272,9 @@
                         <div class="row" style="margin-bottom: 0;">
                             <div class="container-fluid">
                                 <div style="padding: 0 15px 0 15px;">
+                                parent <br>
+                                <?php echo json_encode($this->session->parent_rights);?> <br><br>
+                                child <br>
                                 <?php echo json_encode($this->session->user_rights);?> <br><br>
                     
                      

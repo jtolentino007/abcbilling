@@ -18,7 +18,11 @@ class Tax extends CORE_Controller {
         $data['_chat_template']=$this->load->view('template/elements/chat_view','',TRUE);
         $data['title']='Tax Management';
         $data['tax_type']=$this->Tax_types_model->get_list();
-        $this->load->view('tax_view',$data);
+
+        (in_array('3-1',$this->session->user_rights)? 
+        $this->load->view('tax_view',$data)
+        :redirect(base_url('dashboard')));
+        
     }
 
 

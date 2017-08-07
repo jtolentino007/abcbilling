@@ -19,8 +19,10 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['_chat_template']=$this->load->view('template/elements/chat_view','',TRUE);
 	        $data['title'] = 'Business Style Management';
-
-	        $this->load->view('business_style_view',$data);
+        (in_array('1-6',$this->session->user_rights)? 
+        	$this->load->view('business_style_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn)

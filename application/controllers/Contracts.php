@@ -39,8 +39,10 @@ class Contracts extends CORE_Controller
                 array('customers_info','customers_info.customer_id=user_customers.customer_id','left')
             )
         );
-
-        $this->load->view('contracts_view', $data);
+        (in_array('',$this->session->user_rights)? 
+        $this->load->view('contracts_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null,$filter_value=null) {

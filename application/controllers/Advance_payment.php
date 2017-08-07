@@ -27,8 +27,10 @@
 	        $data['title'] = 'Advance Payment Entry';
 
 	        $data['clients'] = $this->Customers_model->get_list('is_deleted=FALSE');
-
-	        $this->load->view('advance_payments_view',$data);
+        (in_array('4-4',$this->session->user_rights)? 
+        $this->load->view('advance_payments_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn) 

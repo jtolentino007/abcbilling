@@ -7,6 +7,7 @@ class User_groups extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
+        $this->load->helper('checkbox');
         $this->load->model(array(
             'User_groups_model',
             'User_group_right_model'
@@ -22,8 +23,10 @@ class User_groups extends CORE_Controller
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
         $data['_chat_template']=$this->load->view('template/elements/chat_view','',TRUE);
         $data['title'] = 'User Group Management';
-
-        $this->load->view('user_group_view', $data);
+        (in_array('3-2',$this->session->user_rights)? 
+        $this->load->view('user_group_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {
@@ -93,19 +96,33 @@ class User_groups extends CORE_Controller
 
                 $m_rights->delete_via_fk($id);
 
+
+
+
                 $link_code=$this->input->post('link_code',TRUE);
+                $access_code=$this->input->post('access_code',TRUE);
                 $add_code=$this->input->post('add_code',TRUE);
-                $edit=$this->input->post('edit_code',TRUE);
-                $delete=$this->input->post('delete_code',TRUE);
+                $edit_code=$this->input->post('edit_code',TRUE);
+                $delete_code=$this->input->post('delete_code',TRUE);
 
 
                 for($i=0;$i<count($link_code);$i++) {
+                if($access_code[$i] == '0'){ $access_code[$i] = null; }
+                if($add_code[$i] == '0'){ $add_code[$i] = null; }
+                if($edit_code[$i] == '0'){ $edit_code[$i] = null; }
+                if($delete_code[$i] == '0'){ $delete_code[$i] = null; }
+
+              
                     $m_rights->user_group_id=$id;
                     $m_rights->link_code=$link_code[$i];
+                    $m_rights->access_code=$access_code[$i];
                     $m_rights->add_code=$add_code[$i];
+                    $m_rights->edit_code=$edit_code[$i];
+                    $m_rights->delete_code=$delete_code[$i];
                     $m_rights->save();
                     }
                 
+              
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';
                 $response['msg'] = 'User rights successfully saved.';

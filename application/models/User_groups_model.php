@@ -26,10 +26,10 @@ class User_groups_model extends CORE_Model
 
 
         //create default user rights of this group
-        $sql="INSERT IGNORE INTO user_group_rights() SELECT link_id,1,link_code,add_code,view_code,edit_code,delete_code FROM rights_links";
+        $sql="INSERT IGNORE INTO user_group_rights() SELECT link_id,1,link_code,access_code,add_code,edit_code,delete_code FROM rights_links";
         $this->db->query($sql);
 
-
+        
     }
 
 

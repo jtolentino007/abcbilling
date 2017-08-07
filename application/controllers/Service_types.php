@@ -23,8 +23,11 @@ class Service_types extends CORE_Controller
         $data['title'] = 'Service Type Management';
 
         $data['categories']=$this->Categories_model->get_list('is_deleted=FALSE');
+        (in_array('1-2',$this->session->user_rights)? 
+            $this->load->view('service_type_view', $data)
 
-        $this->load->view('service_type_view', $data);
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {

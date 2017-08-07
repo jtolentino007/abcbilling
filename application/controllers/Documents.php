@@ -25,8 +25,10 @@ class Documents extends CORE_Controller
         $data['title'] = 'Document Type Management';
 
         $data['documents_categories'] = $this->Document_category_model->get_list('is_deleted=FALSE AND is_active=TRUE');
-
-        $this->load->view('documents_view', $data);
+        (in_array('1-1',$this->session->user_rights)? 
+        $this->load->view('documents_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {

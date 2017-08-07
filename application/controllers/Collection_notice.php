@@ -25,7 +25,10 @@
           $data['_chat_template'] = $this->load->view('template/elements/chat_view','',TRUE);
           $data['title'] = 'Customer Ledger Report';
           $data['clients']=$this->Customers_model->get_list('is_deleted=FALSE');
-          $this->load->view('collection_notice_view',$data);
+        (in_array('5-3',$this->session->user_rights)? 
+        $this->load->view('collection_notice_view',$data)
+        :redirect(base_url('dashboard')));
+          
     }
 
     function transaction($txn=null) {

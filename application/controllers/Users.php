@@ -21,8 +21,10 @@ class Users extends CORE_Controller
         $data['_chat_template']=$this->load->view('template/elements/chat_view','',TRUE);
         $data['user_groups']=$this->User_groups_model->get_list();
         $data['title'] = 'User Account Management';
-
-        $this->load->view('users_view', $data);
+        (in_array('3-3',$this->session->user_rights)? 
+        $this->load->view('users_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function transaction($txn = null) {

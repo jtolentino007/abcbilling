@@ -22,8 +22,10 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['_chat_template']=$this->load->view('template/elements/chat_view','',TRUE);
 	        $data['title'] = 'Charges Management';
-
-	        $this->load->view('charges_view',$data);
+        (in_array('3-5',$this->session->user_rights)? 
+        $this->load->view('charges_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn=null)

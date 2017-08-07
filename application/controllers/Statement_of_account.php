@@ -21,8 +21,10 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['_chat_template'] = $this->load->view('template/elements/chat_view','',TRUE);
 	        $data['title'] = 'Statement of Account';
-
-	        $this->load->view('statement_of_account_view',$data);
+	     (in_array('5-5',$this->session->user_rights)? 
+        $this->load->view('statement_of_account_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function MergeCenterCell($cellrange) 

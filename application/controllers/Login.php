@@ -106,8 +106,8 @@ class Login extends CORE_Controller {
                                 'user_group_rights.user_group_id'=>$result->row()->user_group_id
                             ),
                             'user_group_rights.link_code,
+                            user_group_rights.access_code,
                             user_group_rights.add_code,
-                            user_group_rights.view_code,
                             user_group_rights.edit_code,
                             user_group_rights.delete_code'
                             
@@ -118,10 +118,9 @@ class Login extends CORE_Controller {
           
                         foreach($rights as $right){
                             // $i++;
-                            $main=explode('-',$right->link_code);
-                            $user_rights[]=$right->link_code;
+                            $main=explode('-',$right->access_code);
+                            $user_rights[]=$right->access_code;
                             $user_rights[]=$right->add_code;
-                            $user_rights[]=$right->view_code;
                             $user_rights[]=$right->edit_code;
                             $user_rights[]=$right->delete_code;
 

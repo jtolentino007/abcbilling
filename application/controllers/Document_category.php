@@ -19,8 +19,10 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['_chat_template']=$this->load->view('template/elements/chat_view','',TRUE);
 	        $data['title'] = 'Document Category Management';
-
-	        $this->load->view('document_category_view',$data);
+        (in_array('1-5',$this->session->user_rights)? 
+          $this->load->view('document_category_view',$data)
+        :redirect(base_url('dashboard')));
+	      
 		}
 
 		function transaction($txn)

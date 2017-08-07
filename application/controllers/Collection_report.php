@@ -20,8 +20,10 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 	        $data['_chat_template'] = $this->load->view('template/elements/chat_view','',TRUE);
 	        $data['title'] = 'Collection Report';
-
-	        $this->load->view('collection_report_view',$data);
+        (in_array('5-2',$this->session->user_rights)? 
+        $this->load->view('collection_report_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transaction($txn) 

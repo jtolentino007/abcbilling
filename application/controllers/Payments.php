@@ -30,8 +30,10 @@
 
 	        $data['methods']=$this->Payment_method_model->get_list('is_deleted=FALSE');
 	        $data['customers']=$this->Customers_model->get_list('is_deleted=FALSE');
-
-	        $this->load->view('payments_view',$data);
+        (in_array('4-3',$this->session->user_rights)? 
+        $this->load->view('payments_view',$data)
+        :redirect(base_url('dashboard')));
+	        
 		}
 
 		function transactions($txn=null,$filter_value=null)

@@ -27,8 +27,10 @@
 	        $data['title'] = 'Customer Ledger Report';
 
 	        $data['clients']=$this->Customers_model->get_list('is_deleted=FALSE');
-
-	        $this->load->view('customer_ledger_view',$data);
+        (in_array('5-1',$this->session->user_rights)? 
+         $this->load->view('customer_ledger_view',$data)
+        :redirect(base_url('dashboard')));
+	       
 		}
 
 		function transaction($txn=null) {

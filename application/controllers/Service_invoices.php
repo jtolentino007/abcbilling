@@ -44,8 +44,10 @@
             $data['months']=array("January","February","March","April","May","June","July","August","September","October","November","December");
             $data['customers']=$this->Customers_model->get_list('is_deleted=0');
             $data['charges']=$this->Charges_model->get_list('is_deleted=0');
-
-	        $this->load->view('service_invoice_view',$data);
+        (in_array('4-1',$this->session->user_rights)? 
+        $this->load->view('service_invoice_view',$data)
+        :redirect(base_url('dashboard')));
+	        
         }
 
 		function transaction($txn=null) 

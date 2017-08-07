@@ -17,8 +17,10 @@ class DBBackup extends CORE_Controller
         $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', true);
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', true);
         $data['title'] = 'Backup Database';
-
-        $this->load->view('db_backup_view', $data);
+        (in_array('3-6',$this->session->user_rights)? 
+        $this->load->view('db_backup_view', $data)
+        :redirect(base_url('dashboard')));
+        
     }
 
     function start(){
