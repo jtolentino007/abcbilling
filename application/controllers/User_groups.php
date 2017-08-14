@@ -7,7 +7,6 @@ class User_groups extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-        $this->load->helper('checkbox');
         $this->load->model(array(
             'User_groups_model',
             'User_group_right_model'

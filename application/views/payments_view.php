@@ -101,6 +101,9 @@
                 from { -webkit-transform: rotate(0deg); }
                 to { -webkit-transform: rotate(360deg); }
             }
+            .check-hidden{
+                display: none;
+            }
     </style>
 </head>
 
@@ -191,7 +194,7 @@
                                                             <?php } ?>
                                                         </select>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-3 check-prop hidden">
+                                                    <div class="col-xs-12 col-sm-3 check-prop check-hidden">
                                                         <strong>Check Date :</strong><br>
                                                         <div class="input-group">
                                                              <span class="input-group-addon">
@@ -200,7 +203,7 @@
                                                             <input type="text" name="check_date" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Check Date">
                                                         </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-4 check-prop hidden">
+                                                    <div class="col-xs-12 col-sm-4 check-prop check-hidden">
                                                         <strong>Check # :</strong>
                                                         <div class="input-group">
                                                              <span class="input-group-addon">
@@ -543,9 +546,9 @@
 
             _cboPayments.on('change', function() {
                 if (_cboPayments.val() == 2)
-                    $('.check-prop').removeClass('hidden');
+                    $('.check-prop').removeClass('check-hidden');
                 else 
-                    $('.check-prop').addClass('hidden');
+                    $('.check-prop').addClass('check-hidden');
             });
 
             _cboCustomers.on('select2:select', function() {
