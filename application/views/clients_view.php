@@ -370,6 +370,14 @@
                                 <div class="row">
                                     <div class="container-fluid">
                                         <div class="col-xs-12 col-sm-6">
+                                            <label> * Client Account # : </label>
+                                            <input class="form-control" type="text" name="customer_code" data-error-msg="Customer Code is Required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <div class="col-xs-12 col-sm-6">
                                             <label> * Corporate/ Individual Name: </label>
                                             <input class="form-control" type="text" name="company_name" data-error-msg="Corporate name is required" required>
                                         </div>
