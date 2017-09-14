@@ -541,7 +541,7 @@
 
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-primary <?php echo (in_array('3-3-a',$this->session->user_rights)?'':'hidden'); ?>"  id="btn_new " style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Register User Account" >'+
+                var _btnNew='<button class="btn btn-primary <?php echo (in_array('3-3-a',$this->session->user_rights)?'':'hidden'); ?>"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Register User Account" >'+
                     '<i class="fa fa-plus-circle"></i> Register User Account</button>';
                 $("div.toolbar").html(_btnNew);
             }();

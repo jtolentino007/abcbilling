@@ -425,7 +425,7 @@
                                                     <?php foreach($newsfeeds as $newsfeed) { ?>
                                                         <div class="container-fluid" style="border: 1px dashed #e2e2e2;padding: 10px;">
                                                             <div class="col-xs-12 col-sm-2">
-                                                                <img src="<?php echo ($newsfeed->photo_path == null ? 'assets/img/default-user-image.png' : '$newsfeed->photo_path') ?>" width="55" height="50" style="border-radius: 50%;">
+                                                                <img src="<?php echo ($newsfeed->photo_path == null ? base_url().'assets/img/default-user-image.png' : base_url().$newsfeed->photo_path) ?>" width="55" height="50" style="border-radius: 50%;">
                                                             </div>
                                                             <div class="col-xs-12 col-sm-10">
                                                                 <strong><span style="text-transform: uppercase;"><?php echo $newsfeed->user; ?></span></strong><br>
