@@ -51,39 +51,39 @@ class Login extends CORE_Controller {
 
     function create_required_default_data(){
         //create default user : the admin
-        $m_users=$this->Users_model;
-        $m_users->create_default_user();
+        // $m_users=$this->Users_model;
+        // $m_users->create_default_user();
 
-        //create default user group : the Super User
-        $m_user_groups=$this->User_groups_model;
-        $m_user_groups->create_default_user_group();
+        // //create default user group : the Super User
+        // $m_user_groups=$this->User_groups_model;
+        // $m_user_groups->create_default_user_group();
 
-        $m_links=$this->Rights_link_model;
-        $m_links->create_default_link_list();
+        // $m_links=$this->Rights_link_model;
+        // $m_links->create_default_link_list();
 
-        $m_methods=$this->Payment_method_model;
-        $m_methods->create_default_payment_method();
+        // $m_methods=$this->Payment_method_model;
+        // $m_methods->create_default_payment_method();
 
-        $m_charges=$this->Charges_model;
-        $m_charges->create_default_charges();
+        // $m_charges=$this->Charges_model;
+        // $m_charges->create_default_charges();
 
-        $m_account_titles=$this->Account_title_model;
-        $m_account_titles->create_default_account_title();
+        // $m_account_titles=$this->Account_title_model;
+        // $m_account_titles->create_default_account_title();
         
-        $m_account_types=$this->Account_type_model;
-        $m_account_types->create_default_account_types();
+        // $m_account_types=$this->Account_type_model;
+        // $m_account_types->create_default_account_types();
 
-        $m_account_class=$this->Account_class_model;
-        $m_account_class->create_default_account_classes();
+        // $m_account_class=$this->Account_class_model;
+        // $m_account_class->create_default_account_classes();
 
-        $m_document_category=$this->Document_category_model;
-        $m_document_category->create_default_document_category();
+        // $m_document_category=$this->Document_category_model;
+        // $m_document_category->create_default_document_category();
 
-        $m_document=$this->Documents_model;
-        $m_document->create_default_documents();
+        // $m_document=$this->Documents_model;
+        // $m_document->create_default_documents();
 
-        $m_business_style=$this->Business_style_model;
-        $m_business_style->create_default_business_styles();
+        // $m_business_style=$this->Business_style_model;
+        // $m_business_style->create_default_business_styles();
     }
 
 
