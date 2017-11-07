@@ -22,7 +22,7 @@ class Rights_link_model extends CORE_Model{
                                           (5,'3','3-3','3-3-a','3-3','3-3-e','3-3-d','Create User Account'),
                                           (6,'3','3-4',null,'3-4',null,null,'Setup Company Info'),
                                           (7,'1','1-2','1-2-a','1-2','1-2-e','1-2-d','Service Types'),
-                                          (8,'4','4-1','4-1-a','4-1',null,null,'Service Invoice (Processing)'),
+                                          (8,'4','4-1','4-1-a','4-1','4-1-e',null,'Service Invoice (Processing)'),
                                           (9,'4','4-2','4-2-a','4-2',null,null,'Process Accomplishments'),
                                           (10,'4','4-3','4-3-a','4-3','4-3-e','4-3-d','Payments'),
                                           (11,'3','3-5','3-5-a','3-5','3-5-e','3-5-d','Charges'),

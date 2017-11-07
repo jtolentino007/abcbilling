@@ -487,7 +487,7 @@
                         render: function(data, type, full, meta){
                             var _btnNew='<center><button class="btn btn-success"  id="btn_print" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"title="Print" >'+
                                 '<i class="fa fa-print"></i> Print </button>';
-                            var _btnEdit='<button class="btn btn-success" name="edit_info"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" title="Edit" >'+
+                            var _btnEdit='<button class="btn btn-success <?php echo (in_array('4-1-e',$this->session->user_rights)?'':'hidden'); ?>" name="edit_info"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" title="Edit" >'+
                                 '<i class="fa fa-pencil"></i></button></center>';
                             return _btnNew+'&nbsp;'+_btnEdit;
                         }

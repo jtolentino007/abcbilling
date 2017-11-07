@@ -58,8 +58,8 @@ class Login extends CORE_Controller {
         // $m_user_groups=$this->User_groups_model;
         // $m_user_groups->create_default_user_group();
 
-        // $m_links=$this->Rights_link_model;
-        // $m_links->create_default_link_list();
+        $m_links=$this->Rights_link_model;
+        $m_links->create_default_link_list();
 
         // $m_methods=$this->Payment_method_model;
         // $m_methods->create_default_payment_method();
