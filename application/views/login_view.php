@@ -315,7 +315,9 @@
 
 								<button type="button" id="btn_login" class="btn login-button" style="background: #4caf50; color: white; border:2px solid #ffffff;"><span class=""></span>&nbsp;Login</button>
 							</form>
+
 					</div>
+
 				</div>
 <!--
 				<div class="text-center">
@@ -324,7 +326,9 @@
 				</div>
 -->
 			</div>
+
 		</div>
+<i style="bottom: 5px!important;left: 5px!important;position: absolute;color:white;">Version 1.4.1</i>
 </div>
 <ul class="bg-bubbles">
 	<li></li>
@@ -338,6 +342,7 @@
 	<li></li>
 	<li></li>
 </ul>
+
 <?php echo $_def_js_files; ?>
 <script src="assets/plugins/spinner/dist/spin.min.js"></script>
 <script src="assets/plugins/spinner/dist/ladda.min.js"></script>
