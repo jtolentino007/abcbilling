@@ -4,6 +4,8 @@
 	{
 		protected $table = "billing_advances";
 		protected $pk_id = "billing_advances_id";
+    	protected $fk_id="billing_id";
+
 		
 		function __construct()
 		{

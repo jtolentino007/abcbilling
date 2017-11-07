@@ -3,6 +3,7 @@
 	{
 		protected $table="billing_items";
 		protected $pk_id="billing_item_id";	
+		protected $fk_id="billing_id";	
 
 		function __construct()
 		{

@@ -7,6 +7,21 @@
 			parent::__construct();
 		}
 
+        function get_count_payments($billing_id){
+            $sql="SELECT 
+                pit.*, pi.is_active
+            FROM
+                payment_items pit
+                    LEFT JOIN
+                (SELECT 
+                    pi.payment_id, pi.is_active
+                FROM
+                    payment_info pi) pi ON pi.payment_id = pit.payment_id
+                    
+            WHERE pi.is_active = TRUE AND pit.payment_amount !=0 AND pit.billing_id = $billing_id";
+
+            return $this->db->query($sql)->result();
+        }
 
         function get_billing_with_balances($contract_id){
             $sql="SELECT bi.*,pi.payment_amount,
@@ -42,6 +57,11 @@
             return $this->db->query($sql)->result();
         }
 
+        function get_count_billing_info($billing_no,$billing_id){
+            $sql="SELECT * FROM billing_info WHERE billing_no = '$billing_no' and billing_id != $billing_id";
+
+            return $this->db->query($sql)->result();
+        }
         function get_news_feed() {
             $sql = "SELECT
                     t.*

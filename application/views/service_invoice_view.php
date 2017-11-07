@@ -153,12 +153,12 @@
                                                                             <thead class="">
                                                                             <tr>
                                                                                 <!-- <th width="5%">&nbsp;&nbsp;</th> -->
-                                                                                <th width="20%">SOA/Billing #</th>
+                                                                                <th width="15%">SOA/Billing #</th>
                                                                                 <th width="35%">Company / Client</th>
                                                                                 <th width="10%">Billing Date</th>
                                                                                 <th width="10%">Due Date</th>
                                                                                 <th width="10%">Total Due</th>
-                                                                                <th width="10%"><center>Action</center></th>
+                                                                                <th width="20%"><center>Action</center></th>
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -438,7 +438,7 @@
     $(document).ready(function(){
         var dt; var _txnMode; var _selectedID; var _selectRowObj;
         var zNodes; var setting; var _monthID; var _year; var dtBilling;
-        var _cboCurrentCharges;var _cboPreviousCharges; var _clientName; var _clientID; 
+        var _cboCurrentCharges;var _cboPreviousCharges; var _clientName; var _clientID;  var _txnModeFinalize; var _selectedBillingID;
         var _advancePaymentId;
 
         var reInitializeTreeView=function(){
@@ -485,9 +485,11 @@
                     {
                         targets:[5],
                         render: function(data, type, full, meta){
-                            var _btnNew='<center><button class="btn btn-success"  id="btn_print" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Print" >'+
-                                '<i class="fa fa-print"></i> Print </button></center>';
-                            return _btnNew;
+                            var _btnNew='<center><button class="btn btn-success"  id="btn_print" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"title="Print" >'+
+                                '<i class="fa fa-print"></i> Print </button>';
+                            var _btnEdit='<button class="btn btn-success" name="edit_info"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" title="Edit" >'+
+                                '<i class="fa fa-pencil"></i></button></center>';
+                            return _btnNew+'&nbsp;'+_btnEdit;
                         }
                     }
                 ]
@@ -655,35 +657,66 @@
                 } 
 
                 else {
-                    // if total amount is positive
-                var btn=$(this);
-                var _data=$('#frm_billing').serializeArray();
-                _data.push({name:"total_billing_current_amount",value:$('#td_total_current_charges').text()});
-                _data.push({name:"total_billing_previous_amount",value:$('#td_total_beginning_balances').text()});
-                _data.push({name:"advance_payment_id",value: _advancePaymentId});
-                _data.push({name:"amount", value: $('#txt_advance').val()});
+                            var btn=$(this);
+                            var _data=$('#frm_billing').serializeArray();
+                            _data.push({name:"total_billing_current_amount",value:$('#td_total_current_charges').text()});
+                            _data.push({name:"total_billing_previous_amount",value:$('#td_total_beginning_balances').text()});
+                            _data.push({name:"advance_payment_id",value: _advancePaymentId});
+                            _data.push({name:"amount", value: $('#txt_advance').val()});
+                    if(_txnModeFinalize == 'finalize'){
+                        // alert(_txnModeFinalize);
+                            $.ajax({
+                                "dataType":"json",
+                                "type":"POST",
+                                "url":"Service_invoices/transaction/finalize",
+                                "data":_data,
+                                "beforeSend": function(){
+                                    showSpinningProgress(btn);
+                                }
+                            }).done(function(response){
+                                showNotification(response);
+                                if(response.stat=="success"){
+                                    $('#modal_process_billing').modal('hide');
+                                    dtBilling.destroy();
+                                    reloadBilling();
+                                    //dt.destroy();
+                                    //reloadContractBillingStatus();
+                                    dt.row(_selectRowObj).data(response.contract_row[0]).draw(false);
+                                }
+                            }).always(function(){
+                                showSpinningProgress(btn);
+                            }); 
 
-                $.ajax({
-                    "dataType":"json",
-                    "type":"POST",
-                    "url":"Service_invoices/transaction/finalize",
-                    "data":_data,
-                    "beforeSend": function(){
-                        showSpinningProgress(btn);
+                    }else if(_txnModeFinalize == 'edit'){
+                        // alert(_txnModeFinalize);
+                        _data.push({name:"billing_id",value: _selectedBillingID});
+                        _selectedBillingID
+                        $.ajax({
+                            "dataType":"json",
+                            "type":"POST",
+                            "url":"Service_invoices/transaction/update_billing",
+                            "data":_data,
+                            "beforeSend": function(){
+                                showSpinningProgress(btn);
+                            }
+                        }).done(function(response){
+                            showNotification(response);
+                            if(response.stat=="success"){
+                                $('#modal_process_billing').modal('hide');
+                                dtBilling.destroy();
+                                reloadBilling();
+                                //dt.destroy();
+                                //reloadContractBillingStatus();
+                                // dt.row(_selectRowObj).data(response.contract_row[0]).draw(false);
+                            }
+                        }).always(function(){
+                            showSpinningProgress(btn);
+                        });
+
+
                     }
-                }).done(function(response){
-                    showNotification(response);
-                    if(response.stat=="success"){
-                        $('#modal_process_billing').modal('hide');
-                        dtBilling.destroy();
-                        reloadBilling();
-                        //dt.destroy();
-                        //reloadContractBillingStatus();
-                        dt.row(_selectRowObj).data(response.contract_row[0]).draw(false);
-                    }
-                }).always(function(){
-                    showSpinningProgress(btn);
-                });
+
+
 
 
 
@@ -758,13 +791,100 @@
                 // });
             });
 
+
+            $('#tbl_billing tbody').on('click', 'button[name="edit_info"]', function(){
+                _selectRowObj=$(this).closest('tr');
+                var data=dtBilling.row(_selectRowObj).data();
+
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Service_invoices/transaction/count_payment_billing?billing_id="+data.billing_id,
+                "beforeSend": function(){
+
+                }
+            }).done(function(response){
+                if(response.payment_count > 0){
+                        showNotification({"title":"Error!","stat":"error","msg":"You cannot edit a billing with an Active payment."});
+                }else{
+
+                    $('#txt_advance').attr('disabled',false);
+
+                    _selectedID=data.contract_id;
+                    _clientID=data.customer_id;
+                    _clientName=data.company_name;
+                    _selectedBillingID=data.billing_id;
+                    _txnModeFinalize = 'edit';
+                    $('#txt_billing_no').prop('readonly', true);
+                     $('#txt_billing_no').val(data.billing_no);
+                    $('input[name="month_id"]').val(_monthID);
+                    $('input[name="year_id"]').val(_year);
+                    $('input[name="advance_payment"]').val('0.00');
+                    $('input,textarea,select',$('#frm_billing')).each(function(){
+                        var _elem=$(this);
+                        $.each(data,function(name,value){
+                            if(_elem.attr('name')==name){
+                                _elem.val(value);
+                            }
+                        });
+                    });
+                    $.ajax({
+                        "dataType":"json",
+                        "type":"POST",
+                        "url":"Service_invoices/transaction/edit-billing?billing_id="+data.billing_id,
+                        "beforeSend" : function(){
+                            $('#div_billing_no_loader').show();
+                            $('#div_billing_no').hide();
+                            $('#tbl_current_charges > tbody').html('<tr><td colspan="4"><center><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></center></td></tr>');
+                            $('#tbl_beginning_balances > tbody').html('<tr><td colspan="5"><center><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></center></td></tr>');
+                        }
+                    }).done(function(response){
+                        $('#div_billing_no_loader').hide();
+                        $('#div_billing_no').show();
+                        //if(response.stat=="success"){
+                        if(response.stat=="info"){
+                            showNotification(response);
+                        }
+                           _advancePaymentId = response.advance_payment_id;
+                           $('input[name="advance_payment"]').val(response.advance_amount);
+                           $('advance_payment')
+                            $('#tbl_current_charges > tbody').html(response.current_charges);
+                            $('#tbl_beginning_balances > tbody').html(response.beginning_balances);
+                            reInitializeNumeric();
+                            reComputeTotalCurrentCharges();
+                            reComputeTotalBeginningCharges();
+                            reComputeBillingSummary();
+                    });
+
+                    $('#modal_process_billing').modal('show');
+
+
+
+                }
+
+
+            }); 
+
+
+
+
+               
+
+
+
+
+
+            });
+
+
             $('#tbl_customers tbody').on( 'click', 'button[name="process_billling"]', function () {
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
                 _selectedID=data.contract_id;
                 _clientID=data.customer_id;
                 _clientName=data.company_name;
-
+                _txnModeFinalize = 'finalize';
+                $('#txt_billing_no').prop('readonly', false);
                 $('input[name="month_id"]').val(_monthID);
                 $('input[name="year_id"]').val(_year);
                 $('input[name="advance_payment"]').val('0.00');

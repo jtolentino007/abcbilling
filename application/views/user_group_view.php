@@ -634,7 +634,7 @@ $(document).ready(function(){
 
         var btn=this;
         var _data=parentDiv.find('form').serializeArray();
-
+        console.log(_data);
         $.ajax({
                 "dataType":"json",
                 "type":"POST",

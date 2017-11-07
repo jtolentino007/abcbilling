@@ -69,6 +69,7 @@
 
 					$payment_id=$this->input->post('payment_id',TRUE);
 					$m_payment_info->is_active=FALSE;
+					$m_payment_info->cancelled_by = $this->session->user_id;
 					$m_payment_info->set('date_cancelled','NOW()');
 					$m_payment_info->modify($payment_id);
 
@@ -119,6 +120,7 @@
 					$charge_id=$this->input->post('charge_id',TRUE);
 
 					for($i=0;$i<count($billing_id);$i++) {
+						if($payment_amount[$i] != 0){
 						$m_payment_items->payment_id=$payment_id;
 						$m_payment_items->billing_id=$billing_id[$i];
 						$m_payment_items->contract_id=$contract_id[$i];
@@ -128,7 +130,9 @@
 						$m_payment_items->payment_amount=$this->get_numeric_value($payment_amount[$i]);
 						$m_payment_items->advance_amount=$this->get_numeric_value($advance_amount[$i]);
 						$m_payment_items->charge_id=$charge_id[$i];
-						$m_payment_items->save();
+						$m_payment_items->save();	
+						}
+
 					}
 
 					$m_payment_info->commit();
