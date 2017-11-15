@@ -124,22 +124,22 @@
                     <?php echo $_chat_template; ?>
                     <ol class="breadcrumb"  style="margin-bottom: 0;">
                         <li><a href="Dashboard">Dashboard</a></li>
-                        <li><a href="Payments">Collection Entry</a></li>
+                        <li><a href="Cancelled_payments">Cancelled Payments</a></li>
                     </ol>
                     <div class="container-fluid">
                         <div id="payments_list"> 
                             <div class="panel panel-default">
                                 <div class="panel-body" style="border-top:5px solid rgb(76, 175, 80);">
-                                    <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Collection Entry <small class="title-modal"> | Transaction</small></h1><hr><br>
+                                    <h1><span class="fa fa-file-text-o" style="border: 3px solid rgb(76, 175, 80); padding: 10px 12px 10px 12px; border-radius: 50%; color: rgb(76, 175, 80);"></span> Cancelled Payments <small class="title-modal"> | History</small></h1><hr><br>
                                     <table id="tbl_payments" class="table-striped custom-design" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th width="10%">Receipt #</th>
                                                 <th width="20%">Client</th>
                                                 <th width="10%">Method</th>
-                                                <th width="20%">Remarks</th>
-                                                <th width="15%">Posted by</th>
-                                                <th width="10%">Date Paid</th>
+                                                <th width="20%">Cancellation Remarks</th>
+                                                <th width="15%">Cancelled by</th>
+                                                <th width="10%">Date Cancelled</th>
                                                 <th width="5%">Status</th>
                                                 <th width="10%" style="text-align: right;">Payment Amount</th>
                                                 <th>
@@ -400,10 +400,6 @@
                 reComputeDetails();
             }, 300);
 
-            var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-primary <?php echo (in_array('4-3-a',$this->session->user_rights)?'':'hidden'); ?>"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New payment" >'+ '<i class="fa fa-plus-circle"></i> New Payment</button>';
-                $("div.toolbar").html(_btnNew);
-            }();
             setTimeout(function(){
                 $('.hidden').remove();
              }, 200);
@@ -502,16 +498,18 @@
                     "searchPlaceholder":"Search Payment"
                 },
                 "ajax" :{ 
-                    "url":"Payments/transactions/list",
+                    "url":"Cancelled_payments/transactions/list",
                     "bDestroy":true
                 },
                 "columns": [
                     { targets:[0],data: "receipt_no" },
                     { targets:[1],data: "company_name" },
                     { targets:[2],data: "payment_method" },
-                    { targets:[3],data: "remarks" },
-                    { targets:[4],data: "user_name" },
-                    { targets:[5],data: "date_paid" },
+                    { targets:[3],data: "cancel_remarks" },
+                     { targets:[4], data: null, render: function ( data, type, row ) {
+                        return data.user_fname+' '+data.user_lname;  
+                    } },
+                    { targets:[5],data: "date_cancelled" },
                     { targets:[6],data: "active_status",
                         render: function (data, type, full, meta){
                             return (data==1?"<center><i class='fa fa-check-circle' style='color:#4caf50;'></i></center>":"<center><i class='fa fa-times-circle' style='color:#f44336;'></i></center>");
@@ -524,13 +522,13 @@
                              return accounting.formatNumber(data, 2, ",");
                         }
                     },
-                    {
+                    { visible:false,
                         targets:[8],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                             var btn_trash='<button class="btn btn-danger btn-sm <?php echo (in_array('4-3-d',$this->session->user_rights)?'':'hidden'); ?>" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-times"></i> </button>';
 
-                            return '<center>'+btn_trash+'</center>';
+                            return '';
                         }
                     }
                 ]
@@ -539,13 +537,7 @@
 
         var bindEventHandlers=function(){
 
-            $('#btn_new').on('click',function(){
-                _txnMode="new";
-                showList(false);
-                dtPayments.destroy();
-                reinitializePaymentDataTable(_cboCustomers.val());
-                $('#btn_save').removeAttr('disabled','disabled');
-            });
+
 
             $('#btn_cancel').on('click',function(){
                 showList(true);

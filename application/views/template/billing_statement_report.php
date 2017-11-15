@@ -155,7 +155,10 @@
 						<td colspan="3">&nbsp;</td>
 					</tr>
 					<tr>
-						<td colspan="3"><small style="font-size: 10px;"><center>Please present this document when paying. All checks should be issued in favour of <strong>Marco Fernando Ng</strong>. <br>Kindly note that as a General Professional Partnership, our fee is not subject to the 10% withholding tax.</center></small></td>
+						<td colspan="3"><small style="font-size: 10px;"><center>
+Please present this document when paying. All checks should be issued in favour of  <strong>Marco Fernando Ng</strong> .<br>
+Kindly note that as a General Professional Partnership, our fee is not subject to the 10% withholding tax. BPI Account 1890-
+0268-65; BPI Swift Account 1890-02-6865 BPI Swift Code BOPIPHMM; Eastwest Bank 200006270068; Metrobank 374-3374116437</center></small></td>
 					</tr>
 				</table>
 			</div>
@@ -294,7 +297,10 @@
 						<td colspan="3">&nbsp;</td>
 					</tr>
 					<tr>
-						<td colspan="3"><small style="font-size: 10px;"><center>Please present this document when paying. All checks should be issued in favour of <strong>Marco Fernando Ng</strong>. <br>Kindly note that as a General Professional Partnership, our fee is not subject to the 10% withholding tax.</center></small></td>
+						<td colspan="3"><small style="font-size: 10px;"><center>
+Please present this document when paying. All checks should be issued in favour of  <strong>Marco Fernando Ng</strong> .<br>
+Kindly note that as a General Professional Partnership, our fee is not subject to the 10% withholding tax. BPI Account 1890-
+0268-65; BPI Swift Account 1890-02-6865 BPI Swift Code BOPIPHMM; Eastwest Bank 200006270068; Metrobank 374-3374116437</center></small></td>
 					</tr>
 				</table>
 			</div>

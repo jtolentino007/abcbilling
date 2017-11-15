@@ -1,6 +1,6 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
-	class Payments extends CORE_Controller
+	class Cancelled_payments extends CORE_Controller
 	{		
 		function __construct()
 		{
@@ -30,8 +30,8 @@
 
 	        $data['methods']=$this->Payment_method_model->get_list('is_deleted=FALSE');
 	        $data['customers']=$this->Customers_model->get_list('is_deleted=FALSE');
-        (in_array('4-3',$this->session->user_rights)? 
-        $this->load->view('payments_view',$data)
+        (in_array('4-5',$this->session->user_rights)? 
+        $this->load->view('cancelled_payments_view',$data)
         :redirect(base_url('dashboard')));
 	        
 		}
@@ -52,12 +52,12 @@
 					$m_payment_info=$this->Payments_info_model;
 
 					$response['data']=$m_payment_info->get_list(
-						'payment_info.is_deleted=FALSE AND payment_info.is_active=TRUE',
+						'payment_info.is_active=FALSE',
 						'payment_info.is_active AS active_status,payment_info.*, customers_info.*, user_accounts.*, payment_methods.*',
 						array(
 							array('customers_info','customers_info.customer_id=payment_info.customer_id','left'),
 							array('payment_methods','payment_methods.payment_method_id=payment_info.payment_method_id','left'),
-							array('user_accounts','user_accounts.user_id=payment_info.posted_by','left')
+							array('user_accounts','user_accounts.user_id=payment_info.cancelled_by','left')
 						)
 					);
 

@@ -485,11 +485,13 @@
                     {
                         targets:[5],
                         render: function(data, type, full, meta){
-                            var _btnNew='<center><button class="btn btn-success"  id="btn_print" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"title="Print" >'+
+                            var _btn_pdf='<center><button class="btn btn-success"  id="btn_pdf" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif; "title="For Email" >'+
+                            ' 1 Copy</button>';
+                            var _btnNew='<button class="btn btn-success"  id="btn_print" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"title="Print" >'+
                                 '<i class="fa fa-print"></i> Print </button>';
                             var _btnEdit='<button class="btn btn-success <?php echo (in_array('4-1-e',$this->session->user_rights)?'':'hidden'); ?>" name="edit_info"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" title="Edit" >'+
                                 '<i class="fa fa-pencil"></i></button></center>';
-                            return _btnNew+'&nbsp;'+_btnEdit;
+                            return _btn_pdf+'&nbsp;'+_btnNew+'&nbsp;'+_btnEdit;
                         }
                     }
                 ]
@@ -643,6 +645,12 @@
                 window.open('Service_invoices/transaction/billing_statement?bid='+_selectedID);
             });
 
+            $('#tbl_billing tbody').on('click','#btn_pdf', function(){
+                _selectRowObj=$(this).closest('tr');
+                var data=dtBilling.row(_selectRowObj).data();
+                _selectedID=data.billing_id;
+                window.open('Service_invoices/transaction/billing_statement_pdf?bid='+_selectedID);
+            });
             $('#btn_finalize').click(function(){
             var totalCurrent=getFloat($('#td_total_current_charges').text());
             var totalBeginning=getFloat($('#td_total_beginning_balances').text());

@@ -36,7 +36,8 @@ class Rights_link_model extends CORE_Model{
                                           (19,'4','4-4','4-4-a','4-4',null,'4-4-d','Advance Payments'),
                                           (20,'5','5-3',null,'5-3',null,null,'Collection Notice (Print)'),
                                           (21,'5','5-4',null,'5-4',null,null,'Client Payment Summary (Print)'),
-                                          (22,'5','5-5',null,'5-5',null,null,'Statement of Account Monitoring (Print)')
+                                          (22,'5','5-5',null,'5-5',null,null,'Statement of Account Monitoring (Print)'),
+                                          (23,'4','4-5',null,'4-5',null,null,'Cancelled Payments')
 
                                           ON DUPLICATE KEY UPDATE
                                           rights_links.parent_code=VALUES(rights_links.parent_code),
